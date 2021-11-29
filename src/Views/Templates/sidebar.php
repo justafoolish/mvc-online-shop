@@ -13,7 +13,8 @@
       <form class="flex justify-center sticky top-20 z-30 pb-6 bg-white" id="searchForm">
         <input type="text" placeholder="TÌM KIẾM SẢN PHẨM" class="px-4 py-3 my-3 bg-gray-100 outline-none placeholder-gray-400 text-gray-400 focus:bg-gray-200 w-full transition-all" />
       </form>
-      <main id="searchProduct"></main>
+      <main id="searchProduct">
+      </main>
     </div>
     <!-- cart items -->
     <div id="cartPanel" class="hidden py-5 mt-3"></div>

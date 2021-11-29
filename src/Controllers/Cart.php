@@ -12,4 +12,5 @@ class Cart extends BaseController
             "collections" => $this->collections,
         ]);
     }
+    
 }

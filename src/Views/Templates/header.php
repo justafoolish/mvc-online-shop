@@ -2,7 +2,7 @@
     <a href="<?= BASE_URL ?>/Home/" class="font-medium">Hades Studio</a>
     <div class="flex items-center divide-x divide-gray-100 divide-opacity-60 text-xs">
         <div>
-            <a class="text-gray-100 hover:text-gray-400" href="<?= BASE_URL ?>/Account/Register">Đăng nhập</a>
+            <a class="text-gray-100 hover:text-gray-400" href="<?= BASE_URL ?>/Account/Login">Đăng nhập</a>
             <span>/</span>
             <a class="text-gray-100 hover:text-gray-400" href="<?= BASE_URL ?>/Account/Register">Đăng ký</a>
         </div>

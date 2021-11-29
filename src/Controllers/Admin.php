@@ -1,5 +1,5 @@
 <?php
-class Home extends BaseController
+class Admin extends BaseController
 {
     function __construct($params)
     {
@@ -8,13 +8,9 @@ class Home extends BaseController
 
     function index()
     {
-        $this->view("Home.index", [
+        $this->view("Admin.Dashboard.index", [
             "collections" => $this->collections,
         ]);
     }
-    function getCart() {
-        $this->view("Templates.sidecart",[
-            "cart"=>"cart",
-        ]);
-    }
+    
 }

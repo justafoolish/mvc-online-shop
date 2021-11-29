@@ -23,4 +23,14 @@ class Collection extends BaseController
             "collections" => $this->collections,
         ]);
     }
+    public function searchproduct() {
+        $keyword= "";
+        if(isset($_POST['keyword'])){
+            $keyword = $_POST['keyword'];
+        }
+
+        $this->view("Templates.search",[
+            "result" => "result",
+        ]);
+    }
 }

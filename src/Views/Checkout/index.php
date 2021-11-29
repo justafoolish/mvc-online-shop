@@ -12,7 +12,7 @@
         ?>
         <div class="flex-1 px-3">
             <header class="my-5">
-                <a class="flex text-gray-600 hover:text-gray-800 cursor-pointer items-center group relative" href="../Cart">
+                <a class="flex text-gray-600 hover:text-gray-800 cursor-pointer items-center group relative" href="<?= BASE_URL ?>/Cart/">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-0 group-hover:opacity-100 absolute top-0 -left-1 transition-all transform translate translate-x-1 group-hover:translate-x-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>

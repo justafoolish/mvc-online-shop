@@ -1,3 +1,4 @@
+const BASE_URL = "http://localhost/mvcphp"
 const sidebarWrap = document.querySelector("#sidebarwrap");
 const search = document.querySelector("#search");
 const searchPanel = document.querySelector("#searchPanel");
@@ -11,17 +12,16 @@ const searchItem = $("#searchProduct");
 
 searchForm.addEventListener("submit",(e) => {
   e.preventDefault();
-  let keyword = searchForm.firstElementChild.value
+  let kw = searchForm.firstElementChild.value
   sideBarTitle.innerHTML = "TÌM KIẾM";
-  $.post("./src/Views/Templates/search.php", { keyword: keyword }, (data) => {
-    // searchItem.html(data);
-    console.log(keyword)
+  $.post(`${BASE_URL}/Ajax/searchproduct`, { keyword: kw }, (data) => {
+    searchItem.html(data);
   });
 })
 
 search.addEventListener("click", () => {
   sideBarTitle.innerHTML = "TÌM KIẾM";
-  $.post("./src/Views/Templates/search.php", { keyword: "Quan ao" }, (data) => {
+  $.post(`${BASE_URL}/Ajax/searchproduct`, { keyword: "Quan ao" }, (data) => {
     searchItem.html(data);
   });
   searchPanel.classList.remove("hidden");
@@ -30,11 +30,11 @@ search.addEventListener("click", () => {
 });
 cart.addEventListener("click", () => {
   sideBarTitle.innerHTML = "GIỎ HÀNG";
-  $.get("./src/Views/Templates/sideCart.php", (data) => {
+  console.log("cart open");
+  $.post(`${BASE_URL}/Ajax/getcart`, (data) => {
     cartPanel.html(data);
     data &&
-      $.getScript("../scripts/deleteSideCartItem.js", () => {
-        console.log("Script loaded");
+      $.getScript(`${BASE_URL}/public/scripts/deleteSideCartItem.js`, () => {
       });
   });
   cartPanel.removeClass("hidden");

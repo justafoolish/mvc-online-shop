@@ -3,7 +3,7 @@
     while ($i--) { ?>
         <div class="flex justify-between items-center pb-2 border-b" id="cart-item-sidebar">
             <div class="w-14 mr-3">
-                <img src="public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full" />
+                <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full" />
             </div>
             <div class="flex-auto pl-3">
                 <h3 class="text-gray-800">Smiley ice tee black</h3>
@@ -29,7 +29,7 @@
         <p>450.000 <sup>vnđ</sup></p>
     </div>
     <div class="flex justify-between mb-2">
-        <a class="uppercase bg-black text-white text-xs px-6 py-3" href="">Xem Giỏ Hàng</a>
-        <a class="uppercase bg-black text-white text-xs px-6 py-3" href="">Thanh Toán</a>
+        <a class="uppercase bg-black text-white text-xs px-6 py-3" href="<?= BASE_URL ?>/Cart/">Xem Giỏ Hàng</a>
+        <a class="uppercase bg-black text-white text-xs px-6 py-3" href="<?= BASE_URL ?>/Checkout/">Thanh Toán</a>
     </div>
 </div>

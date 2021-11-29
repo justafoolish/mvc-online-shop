@@ -1,0 +1,116 @@
+<?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <?php require_once "./src/Views/Admin/Templates/header.php" ?>
+</head>
+
+<body>
+    <div class="relative min-h-screen flex">
+        <!-- side bar -->
+        <?php require_once "./src/Views/Admin/Templates/sidebar.php" ?>
+        <!-- main content -->
+        <div class="flex-1 px-10 mb-10">
+            <?php getNavBar("Tồn kho"); ?>
+            <main>
+                <div class="flex justify-between py-5 mb-3">
+                    <h3 class="font-semibold text-2xl">Tồn kho</h3>
+                    <div class="flex space-x-3">
+                        <button class="flex items-center bg-gray-700 text-gray-200 text-xs px-3 py-2 hover:text-gray-100 hover:bg-gray-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>Xuất dữ liệu
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="product_table" class="table table-borderless table-hover" width="100%" cellspacing="0">
+                        <thead class="bg-gray-700 text-gray-50">
+                            <tr class="grid grid-cols-10">
+                                <th class="col-span-5">Tên Sản Phẩm</th>
+                                <th>ID</th>
+                                <th>Tồn</th>
+                                <th class="col-span-3">Cập nhật tồn kho </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $i = 30;
+                            while ($i-- > 0) { ?>
+                                <tr class="grid grid-cols-10">
+                                    <td class="text-left col-span-5 flex items-center space-x-4">
+                                        <div class="w-10">
+                                            <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto object-center object-cover">
+                                        </div>
+                                        <a href="" class="text-gray-700 hover:text-gray-900 hover:underline transition-all">Áo ABC XYZ</a>
+                                    </td>
+                                    <td class="grid place-items-center">Áo</td>
+                                    <td class="flex items-center justify-center">
+                                        <span class="text-green-500" id="current"><?= --$i ?></span>
+                                        <span class="flex text-green-500 hidden" id="new"></span>
+                                    </td>
+                                    <td class="flex items-center justify-center space-x-10 col-span-3">
+                                        <div class="flex my-5 w-32 justify-between inline-block">
+                                            <button class="px-3 py-2 bg-gray-300 text-gray-500 hover:text-gray-800" id="decrease">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
+                                                </svg>
+                                            </button>
+                                            <input type="text" class="w-16 text-center border-t-2 border-b-2 border-gray-300 bg-white" min="0" value="0" id="quantity" name="quantity" />
+                                            <button class="px-3 py-2 bg-gray-300 text-gray-500 hover:text-gray-800" id="increase">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <button class="text-gray-100 bg-gray-400 hover:bg-gray-600 transition-all px-3 py-1">Lưu</button>
+                                    </td>
+                                </tr>
+                                <tr class="grid grid-cols-10">
+                                    <td class="text-left col-span-5 flex items-center space-x-4">
+                                        <div class="w-10">
+                                            <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto object-center object-cover">
+                                        </div>
+                                        <a href="" class="text-gray-700 hover:text-gray-900 hover:underline transition-all">Áo ABC XYZ</a>
+                                    </td>
+                                    <td class="grid place-items-center">Áo</td>
+                                    <td class="flex items-center justify-center">
+                                        <span class="text-yellow-500" id="current"><?= --$i ?></span>
+                                        <span class="flex text-green-500 hidden" id="new"></span>
+                                    </td>
+                                    <td class="flex items-center justify-center space-x-10 col-span-3">
+                                        <div class="flex my-5 w-32 justify-between inline-block">
+                                            <button class="px-3 py-2 bg-gray-300 text-gray-500 hover:text-gray-800" id="decrease">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
+                                                </svg>
+                                            </button>
+                                            <input type="text" class="w-16 text-center border-t-2 border-b-2 border-gray-300 bg-white" min="0" value="0" id="quantity" name="quantity" />
+                                            <button class="px-3 py-2 bg-gray-300 text-gray-500 hover:text-gray-800" id="increase">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <button class="text-gray-100 bg-gray-400 hover:bg-gray-600 transition-all px-3 py-1">Lưu</button>
+                                    </td>
+                                </tr>
+                            <?php  } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#product_table').DataTable();
+        });
+    </script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= BASE_URL ?>/public/admin/updateInventory.js"></script>
+</body>
+
+</html>

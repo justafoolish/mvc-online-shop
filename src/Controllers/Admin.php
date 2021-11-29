@@ -12,5 +12,15 @@ class Admin extends BaseController
             "collections" => $this->collections,
         ]);
     }
+
+    function dashboard() {
+        $this->index();
+    }
+
+    function inventory() {
+        $this->view("Admin.Inventory.index", [
+            "collections" => $this->collections,
+        ]);
+    }
     
 }

@@ -4,7 +4,7 @@ while ($i--) { ?>
     <div class="flex justify-between border-b pb-3 mb-2">
         <div class="flex-auto">
             <h3 class="mt-2 text-gray-800 uppercase">
-                <a href="<?= BASE_URL ?>/Collection/Product/<?= 5 ?>"> Hades vintage tee black </a>
+                <a href="<?= BASE_URL ?>/Product/ID/<?= 5 ?>"> Hades vintage tee black </a>
             </h3>
             <p class="text-gray-600 text-sm mt-1">250.000<sup>vnđ</sup></pc>
         </div>

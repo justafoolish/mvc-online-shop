@@ -12,14 +12,15 @@ class Ajax extends BaseController
             $keyword = $_POST['keyword'];
         }
 
-        $this->view("Templates.search",[
+        parent::view("Templates.search",[
             "result" => $keyword,
         ]);
     }
-
-    function getcart() {
-        $this->view("Templates.sidecart",[
-            "cart"=>"cart",
+    
+    public function getcart() {
+        $total = 450000;
+        parent::view("Templates.sidecart",[
+            "total" => $total,
         ]);
     }
 }

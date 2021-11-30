@@ -1,15 +1,15 @@
-<?php include "../Component/navbar.php"; ?>
+<?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include "../Component/header.php" ?>
+    <?php require_once "./src/Views/Admin/Templates/header.php" ?>
 </head>
 
 <body>
     <div class="relative min-h-screen flex">
         <!-- side bar -->
-        <?php include "../Component/sidebar.php" ?>
+        <?php require_once "./src/Views/Admin/Templates/sidebar.php" ?>
         <!-- main content -->
         <div class="flex-1 mb-10">
             <form action="index.php" method="post">
@@ -35,7 +35,6 @@
             </form>
         </div>
     </div>
-    <script src="../script/index.js"></script>
 </body>
 
 </html>

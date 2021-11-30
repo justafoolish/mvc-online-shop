@@ -91,7 +91,7 @@
                     while ($i-- > 0) { ?>
                         <div class="group cursor-pointer">
                             <div class="relative overflow-hidden">
-                                <a href="../Detail">
+                                <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
                                     <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto" />
                                 </a>
                                 <div class="absolute top-3 left-1 bg-black rounded-full w-10 h-10 grid place-items-center">
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
                             <div class="text-center pb-3 pt-2 cursor-default">
-                                <a href="../Detail">
+                                <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
                                     <h3 class="font-medium text-md mb-1 text-gray-800 uppercase">Hades/New balance Basic Tee</h3>
                                 </a>
                                 <div class="flex justify-center items-center">

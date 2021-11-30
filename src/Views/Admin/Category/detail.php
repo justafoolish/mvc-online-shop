@@ -1,15 +1,15 @@
-<?php include "../Component/navbar.php"; ?>
+<?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include "../Component/header.php" ?>
+    <?php require_once "./src/Views/Admin/Templates/header.php" ?>
 </head>
 
 <body>
     <div class="relative min-h-screen flex">
         <!-- side bar -->
-        <?php include "../Component/sidebar.php" ?>
+        <?php require_once "./src/Views/Admin/Templates/sidebar.php" ?>
         <!-- main content -->
         <div class="flex-1 mb-10">
             <form action="index.php" method="post">
@@ -39,7 +39,7 @@
                             while ($i-- > 0) { ?>
                                 <div class="flex space-x-3 border-b border-gray-300 pb-3">
                                     <div class="w-10 min-w-10">
-                                        <img src="../../image/107824882_303977137640006_5725713926320775589_n.jpg" class="max-w-full">
+                                        <img src="<?= BASE_URL ?>/public/images/107824882_303977137640006_5725713926320775589_n.jpg" class="max-w-full">
                                     </div>
                                     <div class="flex items-center font-medium">
                                         Áo ABC XYZ Lorem ipsum dolor sit am
@@ -54,7 +54,6 @@
             </form>
         </div>
     </div>
-    <script src="../script/index.js"></script>
 </body>
 
 </html>

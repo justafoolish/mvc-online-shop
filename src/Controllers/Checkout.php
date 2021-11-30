@@ -8,7 +8,7 @@ class Checkout extends BaseController
 
     function index()
     {
-        $this->view("Checkout.index", [
+        parent::view("Checkout.index", [
             "collections" => $this->collections,
         ]);
     }

@@ -8,13 +8,8 @@ class Home extends BaseController
 
     function index()
     {
-        $this->view("Home.index", [
+        parent::view("Home.index", [
             "collections" => $this->collections,
-        ]);
-    }
-    function getCart() {
-        $this->view("Templates.sidecart",[
-            "cart"=>"cart",
         ]);
     }
 }

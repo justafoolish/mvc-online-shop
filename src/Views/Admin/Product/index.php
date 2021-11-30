@@ -1,15 +1,15 @@
-<?php include "../Component/navbar.php"; ?>
+<?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include "../Component/header.php" ?>
+    <?php require_once "./src/Views/Admin/Templates/header.php" ?>
 </head>
 
 <body>
     <div class="relative min-h-screen flex">
         <!-- side bar -->
-        <?php include "../Component/sidebar.php" ?>
+        <?php require_once "./src/Views/Admin/Templates/sidebar.php" ?>
         <!-- main content -->
         <div class="flex-1 px-10 mb-10">
             <?php getNavBar("Danh sách sản phẩm"); ?>
@@ -22,7 +22,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                             </svg>Nhập danh sách sản phẩm
                         </button>
-                        <a class="flex items-center bg-gray-700 text-gray-200 text-xs px-3 py-2 hover:text-gray-100 hover:bg-gray-900" href="add.php">
+                        <a class="flex items-center bg-gray-700 text-gray-200 text-xs px-3 py-2 hover:text-gray-100 hover:bg-gray-900" href="<?= BASE_URL ?>/Admin/InsertProduct/">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>Tạo sản phẩm
@@ -46,9 +46,9 @@
                                 <tr class="grid grid-cols-5">
                                     <td class="text-left col-span-2 flex items-center space-x-4">
                                         <div class="w-10">
-                                            <img src="../../image/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto object-center object-cover">
+                                            <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto object-center object-cover">
                                         </div>
-                                        <a href="detail.php" class="text-gray-700 hover:text-gray-900 hover:underline transition-all">Áo ABC XYZ</a>
+                                        <a href="<?= BASE_URL ?>/Admin/Product/12" class="text-gray-700 hover:text-gray-900 hover:underline transition-all">Áo ABC XYZ</a>
                                     </td>
                                     <td class="grid place-items-center">123 </td>
                                     <td class="grid place-items-center">Áo</td>

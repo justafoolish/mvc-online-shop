@@ -8,7 +8,7 @@ class Cart extends BaseController
 
     function index()
     {
-        $this->view("Cart.index", [
+        parent::view("Cart.index", [
             "collections" => $this->collections,
         ]);
     }

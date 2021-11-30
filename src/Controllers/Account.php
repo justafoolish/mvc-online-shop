@@ -13,7 +13,7 @@ class Account extends BaseController
     
     function login()
     {
-        $this->view("Account.login", [
+        parent::view("Account.login", [
             "product" => "Tran Khac Tuan",
             "collections" => $this->collections,
         ]);
@@ -21,7 +21,7 @@ class Account extends BaseController
 
     function register()
     {
-        $this->view("Account.register", [
+        parent::view("Account.register", [
             "product" => "Tran Khac Tuan",
             "collections" => $this->collections,
         ]);

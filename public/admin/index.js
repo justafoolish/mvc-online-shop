@@ -13,14 +13,18 @@ window.onload = () => {
   switch (currentURL) {
     case "":
     case "index":
+    case "mvcphp":
+    case "admin":
     case "dashboard":
       changeActive(0);
       break;
     case "order":
       changeActive(1);
       break;
-    case "product":
+    case "product": 
+    case "insertproduct":
     case "category":
+    case "addcategory":
     case "inventory":
       document.querySelector("#sptarget").classList.remove("h-0");
       document.querySelector("#sp > span.transform").classList.add("rotate-90");
@@ -30,6 +34,8 @@ window.onload = () => {
       changeActive(3);
       break;
     case "discount":
+    case "automationdiscound":
+    case "adddiscount":
       changeActive(4);
       break;
     case "report":

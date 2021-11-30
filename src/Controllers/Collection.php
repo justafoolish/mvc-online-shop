@@ -7,30 +7,20 @@ class Collection extends BaseController
     }
     public function index()
     {
-        $this->view("Collection.index", [
+        parent::view("Collection.index", [
             "collections" => $this->collections,
         ]);
     }
     public function show()
     {
-        $this->view("Collection.index", [
+        parent::view("Collection.index", [
             "collections" => $this->collections,
         ]);
     }
     public function product()
     {
-        $this->view("Collection.product", [
+        parent::view("Collection.product", [
             "collections" => $this->collections,
-        ]);
-    }
-    public function searchproduct() {
-        $keyword= "";
-        if(isset($_POST['keyword'])){
-            $keyword = $_POST['keyword'];
-        }
-
-        $this->view("Templates.search",[
-            "result" => "result",
         ]);
     }
 }

@@ -81,11 +81,11 @@
                             </div>
                             <div class="px-3 py-4">
                                 <label class="flex items-center mr-4 cursor-pointer group">
-                                    <input type="radio" name="paymethod" />
+                                    <input type="radio" name="paymethod" disabled/>
                                     <span class="checkbox relative w-5 h-5 rounded-full inline-block bg-gray-100 mr-2 group-hover:bg-gray-300 border border-gray-200">
                                         <span class="absolute w-full h-full bg-black rounded-full transform scale-50 hidden"></span>
                                     </span>
-                                    <span>Thanh toán qua ví điện tử</span>
+                                    <span>Thanh toán qua ví điện tử (Đang phát triển)</span>
                                 </label>
                             </div>
                         </div>

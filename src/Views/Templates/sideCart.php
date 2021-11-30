@@ -26,7 +26,7 @@
 <div class="mb-2 border-t-2 border-black">
     <div class="flex justify-between items-center my-4">
         <p>Tổng Tiền:</p>
-        <p>450.000 <sup>vnđ</sup></p>
+        <p><?= $data['total']; ?> <sup>vnđ</sup></p>
     </div>
     <div class="flex justify-between mb-2">
         <a class="uppercase bg-black text-white text-xs px-6 py-3" href="<?= BASE_URL ?>/Cart/">Xem Giỏ Hàng</a>

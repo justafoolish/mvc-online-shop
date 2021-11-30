@@ -14,7 +14,7 @@ class BaseController
             ["id" => "4", "name" => "Bags"],
         ];
     }
-    public function view($viewPath, $data = [])
+    public static function view($viewPath, $data = [])
     {
         foreach ($data as $key => $value) $$key = $value;
         require_once "./src/Views/" . str_replace('.', '/', $viewPath) . ".php";

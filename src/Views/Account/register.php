@@ -26,7 +26,7 @@
                     </div>
                     <div class="relative mb-7 form-group flex items-center">
                         <label for="male" class="flex items-center mr-4 cursor-pointer group">
-                            <input type="radio" name="gender" id="male" />
+                            <input type="radio" name="gender" id="male" checked/>
                             <span class="checkbox relative w-6 h-6 rounded-full inline-block bg-gray-100 mr-2 group-hover:bg-gray-300 border border-gray-200">
                                 <span class="absolute w-full h-full bg-black rounded-full transform scale-50 hidden"></span>
                             </span>

@@ -57,7 +57,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
                                                 </svg>
                                             </button>
-                                            <input type="text" class="w-16 text-center border-t-2 border-b-2 border-gray-300 bg-white" min="0" value="0" id="quantity" name="quantity" />
+                                            <input type="text" class="outline-none w-16 text-center border-t-2 border-b-2 border-gray-300 bg-white" min="0" value="0" id="quantity" name="quantity" />
                                             <button class="px-3 py-2 bg-gray-300 text-gray-500 hover:text-gray-800" id="increase">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -86,7 +86,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
                                                 </svg>
                                             </button>
-                                            <input type="text" class="w-16 text-center border-t-2 border-b-2 border-gray-300 bg-white" min="0" value="0" id="quantity" name="quantity" />
+                                            <input type="text" class="outline-none w-16 text-center border-t-2 border-b-2 border-gray-300 bg-white" min="0" value="0" id="quantity" name="quantity" />
                                             <button class="px-3 py-2 bg-gray-300 text-gray-500 hover:text-gray-800" id="increase">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />

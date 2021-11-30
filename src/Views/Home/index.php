@@ -49,9 +49,9 @@
                             <div class="absolute top-3 left-1 bg-black rounded-full w-10 h-10 grid place-items-center">
                                 <span class="text-white text-xs font-semibold">-34%</span>
                             </div>
-                            <div class="flex justify-between absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
-                                <button class="uppercase bg-black text-white text-xs px-8 py-3">Mua Ngay</button>
-                                <button class="uppercase bg-black text-white text-xs px-8 py-3">Thêm vào giỏ</button>
+                            <div class="grid grid-cols-2 gap-2 absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
+                                <button class="uppercase bg-black text-white text-xs py-3">Mua Ngay</button>
+                                <button class="uppercase bg-black text-white text-xs py-3">Thêm vào giỏ</button>
                             </div>
                         </div>
                         <div class="text-center pb-3 pt-2 cursor-default">

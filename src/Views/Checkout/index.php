@@ -30,7 +30,7 @@
                             <input type="text" class="placeholder-gray-600 outline-none w-full" placeholder="Họ và tên">
                         </div>
                         <div class="border py-2 px-3 rounded border-gray-400 text-gray-800 focus-within:ring-2 focus-within:ring-gray-600 transition-all col-span-2">
-                            <input type="email" class="placeholder-gray-600 outline-none" placeholder="Email">
+                            <input type="email" class="placeholder-gray-600 outline-none w-full" placeholder="Email">
                         </div>
                         <div class="border py-2 px-3 rounded border-gray-400 text-gray-800 focus-within:ring-2 focus-within:ring-gray-600 transition-all ">
                             <input type="text" class="placeholder-gray-600 outline-none max-w-full" placeholder="Số điện thoại">

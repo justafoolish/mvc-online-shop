@@ -22,12 +22,12 @@
                 <div>
                     <div class="grid grid-cols-4 gap-5">
                         <div class="border rounded-lg overflow-hidden shadow-xl">
-                            <div class="flex bg-blue-500 px-6 py-4 text-white">
+                            <div class="flex justify-between bg-blue-500 px-6 py-4 text-white">
                                 <div>
                                     <h3 class="text-2xl">Sản phẩm</h3>
                                     <h3 class="font-medium text-2xl">13</h3>
                                 </div>
-                                <div class="flex-1 grid place-items-center ml-10">
+                                <div class="flex-1 grid place-items-end">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shirt" width="45" height="45" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <path d="M15 4l6 2v5h-3v8a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1v-8h-3v-5l6 -2a3 3 0 0 0 6 0"></path>
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="px-6 py-2 text-blue-500 hover:text-blue-600">
-                                <a href="../Product" class="flex justify-between">
+                                <a href="<?= BASE_URL ?>/Admin/Product/" class="flex justify-between">
                                     <span>Xem chi tiết</span>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -46,12 +46,12 @@
                             </div>
                         </div>
                         <div class="border rounded-lg overflow-hidden shadow-xl">
-                            <div class="flex bg-green-500 px-6 py-4 text-white">
+                            <div class="flex justify-between bg-green-500 px-6 py-4 text-white">
                                 <div>
                                     <h3 class="text-2xl">Đơn hàng</h3>
                                     <h3 class="font-medium text-2xl">13</h3>
                                 </div>
-                                <div class="flex-1 grid place-items-center ml-10">
+                                <div class="flex-1 grid place-items-end">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-invoice" width="45" height="45" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="px-6 py-2 text-green-500 hover:text-green-600">
-                                <a href="../Order" class="flex justify-between">
+                                <a href="<?= BASE_URL ?>/Admin/Order/" class="flex justify-between">
                                     <span>Xem chi tiết</span>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -74,12 +74,12 @@
                             </div>
                         </div>
                         <div class="border rounded-lg overflow-hidden shadow-xl">
-                            <div class="flex bg-pink-500 px-6 py-4 text-white">
+                            <div class="flex justify-between bg-pink-500 px-6 py-4 text-white">
                                 <div>
                                     <h3 class="text-2xl">Khách hàng</h3>
                                     <h3 class="font-medium text-2xl">13</h3>
                                 </div>
-                                <div class="flex-1 grid place-items-center ml-10">
+                                <div class="flex-1 grid place-items-end">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="45" height="45" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <circle cx="9" cy="7" r="4"></circle>
@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="px-6 py-2 text-pink-500 hover:text-pink-600">
-                                <a href="../Customer" class="flex justify-between">
+                                <a href="<?= BASE_URL ?>/Admin/Customer/" class="flex justify-between">
                                     <span>Xem chi tiết</span>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -101,12 +101,12 @@
                             </div>
                         </div>
                         <div class="border rounded-lg overflow-hidden shadow-xl">
-                            <div class="flex bg-purple-500 px-6 py-4 text-white">
+                            <div class="flex justify-between bg-purple-500 px-6 py-4 text-white">
                                 <div>
                                     <h3 class="text-2xl">Doanh thu</h3>
                                     <h3 class="font-medium text-2xl">13</h3>
                                 </div>
-                                <div class="flex-1 grid place-items-center ml-10">
+                                <div class="flex-1 grid place-items-end">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cash" width="45" height="45" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <rect x="7" y="9" width="14" height="10" rx="2"></rect>
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                             <div class="px-6 py-2 text-purple-500 hover:text-purple-600">
-                                <a href="../Report" class="flex justify-between">
+                                <a href="<?= BASE_URL ?>/Admin/Report/" class="flex justify-between">
                                     <span>Xem chi tiết</span>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

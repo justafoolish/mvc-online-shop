@@ -24,9 +24,9 @@
             </header>
             <main class="grid grid-cols-3">
                 <div class="col-span-2">
-                    <div class="flex justify-around">
-                        <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" alt="" class="max-w-full" />
-                        <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" alt="" class="max-w-full" />
+                    <div class="grid grid-cols-2 overflow-hidden">
+                        <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" alt="" class="max-w-full" />
+                        <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh2'] ?>" alt="" class="max-w-full" />
                     </div>
                 </div>
                 <div class="px-3">

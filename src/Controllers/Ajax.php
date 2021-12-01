@@ -27,4 +27,15 @@ class Ajax extends BaseController
             "total" => $total,
         ]);
     }
+
+    public function updatequantity() {
+        if(isset($_POST['pid']) && isset($_POST['quantity'])) {
+            $pid = $_POST['pid'];
+            $quantity = $_POST['quantity'];
+            $productModel = parent::model("ProductModel");
+            return $productModel->updateQuantity($pid,$quantity);
+        }
+        return 0;
+        
+    }
 }

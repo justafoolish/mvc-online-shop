@@ -26,11 +26,25 @@ class ProductModel extends BaseModel
     }
 
     public function insertProduct($data = []) {
-        return $this->insert(self::TABLE,$data);
+        $insertData = [
+            "TenSP" => $data['TenSP'],
+            "Hinh1" => $data['Hinh1'],
+            "Hinh2" => $data['Hinh2'],
+            "TongSoLuong" => $data['TongSoLuong'],
+            "DanhMuc" => $data['DanhMuc'],
+            "NgayNhap" => $data['NgayNhap'],
+            "DonGia" => $data['DonGia'],
+            "ChietKhau" => $data['DanhMuc'],
+        ];
+        return $this->insert(self::TABLE,$insertData);
     }
 
     public function updateQuantity($productID, $quantity) {
-
+        $condition = "MaSP='${productID}'";
+        $data = [
+            "TongSoLuong" => $quantity,
+        ];
+        return $this->update(self::TABLE,$condition,$data);
     }
 
 }

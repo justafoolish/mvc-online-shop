@@ -57,7 +57,20 @@ class BaseModel extends DataBase{
 
     public function update($table,$condition, $data = []) {
 
-        $sql = "UPDATE ${table} SET  WHERE ${condition}";
+        $updateData = [];
+        foreach($data as $key => $val) {
+            array_push($updateData,"${key}='${val}'");
+        }
+
+        $updateData = implode(', ',$updateData);
+
+        $sql = "UPDATE ${table} SET ${updateData} WHERE ${condition}";
+
+        echo $sql;
+
+        $this->query($sql);
+        
+        return mysqli_affected_rows($this->con);
     }
 
     public function delete() {

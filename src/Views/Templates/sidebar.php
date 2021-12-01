@@ -10,7 +10,7 @@
     </header>
     <!-- search items -->
     <div id="searchPanel" class="hidden mb-5">
-      <form class="flex justify-center sticky top-20 z-30 pb-6 bg-white" id="searchForm">
+      <form class="flex justify-center sticky top-20 z-30 pb-2 bg-white" id="searchForm">
         <input type="text" placeholder="TÌM KIẾM SẢN PHẨM" class="px-4 py-3 my-3 bg-gray-100 outline-none placeholder-gray-400 text-gray-400 focus:bg-gray-200 w-full transition-all" />
       </form>
       <main id="searchProduct">

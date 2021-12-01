@@ -46,7 +46,7 @@
                                 <tr class="grid grid-cols-5">
                                     <td class="text-left col-span-2 flex items-center space-x-4">
                                         <div class="w-10">
-                                            <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto object-center object-cover">
+                                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto object-center object-cover">
                                         </div>
                                         <a href="<?= BASE_URL ?>/Admin/Product/12" class="text-gray-700 hover:text-gray-900 hover:underline transition-all">Áo ABC XYZ</a>
                                     </td>

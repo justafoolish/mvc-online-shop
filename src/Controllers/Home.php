@@ -8,8 +8,12 @@ class Home extends BaseController
 
     function index()
     {
+        $productModel = parent::model("ProductModel");
+        $latestProduct = $productModel->getLatestProducts();
+
         parent::view("Home.index", [
             "collections" => $this->collections,
+            "latestProduct" => $latestProduct,
         ]);
     }
 }

@@ -30,7 +30,7 @@
                 <div class="group cursor-pointer">
                     <div class="relative overflow-hidden">
                         <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                            <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto" />
+                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto" />
                         </a>
                         <div class="grid grid-cols-2 gap-3 absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
                             <button class="uppercase bg-black text-white text-xs py-3">Mua Ngay</button>
@@ -51,7 +51,7 @@
                 <div class="group cursor-pointer">
                     <div class="relative overflow-hidden">
                         <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                            <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto" />
+                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto" />
                         </a>
                         <div class="absolute top-3 left-1 bg-black rounded-full w-10 h-10 grid place-items-center">
                             <span class="text-white text-xs font-semibold">-34%</span>
@@ -75,7 +75,7 @@
                 <div class="group cursor-pointer">
                     <div class="relative overflow-hidden">
                         <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                            <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto" />
+                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto" />
                         </a>
                         <div class="absolute top-3 right-1 bg-black rounded-full w-10 h-10 grid place-items-center">
                             <span class="text-white text-xs font-semibold text-gray-200">Hết</span>

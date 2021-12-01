@@ -15,8 +15,12 @@ class Product extends BaseController
             $this->index();
         }
         else {
+            $productModel = parent::model("ProductModel");
+            $product = $productModel->getProduct($pid);
+
             parent::view("Product.index", [
                 "collections" => $this->collections,
+                "product" => $product,
             ]);
         }
         

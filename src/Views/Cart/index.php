@@ -30,7 +30,7 @@
                     while ($i--) { ?>
                         <div class="grid grid-cols-12 pr-6 mt-1 py-6 border-b border-gray-300" id="cartItem">
                             <div class="w-16">
-                                <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full mx-auto" />
+                                <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full mx-auto" />
                             </div>
                             <div class="col-span-5 flex flex-col justify-center pl-3">
                                 <h3 class="font-bold text-gray-800">Hades/New balance Basic Tee</h3>
@@ -87,7 +87,7 @@
                         <div class="group cursor-pointer">
                             <div class="relative overflow-hidden">
                                 <a href="<?= BASE_URL ?>/Product/ID/<?= 5 ?>">
-                                    <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto" />
+                                    <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto" />
                                 </a>
                                 <div class="absolute top-3 left-1 bg-black rounded-full w-10 h-10 grid place-items-center">
                                     <span class="text-white text-xs font-semibold">-34%</span>

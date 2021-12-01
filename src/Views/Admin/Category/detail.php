@@ -39,7 +39,7 @@
                             while ($i-- > 0) { ?>
                                 <div class="flex space-x-3 border-b border-gray-300 pb-3">
                                     <div class="w-10 min-w-10">
-                                        <img src="<?= BASE_URL ?>/public/images/107824882_303977137640006_5725713926320775589_n.jpg" class="max-w-full">
+                                        <img src="<?= BASE_URL ?>/public/images/products/ao1.jpg" class="max-w-full">
                                     </div>
                                     <div class="flex items-center font-medium">
                                         Áo ABC XYZ Lorem ipsum dolor sit am

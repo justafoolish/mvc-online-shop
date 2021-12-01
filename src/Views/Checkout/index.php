@@ -100,7 +100,7 @@
                             <div class="flex-auto flex">
                                 <div class="border-2 border-gray-200 rounded relative">
                                     <div class="overflow-hidden w-16 h-16">
-                                        <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="w-full object-cover object-center" alt="">
+                                        <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="w-full object-cover object-center" alt="">
                                     </div>
                                     <span class="absolute -top-3 -right-3 bg-gray-500 h-6 w-6 rounded-full text-white grid place-items-center">1</span>
                                 </div>

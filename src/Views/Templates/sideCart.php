@@ -3,7 +3,7 @@
     while ($i--) { ?>
         <div class="flex justify-between items-center pb-2 border-b" id="cart-item-sidebar">
             <div class="w-14 mr-3">
-                <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full" />
+                <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full" />
             </div>
             <div class="flex-auto pl-3">
                 <h3 class="text-gray-800">Smiley ice tee black</h3>

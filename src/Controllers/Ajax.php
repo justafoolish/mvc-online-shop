@@ -11,9 +11,13 @@ class Ajax extends BaseController
         if(isset($_POST['keyword'])){
             $keyword = $_POST['keyword'];
         }
+        $productModel = parent::model("ProductModel");
+        $products = $keyword != "" ? $productModel->search($keyword) : [];
+
 
         parent::view("Templates.search",[
             "result" => $keyword,
+            "products" => $products
         ]);
     }
     

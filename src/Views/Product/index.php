@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php $product = $data['product']; ?>
 <?php require_once "./src/Views/Templates/head.php"; ?>
 
 <body>
@@ -25,17 +25,23 @@
             <main class="grid grid-cols-3">
                 <div class="col-span-2">
                     <div class="flex justify-around">
-                        <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" alt="" class="max-w-full" />
-                        <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" alt="" class="max-w-full" />
+                        <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" alt="" class="max-w-full" />
+                        <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" alt="" class="max-w-full" />
                     </div>
                 </div>
                 <div class="px-3">
-                    <h3 class="font-medium text-2xl mb-2 text-gray-900">Hades basic Tee</h3>
+                    <h3 class="font-medium text-2xl mb-2 text-gray-900 uppercase"><?= $product['TenSP'] ?></h3>
                     <h4 class="text-sm text-gray-500 font-light mb-4">
                         <span>ID: </span>
-                        <span>SP001</span>
+                        <span>SP<?= $product['MaSP'] ?></span>
                     </h4>
-                    <h4 class="font-semibold text-lg text-gray-700 mb-4">350.000 <sup>vnđ</sup></h4>
+                    <div class="flex space-x-3 items-center mb-4">
+                        <?php if($product['ChietKhau']) { ?>
+                        <h4 class="bg-gray-200 text-red-500 text-sm font-bold py-1 px-2">-<?= $product['ChietKhau'] ?>%</h4>
+                        <h4 class="font-bold text-lg text-gray-700"><?= number_format($product['DonGia'],0,",",".")  ?> <sup>vnđ</sup></h4>
+                        <?php } ?>
+                        <h4 class="text-lg text-gray-700 <?= $product['ChietKhau'] ? "line-through" : "font-semibold" ?>"><?= number_format($product['DonGia'],0,",",".")  ?> <sup>vnđ</sup></h4>
+                    </div>
                     <form action="" class="mb-3">
                         <div class="mb-4">
                             <h4 class="font-medium mb-3">Size</h4>
@@ -92,14 +98,14 @@
                         <div class="group cursor-pointer">
                             <div class="relative overflow-hidden">
                                 <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                                    <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto" />
+                                    <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto" />
                                 </a>
                                 <div class="absolute top-3 left-1 bg-black rounded-full w-10 h-10 grid place-items-center">
                                     <span class="text-white text-xs font-semibold">-34%</span>
                                 </div>
-                                <div class="flex justify-between absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
-                                    <button class="uppercase bg-black text-white text-xs px-8 py-3">Mua Ngay</button>
-                                    <button class="uppercase bg-black text-white text-xs px-8 py-3">Thêm vào giỏ</button>
+                                <div class="grid grid-cols-2 gap-3 absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
+                                    <button class="uppercase bg-black text-white text-xs py-3">Mua Ngay</button>
+                                    <button class="uppercase bg-black text-white text-xs py-3">Thêm vào giỏ</button>
                                 </div>
                             </div>
                             <div class="text-center pb-3 pt-2 cursor-default">

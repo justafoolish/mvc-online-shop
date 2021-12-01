@@ -16,7 +16,7 @@
             <div class="relative">
                 <ul>
                     <li class="mt-1">
-                        <img src="<?= BASE_URL ?>/public/images/slideshow_3.webp" alt="" class="w-full" />
+                        <img src="<?= BASE_URL ?>/public/images/banner/slideshow_3.webp" alt="" class="w-full" />
                     </li>
                 </ul>
                 <div class="absolute bottom-0 right-0">
@@ -38,17 +38,21 @@
                 <a href="<?= BASE_URL ?>/Collection/" class="text-sm text-gray-600 hover:text-gray-900">Xem Thêm</a>
             </header>
             <main class="mb-10 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 px-4" id="indexProduct">
-                <?php $i = 8;
-                while ($i-- > 0) {
+                <?php
+                foreach($data['latestProduct'] as $product) {
                 ?>
                     <div class="group cursor-pointer">
                         <div class="relative overflow-hidden">
-                            <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                                <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto" />
+                            <a href="<?= BASE_URL ?>/Product/ID/<?= $product['MaSP'] ?>">
+                                <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" class="max-w-full h-auto" />
                             </a>
+                            
+                            <?php if($product['ChietKhau']) { ?>
                             <div class="absolute top-3 left-1 bg-black rounded-full w-10 h-10 grid place-items-center">
-                                <span class="text-white text-xs font-semibold">-34%</span>
+                                <span class="text-white text-xs font-semibold">-<?= $product['ChietKhau'] ?>%</span>
                             </div>
+                            <?php }?>
+
                             <div class="grid grid-cols-2 gap-2 absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
                                 <button class="uppercase bg-black text-white text-xs py-3">Mua Ngay</button>
                                 <button class="uppercase bg-black text-white text-xs py-3">Thêm vào giỏ</button>
@@ -56,11 +60,13 @@
                         </div>
                         <div class="text-center pb-3 pt-2 cursor-default">
                             <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                                <h3 class="font-medium text-md mb-1 text-gray-800 uppercase">Hades/New balance Basic Tee</h3>
+                                <h3 class="font-medium text-md mb-1 text-gray-800 uppercase"><?= $product['TenSP'] ?></h3>
                             </a>
                             <div class="flex justify-center items-center">
-                                <h4 class="font-medium text-sm text-red-500 mr-2">250.000 <sup>vnđ</sup></h4>
-                                <h4 class="font-light text-sm text-gray-700 line-through">380.000 <sup>vnđ</sup></h4>
+                            <?php if($product['ChietKhau']) { ?>
+                                <h4 class="font-medium text-sm text-red-500 mr-2"><?= number_format(intval($product['DonGia'])*(100 - intval($product['ChietKhau']))/100,0,",",".") ?> <sup>vnđ</sup></h4>
+                            <?php }?>
+                                <h4 class="font-light text-sm text-gray-700  <?= $product['ChietKhau'] ? "line-through" : "" ?>"><?= number_format($product['DonGia'],0,",",".") ?> <sup>vnđ</sup></h4>
                             </div>
                         </div>
                     </div>

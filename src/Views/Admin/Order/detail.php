@@ -36,7 +36,7 @@
                             
                             <div class="col-span-4 p-2 flex">
                                 <div class="w-14">
-                                    <img class="max-w-full" src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" alt="">
+                                    <img class="max-w-full" src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" alt="">
                                 </div>
                                 <div class="pl-2">
                                     <h3>Áo ABC XYZ</h3>

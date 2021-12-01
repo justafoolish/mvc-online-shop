@@ -41,7 +41,7 @@
                                 <tr class="grid grid-cols-10">
                                     <td class="text-left col-span-5 flex items-center space-x-4">
                                         <div class="w-10">
-                                            <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto object-center object-cover">
+                                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto object-center object-cover">
                                         </div>
                                         <a href="" class="text-gray-700 hover:text-gray-900 hover:underline transition-all">Áo ABC XYZ</a>
                                     </td>
@@ -70,7 +70,7 @@
                                 <tr class="grid grid-cols-10">
                                     <td class="text-left col-span-5 flex items-center space-x-4">
                                         <div class="w-10">
-                                            <img src="<?= BASE_URL ?>/public/images/2310_8_8f886f646f4f4cefa6c46af0d0e22cc2_large.jpeg" class="max-w-full h-auto object-center object-cover">
+                                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto object-center object-cover">
                                         </div>
                                         <a href="" class="text-gray-700 hover:text-gray-900 hover:underline transition-all">Áo ABC XYZ</a>
                                     </td>

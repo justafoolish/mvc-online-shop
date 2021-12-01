@@ -19,4 +19,9 @@ class BaseController
         foreach ($data as $key => $value) $$key = $value;
         require_once "./src/Views/" . str_replace('.', '/', $viewPath) . ".php";
     }
+
+    public static function model($model) {
+        require_once "./src/Models/".$model.".php";
+        return new $model();
+    }
 }

@@ -38,7 +38,7 @@
                     <div class="flex space-x-3 items-center mb-4">
                         <?php if($product['ChietKhau']) { ?>
                         <h4 class="bg-gray-200 text-red-500 text-sm font-bold py-1 px-2">-<?= $product['ChietKhau'] ?>%</h4>
-                        <h4 class="font-bold text-lg text-gray-700"><?= number_format($product['DonGia'],0,",",".")  ?> <sup>vnđ</sup></h4>
+                        <h4 class="font-bold text-lg text-gray-700"><?= number_format(intval($product['DonGia'])*(100 - intval($product['ChietKhau']))/100,0,",",".")  ?> <sup>vnđ</sup></h4>
                         <?php } ?>
                         <h4 class="text-lg text-gray-700 <?= $product['ChietKhau'] ? "line-through" : "font-semibold" ?>"><?= number_format($product['DonGia'],0,",",".")  ?> <sup>vnđ</sup></h4>
                     </div>

@@ -33,9 +33,17 @@ class Ajax extends BaseController
             $pid = $_POST['pid'];
             $quantity = $_POST['quantity'];
             $productModel = parent::model("ProductModel");
-            return $productModel->updateQuantity($pid,$quantity);
+            echo $productModel->updateQuantity($pid,$quantity);
         }
-        return 0;
+        echo 0;
+        
+    }
+
+    public function getquantity() {
+        $productModel = parent::model("ProductModel");
+        $product = $productModel->getQuantityByVariant('4','M');
+
+        echo $product[0]['SoLuong'];
         
     }
 }

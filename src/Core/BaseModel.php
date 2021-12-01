@@ -11,7 +11,8 @@ class BaseModel extends DataBase{
         return mysqli_query($this->con, $sql);
     }
 
-    public function getAll($table,$condition = "1", $limit = 8, $subQuery = "") {
+    //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
+    public function getAll($table,$condition = "1", $limit = "8", $subQuery = "") {
         $sql = "SELECT * FROM ${table} WHERE ${condition} ${subQuery} LIMIT ${limit}";
 
         // echo $sql;
@@ -69,12 +70,21 @@ class BaseModel extends DataBase{
         echo $sql;
 
         $this->query($sql);
-        
+
         return mysqli_affected_rows($this->con);
     }
 
     public function delete() {
 
+    }
+
+    public function countRecords($table, $column, $condition = "1") {
+
+        $sql = "SELECT count($column) as Tong FROM ${table} WHERE ${condition}";
+
+        $query = $this->query($sql);
+
+        return mysqli_fetch_row($query);
     }
 
 

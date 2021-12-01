@@ -7,8 +7,9 @@ class ProductModel extends BaseModel
         parent::__construct();
     }
 
-    public function getAllProducts($limit = 8) {
-        return $this->getAll(self::TABLE, $limit);
+    public function getAllProducts($limit = 0) {
+        $limitString ="${limit}, 8";
+        return $this->getAll(self::TABLE,1, $limitString);
     }
 
     public function getLatestProducts() {
@@ -22,7 +23,7 @@ class ProductModel extends BaseModel
     public function search($keyword)
     {
         $condition = "TenSP LIKE '%${keyword}%'";
-        return $this->getAll("sanpham",$condition, 5,"");
+        return $this->getAll(self::TABLE,$condition, 5,"");
     }
 
     public function insertProduct($data = []) {
@@ -36,6 +37,7 @@ class ProductModel extends BaseModel
             "DonGia" => $data['DonGia'],
             "ChietKhau" => $data['DanhMuc'],
         ];
+
         return $this->insert(self::TABLE,$insertData);
     }
 
@@ -45,6 +47,15 @@ class ProductModel extends BaseModel
             "TongSoLuong" => $quantity,
         ];
         return $this->update(self::TABLE,$condition,$data);
+    }
+
+    public function getQuantityByVariant($productID,$variant) {
+        $condition = "MaSP='${productID}' AND MaSize='${variant}'";
+        return $this->getAll("bienthe",$condition, 1,"");
+    }
+
+    public function countTotalProducts($collection = "") {
+        return $this->countRecords(self::TABLE,"MaSP");
     }
 
 }

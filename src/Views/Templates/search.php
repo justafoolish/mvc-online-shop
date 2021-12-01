@@ -14,7 +14,7 @@ foreach ($data['products'] as $product) { ?>
             </div>
         </div>
         <div class="w-12 ml-5">
-            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto" />
+            <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" class="max-w-full h-auto" />
         </div>
     </div>
 <?php } ?>

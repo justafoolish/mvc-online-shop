@@ -8,6 +8,6 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/styles/tailwind.css" />
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/styles/custom.css" />
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" defer></script>
     <script src="<?= BASE_URL ?>/public/scripts/sidebar.js" defer></script>
 </head>

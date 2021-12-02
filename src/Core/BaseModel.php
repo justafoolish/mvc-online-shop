@@ -89,5 +89,21 @@ class BaseModel extends DataBase{
         return mysqli_fetch_row($query);
     }
 
+    protected function getColumns($table) {
+        $sql = "SHOW fields FROM ${table}";//query de lay toan bo column trong 1 table 
+        $Col_data = [];
+        $i=0;
+        if($query = $this->query($sql))
+        {
+            //dua cac column trong 1 table vao array
+            while ($row = $query->fetch_row()) {
+                //cai nay se lay tung column nen se de $row[0]
+                $Col_data[$i] = $row[0];
+                $i= $i+1;
+            }
+        }
+        return $Col_data;
+    }
+
 
 }

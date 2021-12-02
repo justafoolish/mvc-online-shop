@@ -1,44 +1,35 @@
 <?php
-class EmloyeeModel extends BaseModel 
+class OrderDetailModel extends BaseModel 
 {
-    const TABLE = "nhanvien";
+    const TABLE = "chitiethoadon";
 
     public function __construct() {
         parent::__construct();
     }
 
-    public function getAllEmloyee($limit = 8) {
+    public function getAllOrderDetail($limit = 8) {
         return $this->getAll(self::TABLE, $limit);
     }
 
-    function getEmloyee($id) {
+    function getOrderDetail($id) {
         $temp = $this->getColumns(self::TABLE);
-        $idEmployee = $temp[0];//temp[0] gia tri dau tien la ma nhan vien
-        return $this->findByID(self::TABLE,$idEmployee,$id);
+        $idOrderDetail = $temp[0];//temp[0] gia tri dau tien la ma chi tiet hoa don
+        return $this->findByID(self::TABLE,$idOrderDetail,$id);
     }
 
     public function search($keyword)
     {
-        $condition = "TenNhanVien LIKE '%${keyword}%'";
+        $condition = "* LIKE '%${keyword}%'";
         return $this->getAll(self::TABLE,$condition, 5,"");
     }
 
-    public function insertEmployee($data = []) {
-        /*$insertData = [
-            "TenSP" => $data['TenSP'],
-            "Hinh1" => $data['Hinh1'],
-            "Hinh2" => $data['Hinh2'],
-            "TongSoLuong" => $data['TongSoLuong'],
-            "DanhMuc" => $data['DanhMuc'],
-            "NgayNhap" => $data['NgayNhap'],
-            "DonGia" => $data['DonGia'],
-            "ChietKhau" => $data['DanhMuc'],
-        ];*/
+    public function insertOrderDetail($data = []) {
+        
         //ong nho test lai xem co chay hay ko :))
         $temp = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
 
-        //lay $i = 1 la de bo cai muc ma~ nhan vien ra
-        for($i = 1 ; $i < count($temp) ; $i++ ){
+        // ma chi tiet hoa don co the cung 1 ma nen phai nhap vao
+        for($i = 0 ; $i < count($temp) ; $i++ ){
             $insertData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
              //                \\   //             \\
             //key cua insertData\\ //value cua $data\\
@@ -46,10 +37,10 @@ class EmloyeeModel extends BaseModel
         return $this->insert(self::TABLE,$insertData);
     }
 
-    public function updateEmloyee($employeeID, $data = []) {
+    public function updateOrderDetail($orderDetailID, $data = []) {
         $temp = $this->getColumns(self::TABLE);
-        $id = $temp[0];//temp[0] gia tri dau tien la ma nhan vien
-        $condition = "$id='${employeeID}'";
+        $id = $temp[0];//temp[0] gia tri dau tien la ma chi tiet hoa don
+        $condition = "$id='${orderDetailID}'";
         for($i = 1 ; $i < count($temp) ; $i++ ){
             $updateData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
              //                \\   //             \\

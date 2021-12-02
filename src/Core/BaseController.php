@@ -3,6 +3,7 @@ class BaseController
 {
     protected $params = [];
     protected $collections = [];
+    protected $totalCartItem = 0;
 
     function __construct($params)
     {
@@ -13,14 +14,20 @@ class BaseController
             ["id" => "3", "name" => "Hats"],
             ["id" => "4", "name" => "Bags"],
         ];
+        if(isset($_SESSION['cart'])) {
+            $cart = $_SESSION['cart'];
+            foreach($cart as $product)
+                $this->totalCartItem += $product['SoLuong'];
+        }
+
     }
-    public static function view($viewPath, $data = [])
+    protected static function view($viewPath, $data = [])
     {
         foreach ($data as $key => $value) $$key = $value;
         require_once "./src/Views/" . str_replace('.', '/', $viewPath) . ".php";
     }
 
-    public static function model($model) {
+    protected static function model($model) {
         require_once "./src/Models/".$model.".php";
         return new $model();
     }

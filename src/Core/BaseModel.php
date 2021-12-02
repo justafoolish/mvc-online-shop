@@ -6,13 +6,13 @@ class BaseModel extends DataBase{
         $this->con = $this->connect();
     }
 
-    public function query($sql)
+    protected function query($sql)
     {
         return mysqli_query($this->con, $sql);
     }
 
     //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
-    public function getAll($table,$condition = "1", $limit = "8", $subQuery = "") {
+    protected function getAll($table,$condition = "1", $limit = "8", $subQuery = "") {
         $sql = "SELECT * FROM ${table} WHERE ${condition} ${subQuery} LIMIT ${limit}";
 
         // echo $sql;
@@ -29,7 +29,8 @@ class BaseModel extends DataBase{
 
     }
 
-    public function findByID($table, $column, $value) {
+    //findByID nhận 3 tham số gồm bảng, cột cần tìm và giá trị tại record cần tìm
+    protected function findByID($table, $column, $value) {
         $sql = "SELECT * FROM ${table} WHERE ${column}=${value}";
         
         $query = $this->query($sql);  
@@ -37,7 +38,7 @@ class BaseModel extends DataBase{
         return mysqli_fetch_assoc($query);
     }
 
-    public function insert($table, $data = []) {
+    protected function insert($table, $data = []) {
         $column = implode(",",array_keys($data));
 
         $newValue = array_map(function ($value) {
@@ -56,7 +57,7 @@ class BaseModel extends DataBase{
         return 0;
     }
 
-    public function update($table,$condition, $data = []) {
+    protected function update($table,$condition, $data = []) {
 
         $updateData = [];
         foreach($data as $key => $val) {
@@ -74,14 +75,15 @@ class BaseModel extends DataBase{
         return mysqli_affected_rows($this->con);
     }
 
-    public function delete() {
+    protected function delete() {
 
     }
 
-    public function countRecords($table, $column, $condition = "1") {
+    protected function countRecords($table, $column, $condition = "1") {
 
         $sql = "SELECT count($column) as Tong FROM ${table} WHERE ${condition}";
 
+        // echo $sql;
         $query = $this->query($sql);
 
         return mysqli_fetch_row($query);

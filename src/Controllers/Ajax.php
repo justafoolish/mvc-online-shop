@@ -25,6 +25,7 @@ class Ajax extends BaseController
         $total = 450000;
         parent::view("Templates.sidecart",[
             "total" => $total,
+            "carts" => isset($_SESSION["cart"]) ? $_SESSION["cart"] : [],
         ]);
     }
 
@@ -40,10 +41,13 @@ class Ajax extends BaseController
     }
 
     public function getquantity() {
-        $productModel = parent::model("ProductModel");
-        $product = $productModel->getQuantityByVariant('4','M');
+        if(isset($_POST['size']) && $_POST['pid']) {
 
-        echo $product[0]['SoLuong'];
+            $productModel = parent::model("ProductModel");
+            $product = $productModel->getQuantityByVariant($_POST['pid'],$_POST['size']);
+            
+            echo $product;
+        }
         
     }
 }

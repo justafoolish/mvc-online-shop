@@ -66,7 +66,12 @@ class Admin extends BaseController
 
     function product($pid = "") {
         if(empty($pid)) {
-            parent::view("Admin.Product.index", []);
+            $productModel = parent::model("ProductModel");
+            $totalProduct = $productModel->countTotalProducts();
+            $products = $productModel->getAllProducts($totalProduct[0]);
+            parent::view("Admin.Product.index", [
+                "products" => $products
+            ]);
         }
         else {
             parent::view("Admin.Product.detail", []);

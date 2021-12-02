@@ -7,12 +7,12 @@ class ProductModel extends BaseModel
         parent::__construct();
     }
 
-    public function getAllProducts($limit = 0) {
-        $limitString ="${limit}, 8";
-        return $this->getAll(self::TABLE,1, $limitString);
+    function getAllProducts($limit = "0, 8", $collection = "") {
+        $condition = $collection ? "DanhMuc='${collection}'" : "1";
+        return $this->getAll(self::TABLE,$condition, $limit);
     }
 
-    public function getLatestProducts() {
+    function getLatestProducts() {
         return $this->getAll(self::TABLE,1, 8, "ORDER BY NgayNhap DESC");
     }
 
@@ -20,13 +20,13 @@ class ProductModel extends BaseModel
         return $this->findByID(self::TABLE,"MaSP",$id);
     }
 
-    public function search($keyword)
+    function search($keyword)
     {
         $condition = "TenSP LIKE '%${keyword}%'";
         return $this->getAll(self::TABLE,$condition, 5,"");
     }
 
-    public function insertProduct($data = []) {
+    function insertProduct($data = []) {
         $insertData = [
             "TenSP" => $data['TenSP'],
             "Hinh1" => $data['Hinh1'],
@@ -41,7 +41,7 @@ class ProductModel extends BaseModel
         return $this->insert(self::TABLE,$insertData);
     }
 
-    public function updateQuantity($productID, $quantity) {
+    function updateQuantity($productID, $quantity) {
         $condition = "MaSP='${productID}'";
         $data = [
             "TongSoLuong" => $quantity,
@@ -49,13 +49,14 @@ class ProductModel extends BaseModel
         return $this->update(self::TABLE,$condition,$data);
     }
 
-    public function getQuantityByVariant($productID,$variant) {
+    function getQuantityByVariant($productID,$variant) {
         $condition = "MaSP='${productID}' AND MaSize='${variant}'";
-        return $this->getAll("bienthe",$condition, 1,"");
+        return $this->getAll("bienthe",$condition, 1,"")[0]['SoLuong'];
     }
 
-    public function countTotalProducts($collection = "") {
-        return $this->countRecords(self::TABLE,"MaSP");
+    function countTotalProducts($collection = "") {
+        $condition = $collection ? "DanhMuc='${collection}'" : "1";
+        return $this->countRecords(self::TABLE,"MaSP",$condition);
     }
 
 }

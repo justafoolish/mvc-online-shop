@@ -61,7 +61,7 @@
 
                             <div class="grid grid-cols-2 gap-2 absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
                                 <button class="uppercase bg-black text-white text-xs py-3">Mua Ngay</button>
-                                <button class="uppercase bg-black text-white text-xs py-3">Thêm vào giỏ</button>
+                                <button class="uppercase bg-black text-white text-xs py-3" value="<?= $product['MaSP'] ?>" id="addtocart">Thêm vào giỏ</button>
                             </div>
                         </div>
                         <div class="text-center pb-3 pt-2 cursor-default">

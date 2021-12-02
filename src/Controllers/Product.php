@@ -21,6 +21,7 @@ class Product extends BaseController
             parent::view("Product.index", [
                 "collections" => $this->collections,
                 "product" => $product,
+                "totalCartItem" => $this->totalCartItem
             ]);
         }
         

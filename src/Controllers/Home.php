@@ -14,6 +14,7 @@ class Home extends BaseController
         parent::view("Home.index", [
             "collections" => $this->collections,
             "latestProduct" => $latestProduct,
+            "totalCartItem" => $this->totalCartItem
         ]);
     }
 }

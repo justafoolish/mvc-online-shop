@@ -33,7 +33,7 @@
                     <h3 class="font-medium text-2xl mb-2 text-gray-900 uppercase"><?= $product['TenSP'] ?></h3>
                     <h4 class="text-sm text-gray-500 font-light mb-4">
                         <span>ID: </span>
-                        <span>SP<?= $product['MaSP'] ?></span>
+                        <span id="product-id"><?= $product['MaSP'] ?></span>
                     </h4>
                     <div class="flex space-x-3 items-center mb-4">
                         <?php if($product['ChietKhau']) { ?>
@@ -48,13 +48,7 @@
                             <ul class="flex space-x-3">
                                 <li>
                                     <label class="h-full w-full cursor-pointer group">
-                                        <input type="radio" name="size" value="s" checked />
-                                        <span class="h-10 w-10 grid place-items-center inline-block border border-gray-300 group-hover:bg-black group-hover:text-white transition-all radio-label">S</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="h-full w-full cursor-pointer group">
-                                        <input type="radio" name="size" value="m" />
+                                        <input type="radio" name="size" value="m" checked />
                                         <span class="h-10 w-10 grid place-items-center inline-block border border-gray-300 group-hover:bg-black group-hover:text-white transition-all radio-label">M</span>
                                     </label>
                                 </li>
@@ -62,6 +56,12 @@
                                     <label class="h-full w-full cursor-pointer group">
                                         <input type="radio" name="size" value="l" />
                                         <span class="h-10 w-10 grid place-items-center inline-block border border-gray-300 group-hover:bg-black group-hover:text-white transition-all radio-label">L</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="h-full w-full cursor-pointer group">
+                                        <input type="radio" name="size" value="xl" />
+                                        <span class="h-10 w-10 grid place-items-center inline-block border border-gray-300 group-hover:bg-black group-hover:text-white transition-all radio-label">XL</span>
                                     </label>
                                 </li>
                             </ul>
@@ -79,7 +79,7 @@
                                 </button>
                             </div>
                         </div>
-                        <button class="w-full border border-black py-4 mb-2 font-semibold text-xs uppercase hover:bg-black hover:text-white transition-all">Thêm vào giỏ</button>
+                        <button class="w-full border border-black py-4 mb-2 font-semibold text-xs uppercase hover:bg-black hover:text-white transition-all" id="addcart" value="<?= $product['MaSP'] ?>">Thêm vào giỏ</button>
                         <a class="w-full border border-black py-4 mb-2 font-semibold text-xs uppercase bg-black text-white block text-center" href="<?= BASE_URL ?>/Cart/index">Mua ngay</a>
                     </form>
                     <button class="underline mb-2 text-gray-600">Hướng dẫn chọn size</button>
@@ -124,7 +124,7 @@
         </div>
     </div>
     <?php require_once "./src/Views/Templates/sidebar.php" ?>
-    <script src="<?= BASE_URL ?>/public/scripts/detailpage.js"></script>
+    <script src="<?= BASE_URL ?>/public/scripts/detailpage.js?v=2"></script>
 </body>
 
 </html>

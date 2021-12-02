@@ -9,8 +9,8 @@ for (let i = 0; i < input.length; i++) {
 }
 
 const datePick = document.querySelector("#date");
-datePick.addEventListener("focus", (e) => (e.target.type = "date"));
-datePick.addEventListener("blur", (e) => {
+datePick && datePick.addEventListener("focus", (e) => (e.target.type = "date"));
+datePick && datePick.addEventListener("blur", (e) => {
   let dateValue = e.target.value === "" ? "" : new Date(e.target.value);
   e.target.type = "text";
   e.target.value && (e.target.value = dateValue.toLocaleDateString("en-US"));

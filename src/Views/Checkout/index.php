@@ -95,24 +95,30 @@
                     </div>
                 </div>
                 <div class="col-span-4 pl-5 space-y-5 divide-y-2 divide-gray-100 ">
-                    <div>
+                    <div class="space-y-5">
+                        <?php
+                            $total=0;
+                            foreach($data['cart'] as $product) {
+                                $total += intval($product['DonGia'])*intval($product['SoLuong']);
+                        ?>
                         <div class="flex justify-between">
                             <div class="flex-auto flex">
                                 <div class="border-2 border-gray-200 rounded relative">
                                     <div class="overflow-hidden w-16 h-16">
-                                        <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="w-full object-cover object-center" alt="">
+                                        <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" class="w-full object-cover object-center" alt="">
                                     </div>
-                                    <span class="absolute -top-3 -right-3 bg-gray-500 h-6 w-6 rounded-full text-white grid place-items-center">1</span>
+                                    <span class="absolute -top-3 -right-3 bg-gray-500 h-6 w-6 rounded-full text-white grid place-items-center"><?= $product['SoLuong'] ?></span>
                                 </div>
                                 <div class="pl-5 grid place-items-center">
-                                    <h3 class="mr-auto text-gray-900 text-sm font-medium">HADES SIGNATURE OVERSHIRT</h3>
-                                    <h3 class="mr-auto text-gray-700 text-sm">ĐEN / S</h3>
+                                    <h3 class="mr-auto text-gray-900 text-sm font-medium uppercase"><?= $product['TenSP'] ?></h3>
+                                    <h3 class="mr-auto text-gray-700 text-sm uppercase">SIZE <?= $product['size'] ?></h3>
                                 </div>
                             </div>
                             <div class="grid place-items-center">
-                                <span>300,000<sup>đ</sup></span>
+                                <span><?= number_format($product['DonGia'],0,",",".") ?><sup>đ</sup></span>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                     <div class="grid grid-cols-3 gap-x-2 pt-6 pb-1">
                         <div class="col-span-2 border py-2 px-3 rounded border-gray-400 text-gray-800 focus-within:ring-2 focus-within:ring-gray-600 transition-all">
@@ -123,7 +129,7 @@
                     <div class="pt-7 pb-2 space-y-2">
                         <div class="flex justify-between items-center">
                             <h3>Tạm tính</h3>
-                            <p class="font-medium text-lg">300,000<sup>đ</sup></p>
+                            <p class="font-medium text-lg"><?= number_format($total,0,",",".") ?><sup>đ</sup></p>
                         </div>
                         <div class="flex justify-between items-center">
                             <h3>Phí vận chuyển</h3>
@@ -132,7 +138,7 @@
                     </div>
                     <div class="flex justify-between items-center pt-7 pb-2">
                         <h3>Tổng tiền</h3>
-                        <span class="font-semibold text-2xl">340,000<sup>đ</sup></span>
+                        <span class="font-semibold text-2xl"><?= number_format($total + 40000,0,",",".") ?><sup>đ</sup></span>
                     </div>
                 </div>
             </main>

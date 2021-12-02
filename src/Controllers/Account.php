@@ -16,6 +16,7 @@ class Account extends BaseController
         parent::view("Account.login", [
             "product" => "Tran Khac Tuan",
             "collections" => $this->collections,
+            "totalCartItem" => $this->totalCartItem
         ]);
     }
 
@@ -24,6 +25,34 @@ class Account extends BaseController
         parent::view("Account.register", [
             "product" => "Tran Khac Tuan",
             "collections" => $this->collections,
+            "totalCartItem" => $this->totalCartItem
         ]);
+    }
+
+    function checkregister() {
+        if(isset($_POST['submit'])) {
+            $data['firstname'] = $_POST['firstname'];
+            $data['lastname'] = $_POST['lastname'];
+            $data['gender'] = $_POST['gender'];
+            $data['email'] = $_POST['email'];
+            $data['password'] = $_POST['password'];
+            
+            echo "<pre>";
+            print_r($data);
+            echo "</pre>";
+
+        }
+    }
+
+    function checklogin() {
+        if(isset($_POST['submit'])) {
+            $data['email'] = $_POST['email'];
+            $data['password'] = $_POST['password'];
+            
+            echo "<pre>";
+            print_r($data);
+            echo "</pre>";
+
+        }
     }
 }

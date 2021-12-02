@@ -50,7 +50,7 @@
 
                             <div class="grid grid-cols-2 gap-2 absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
                                 <button class="uppercase bg-black text-white text-xs py-3">Mua Ngay</button>
-                                <button class="uppercase bg-black text-white text-xs py-3">Thêm vào giỏ</button>
+                                <button class="uppercase bg-black text-white text-xs py-3" value="<?= $product['MaSP'] ?>" id="addtocart">Thêm vào giỏ</button>
                             </div>
                         </div>
                         <div class="text-center pb-3 pt-2 cursor-default">
@@ -69,7 +69,7 @@
             </main>
             <ul class="flex space-x-3 items-center justify-center my-3">
                 <li class="text-md font-semibold text-gray-500 hover:text-gray-700">
-                    <a href="<?= BASE_URL ?>/Collection/<?= $data['page'] ?>/<?= --$data['currentPage'] ? $data['currentPage'] : 1 ?>" class="">
+                    <a href="<?= BASE_URL ?>/Collection/<?= $data['page'] ?><?= $data['page'] === "Show" ? "/".$data['category'] :  "" ?>/<?= --$data['currentPage'] ? $data['currentPage'] : 1 ?>" class="">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
                         </svg>
@@ -78,11 +78,11 @@
                 <?php
                 for($i = 1; $i <= $data['totalPage']; $i++) {?>
                 <li class="text-md font-semibold text-gray-500 hover:text-gray-700">
-                    <a href="<?= BASE_URL ?>/Collection/<?= $data['page'] ?>/<?= $i ?>"><?= $i ?></a>
+                    <a href="<?= BASE_URL ?>/Collection/<?= $data['page'] ?><?= $data['page'] === "Show" ? "/".$data['category'] :  "" ?>/<?= $i ?>"><?= $i ?></a>
                 </li>
                 <?php } ?>
                 <li class="text-md font-semibold text-gray-500 hover:text-gray-700">
-                    <a href="<?= BASE_URL ?>/Collection/<?= $data['page'] ?>/<?= $data['currentPage'] ? $data['currentPage']+2 : 2 ?>" class="">
+                    <a href="<?= BASE_URL ?>/Collection/<?= $data['page'] ?><?= $data['page'] === "Show" ? "/".$data['category'] :  "" ?>/<?= $data['currentPage'] ? $data['currentPage']+2 : 2 ?>" class="">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>

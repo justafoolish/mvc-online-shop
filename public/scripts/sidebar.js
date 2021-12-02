@@ -61,3 +61,16 @@ closeSide.addEventListener("click", () => {
   cartPanel.html("");
   delete sbDeleteCartItems;
 });
+
+
+
+const addToCartButtons = document.querySelectorAll("#addtocart");
+
+addToCartButtons.forEach(ele => {
+  ele.addEventListener("click",(e) => {
+    $.post(`${BASE_URL}/Cart/checkquantity`, {pid: ele.value, size: ["M","L","XL"]}, (data)=> {
+      console.log(data);
+      document.querySelector("#totalItem").innerHTML = data
+    })
+  })
+})

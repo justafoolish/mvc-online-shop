@@ -8,8 +8,16 @@ class Checkout extends BaseController
 
     function index()
     {
-        parent::view("Checkout.index", [
-            "collections" => $this->collections,
-        ]);
+        if(isset($_SESSION['cart'])){
+            $cart = [];
+            $cart = $_SESSION['cart'];
+            parent::view("Checkout.index", [
+                "collections" => $this->collections,
+                "totalCartItem" => $this->totalCartItem,
+                "cart" => $cart
+            ]);
+        }
+        else header("Location: ".BASE_URL);
+        
     }
 }

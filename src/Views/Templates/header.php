@@ -13,7 +13,7 @@
                 </svg>
             </button>
             <h3 class="mx-4">VND</h3>
-            <button class="ml-10" id="cart">Giỏ Hàng(10)</button>
+            <button class="ml-10" id="cart">Giỏ Hàng (<span id="totalItem"><?= $data['totalCartItem'] ?></span>)</button>
         </div>
     </div>
 </nav>

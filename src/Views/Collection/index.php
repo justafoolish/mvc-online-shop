@@ -1,8 +1,3 @@
-<?php 
-    // echo $data['totalPage'];
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,74 +66,6 @@
                         </div>
                     </div>
                 <?php } ?>
-                <!-- <div class="group cursor-pointer">
-                    <div class="relative overflow-hidden">
-                        <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto" />
-                        </a>
-                        <div class="grid grid-cols-2 gap-3 absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
-                            <button class="uppercase bg-black text-white text-xs py-3">Mua Ngay</button>
-                            <button class="uppercase bg-black text-white text-xs py-3">Thêm vào giỏ</button>
-                        </div>
-                    </div>
-                    <div class="text-center pb-3 pt-2 cursor-default">
-                        <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                            <h3 class="font-medium text-md mb-1 text-gray-800 uppercase">Hades/New balance Basic Tee</h3>
-                        </a>
-                        <div class="flex justify-center">
-                            <h4 class="font-light text-sm text-gray-700">300.000 <sup>vnđ</sup></h4>
-                            <h4></h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="group cursor-pointer">
-                    <div class="relative overflow-hidden">
-                        <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto" />
-                        </a>
-                        <div class="absolute top-3 left-1 bg-black rounded-full w-10 h-10 grid place-items-center">
-                            <span class="text-white text-xs font-semibold">-34%</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3 absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
-                            <button class="uppercase bg-black text-white text-xs py-3">Mua Ngay</button>
-                            <button class="uppercase bg-black text-white text-xs py-3">Thêm vào giỏ</button>
-                        </div>
-                    </div>
-                    <div class="text-center pb-3 pt-2 cursor-default">
-                        <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                            <h3 class="font-medium text-md mb-1 text-gray-800 uppercase">Hades/New balance Basic Tee</h3>
-                        </a>
-                        <div class="flex justify-center items-center">
-                            <h4 class="font-medium text-sm text-red-500 mr-2">250.000 <sup>vnđ</sup></h4>
-                            <h4 class="font-light text-sm text-gray-700 line-through">380.000 <sup>vnđ</sup></h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="group cursor-pointer">
-                    <div class="relative overflow-hidden">
-                        <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto" />
-                        </a>
-                        <div class="absolute top-3 right-1 bg-black rounded-full w-10 h-10 grid place-items-center">
-                            <span class="text-white text-xs font-semibold text-gray-200">Hết</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3 absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
-                            <button class="uppercase bg-black text-white text-xs py-3">Mua Ngay</button>
-                            <button class="uppercase bg-black text-white text-xs py-3">Thêm vào giỏ</button>
-                        </div>
-                    </div>
-                    <div class="text-center pb-3 pt-2 cursor-default">
-                        <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
-                            <h3 class="font-medium text-md mb-1 text-gray-800 uppercase">Hades/New balance Basic Tee</h3>
-                        </a>
-                        <div class="flex justify-center items-center">
-                            <h4 class="font-light text-sm text-gray-700 mr-1">250.000 <sup>vnđ</sup></h4>
-                            <!-- <h4 class="font-light text-sm text-gray-700 line-through">380.000 <sup>vnđ</sup></h4> -->
-                        </div>
-                    </div>
-                </div> -->
             </main>
             <ul class="flex space-x-3 items-center justify-center my-3">
                 <li class="text-md font-semibold text-gray-500 hover:text-gray-700">

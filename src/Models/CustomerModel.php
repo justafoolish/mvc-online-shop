@@ -7,14 +7,23 @@ class CustomerModel extends BaseModel
         parent::__construct();
     }
 
-    public function getAllCustomer($limit = 8) {
-        return $this->getAll(self::TABLE, $limit);
+    public function getAllCustomer($limit = "") {
+        return $this->getAll(self::TABLE,1,$limit);
     }
 
-    function getCustomer($id) {
-        $temp = $this->getColumns(self::TABLE);
-        $idCustomer = $temp[0];//temp[0] gia tri dau tien la ma khach hang
-        return $this->findByID(self::TABLE,$idCustomer,$id);
+    function getCustomer($data = []) {
+        $condition = [];
+
+        foreach($data as $key => $val) {
+            array_push($condition,"$key='$val'");
+        }
+        $condition = implode(" AND ",$condition);
+
+        $condition = $condition ? $condition : "1";
+        
+        $execute = $this->getAll(self::TABLE,$condition);
+        
+        return $execute ? $execute[0] : [];
     }
 
     public function search($keyword)

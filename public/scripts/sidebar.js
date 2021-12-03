@@ -28,6 +28,7 @@ search.addEventListener("click", () => {
   sidebarWrap.classList.remove("hidden");
   sidePanel.classList.remove("hidden");
 });
+
 cart.addEventListener("click", () => {
   sideBarTitle.innerHTML = "GIỎ HÀNG";
   console.log("cart open");

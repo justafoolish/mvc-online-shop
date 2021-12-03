@@ -1,4 +1,5 @@
 <?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

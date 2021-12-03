@@ -20,11 +20,26 @@ class Admin extends BaseController
     }
 
     function category($categoryID = "") {
+        $categoryModel = parent::model("CategoryModel");
         if(empty($categoryID)) {
-            parent::view("Admin.Category.index", []);
+            $getAll = $categoryModel->getAllCategory();
+            $productModel = parent::model("ProductModel");
+
+            $category = [];
+            foreach($getAll as $cat) {
+                $cat['SoLuong'] = $productModel->countTotalProducts($cat['MaDanhMuc']);
+                array_push($category,$cat);
+            }
+
+            parent::view("Admin.Category.index", [
+                "category" => $category
+            ]);
         }
         else {
-            parent::view("Admin.Category.detail", []);
+            $getCategory = $categoryModel->getCategory($categoryID);
+            parent::view("Admin.Category.detail", [
+                "categoryDetail" => $getCategory
+            ]);
         }
     }
     function addcategory() {
@@ -67,14 +82,29 @@ class Admin extends BaseController
     function product($pid = "") {
         if(empty($pid)) {
             $productModel = parent::model("ProductModel");
-            $totalProduct = $productModel->countTotalProducts();
-            $products = $productModel->getAllProducts($totalProduct[0]);
+
+            $products = $productModel->getAllProducts();
             parent::view("Admin.Product.index", [
                 "products" => $products
             ]);
         }
         else {
-            parent::view("Admin.Product.detail", []);
+            $productModel = parent::model("ProductModel");
+            $categoryModel = parent::model("CategoryModel");
+            $variantModel = parent::model("VariantModel");
+
+            $product = $productModel->getProduct($pid); //Lấy thông tin sản phẩm theo product ID
+
+            $categories = $categoryModel->getAllCategory(); //Lấy thông tin tất cả danh mục cho view option
+
+            $variant = $variantModel->getAllVariants($product['MaSP']);
+
+            // $this->print($variant);
+            parent::view("Admin.Product.detail", [
+                "product" => $product,
+                "categories" => $categories,
+                "variant" => $variant
+            ]);
         }
     }
 

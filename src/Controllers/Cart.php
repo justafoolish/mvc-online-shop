@@ -1,5 +1,5 @@
 <?php
-class Cart extends BaseController
+class Cart extends BaseCustomer
 {
     function __construct($params)
     {
@@ -13,6 +13,7 @@ class Cart extends BaseController
             $cart = $_SESSION['cart'];
         }
         parent::view("Cart.index", [
+            "customerLogin" => $this->customerLogin,
             "collections" => $this->collections,
             "totalCartItem" => $this->totalCartItem,
             "cart" => $cart

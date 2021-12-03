@@ -1,33 +1,35 @@
 <?php
-class DiscountModel extends BaseModel 
+class CategoryModel extends BaseModel 
 {
-    const TABLE = "Khuyenmai";
+    const TABLE = "danhmuc";
 
     public function __construct() {
         parent::__construct();
     }
 
-    public function getAllDiscount($limit = 8) {
-        return $this->getAll(self::TABLE, $limit);
+    public function getAllCategory($limit = "") {
+        //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
+        return $this->getAll(self::TABLE,1,$limit);
     }
 
-    function getDiscount($id) {
+    function getCategory($id) {
         $temp = $this->getColumns(self::TABLE);
-        $idDiscount = $temp[0];//temp[0] gia tri dau tien la ma khuyen mai
-        return $this->findByID(self::TABLE,$idDiscount,$id);
+        $idCategory = $temp[0];//temp[0] gia tri dau tien la ma danh muc
+        return $this->findByID(self::TABLE,$idCategory,$id);
     }
 
     public function search($keyword)
     {
-        $condition = "* LIKE '%${keyword}%'";
+        $condition = "TenDanhMuc LIKE '%${keyword}%'";
         return $this->getAll(self::TABLE,$condition, 5,"");
     }
 
-    public function insertDiscount($data = []) {
-        //ong nho test lai xem co chay hay ko :))
+    public function insertCategory($data = []) {
+
+       
         $temp = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
 
-        //lay $i = 1 la de bo cai muc ma~ khuyen mai ra
+        //lay $i = 1 la de bo cai muc ma~ khach hang ra
         for($i = 1 ; $i < count($temp) ; $i++ ){
             $insertData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
              //                \\   //             \\
@@ -36,10 +38,10 @@ class DiscountModel extends BaseModel
         return $this->insert(self::TABLE,$insertData);
     }
 
-    public function updateDiscount($discountID, $data = []) {
+    public function updateCategory($categoryID, $data = []) {
         $temp = $this->getColumns(self::TABLE);
-        $id = $temp[0];//temp[0] gia tri dau tien la ma khuyen mai
-        $condition = "$id='${discountID}'";
+        $id = $temp[0];//temp[0] gia tri dau tien la ma danh muc
+        $condition = "$id='${categoryID}'";
         for($i = 1 ; $i < count($temp) ; $i++ ){
             $updateData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
              //                \\   //             \\
@@ -48,10 +50,5 @@ class DiscountModel extends BaseModel
         return $this->update(self::TABLE,$condition,$updateData);
     }
 
-    function countTotalProducts() {
-        $PK = $this->getColumns(self::TABLE);
-        return $this->countRecords(self::TABLE,$PK[0]);
-    }
-
-
+    
 }

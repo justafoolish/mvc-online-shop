@@ -1,22 +1,26 @@
 <?php
-class Collection extends BaseController
+class Collection extends BaseCustomer
 {
+    private $itemPerPage = 8; //Số sản phẩm mỗi trang
     public function __construct($params)
     {
         parent::__construct($params);
     }
     public function index()
     {
-
-        $currentPage = empty($this->params[0]) ? '1' : $this->params[0];
+        $currentPage = empty($this->params[0]) ? '1' : $this->params[0]; //Số trang hiện tại
 
         $productModel = parent::model("ProductModel");
-        $productCount = $productModel->countTotalProducts();
+        /*----------    Phân trang    ----------*/
+        //Lấy tổng số sản phẩm để tính tổng số trang cần thiết
+        $productCount = $productModel->countTotalProducts(); 
 
-        $totalPage = ceil($productCount[0] / 8);
-        $countFrom = ($currentPage-1)*$totalPage;
+        $totalPage = ceil($productCount / 8); // Tổng số trang
+        
+        $countFrom = ($currentPage-1)*$totalPage; // Số thự tự bắt đàu lấy sản phẩm trong records
 
-        $products = $productModel->getAllProducts("${countFrom}, 8");
+        $products = $productModel->getAllProducts("${countFrom}, {$this->itemPerPage}");
+        /*----------    Kết thúc phân trang    ----------*/
 
         parent::view("Collection.index", [
             "collections" => $this->collections,
@@ -24,23 +28,29 @@ class Collection extends BaseController
             "totalPage" => $totalPage,
             "currentPage" => $currentPage,
             "products" => $products,
-            "totalCartItem" => $this->totalCartItem
+            "totalCartItem" => $this->totalCartItem,
+            "customerLogin" => $this->customerLogin
         ]);
     }
     public function show()
     {
-        $currentPage = empty($this->params[1]) ? '1' : $this->params[1];
+        $currentPage = empty($this->params[1]) ? '1' : $this->params[1]; //Số trang hiện tại
 
-        $collection = empty($this->params[0]) ? '' : $this->params[0];
+        $collection = empty($this->params[0]) ? '' : $this->params[0]; // Mã danh mục
 
         $productModel = parent::model("ProductModel");
+        
+        /*----------    Phân trang    ----------*/
+        //Lấy tổng số sản phẩm để tính tổng số trang cần thiết
         $productCount = $productModel->countTotalProducts($collection);
 
-        $totalPage = ceil($productCount[0] / 8);
+        $totalPage = ceil($productCount / 8); // Tổng số trang
 
-        $countFrom = ($currentPage-1)*$totalPage;
-        $products = $productModel->getAllProducts("${countFrom}, 8", $collection);
-        
+        $countFrom = ($currentPage-1)*$totalPage; // Số thự tự bắt đàu lấy sản phẩm trong records
+
+        $products = $productModel->getAllProducts("${countFrom}, {$this->itemPerPage}", $collection);
+        /*----------    Kết thúc phân trang    ----------*/
+
         parent::view("Collection.index", [
             "collections" => $this->collections,
             "page" => "Show",
@@ -48,7 +58,8 @@ class Collection extends BaseController
             "currentPage" => $currentPage,
             "products" => $products,
             "category" => $collection,
-            "totalCartItem" => $this->totalCartItem
+            "totalCartItem" => $this->totalCartItem,
+            "customerLogin" => $this->customerLogin
         ]);
     }
 }

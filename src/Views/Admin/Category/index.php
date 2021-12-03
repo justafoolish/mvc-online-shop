@@ -1,7 +1,9 @@
 <?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<pre>
+    <?php print_r($data['category']) ?>
+</pre>
 <head>
     <?php require_once "./src/Views/Admin/Templates/header.php" ?>
 </head>

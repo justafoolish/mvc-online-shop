@@ -15,10 +15,10 @@ $(document).ready(() => {
     e.preventDefault();
     if (document.querySelector("#listVariant").childElementCount < 2) {
       document.querySelector("#listVariant").appendChild(variantSelectBox);
-    } else if (document.querySelector("#listVariant").childElementCount < 5) {
+    } else if (document.querySelector("#listVariant").childElementCount < 4) {
       $("#variantSelectBox:first").clone().insertAfter("#variantSelectBox:last");
     }
-    if (document.querySelector("#listVariant").childElementCount >= 5) {
+    if (document.querySelector("#listVariant").childElementCount >= 4) {
       $("#variant").addClass("hidden");
     }
   });
@@ -26,7 +26,7 @@ $(document).ready(() => {
   $(document).on("click", "#deleteVariant", (e) => {
     e.preventDefault();
     e.target.closest("#variantSelectBox").remove();
-    if (document.querySelector("#listVariant").childElementCount < 5) {
+    if (document.querySelector("#listVariant").childElementCount < 4) {
       $("#variant").removeClass("hidden");
     }
   });

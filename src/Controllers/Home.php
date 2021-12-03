@@ -1,5 +1,5 @@
 <?php
-class Home extends BaseController
+class Home extends BaseCustomer
 {
     function __construct($params)
     {
@@ -9,12 +9,14 @@ class Home extends BaseController
     function index()
     {
         $productModel = parent::model("ProductModel");
-        $latestProduct = $productModel->getLatestProducts();
+
+        $latestProduct = $productModel->getLatestProducts(); // Lọc danh sách sản phẩm mới nhất
 
         parent::view("Home.index", [
             "collections" => $this->collections,
             "latestProduct" => $latestProduct,
-            "totalCartItem" => $this->totalCartItem
+            "totalCartItem" => $this->totalCartItem,
+            "customerLogin" => $this->customerLogin
         ]);
     }
 }

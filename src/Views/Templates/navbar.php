@@ -1,4 +1,6 @@
-<?php function getNavBar($collection)
+<?php 
+
+function getNavBar($collection)
 { ?>
     <div class="min-h-screen w-56 relative bg-gray-50">
         <div class="sticky top-7 px-8 pt-7">

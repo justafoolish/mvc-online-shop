@@ -7,8 +7,11 @@ class ProductModel extends BaseModel
         parent::__construct();
     }
 
-    function getAllProducts($limit = "0, 8", $collection = "") {
+    function getAllProducts($limit = "", $collection = "") {
+        //Lọc theo danh mục
         $condition = $collection ? "DanhMuc='${collection}'" : "1";
+
+        //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
         return $this->getAll(self::TABLE,$condition, $limit);
     }
 
@@ -17,7 +20,10 @@ class ProductModel extends BaseModel
     }
 
     function getProduct($id) {
-        return $this->findByID(self::TABLE,"MaSP",$id);
+
+        $fields = $this->getColumns(self::TABLE);
+
+        return $this->findByID(self::TABLE,$fields[0],$id);
     }
 
     function search($keyword)
@@ -66,8 +72,13 @@ class ProductModel extends BaseModel
     }
 
     function countTotalProducts($collection = "") {
+
         $condition = $collection ? "DanhMuc='${collection}'" : "1";
-        return $this->countRecords(self::TABLE,"MaSP",$condition);
+
+        $fields = $this->getColumns(self::TABLE);
+
+        return $this->countRecords(self::TABLE,$fields[0],$condition);
+
     }
 
 }

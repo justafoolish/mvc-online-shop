@@ -1,5 +1,10 @@
 <?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
 <!DOCTYPE html>
+<?php 
+    $product = $data['product'];
+    $categories = $data['categories'];
+    $variants = $data['variant'];
+?>
 <html lang="en">
 
 <head>
@@ -23,12 +28,18 @@
                         <div class="col-start-2 col-span-4 space-y-3">
                             <div>
                                 <label>Tên sản phẩm</label>
-                                <input type="text" class="border w-full px-3 py-2 mt-1 focus:ring-gray-700 focus:ring-2 transition-all outline-none" placeholder="Nhập tên sản phẩm">
+                                <input type="text" class="border w-full px-3 py-2 mt-1 focus:ring-gray-700 focus:ring-2 transition-all outline-none" placeholder="Nhập tên sản phẩm" value="<?= $product['TenSP'] ?>">
                             </div>
                             <div>
                                 <label for="">Danh mục</label>
                                 <select name="category" class="w-full py-2 px-3 mt-1 border focus:ring-gray-700 focus:ring-2 transition-all outline-none">
                                     <option selected disabled>Chọn danh mục sản phẩm</option>
+                                    <?php 
+                                        foreach($categories as $cat) {
+                                    ?>
+                                    <option value="<?= $cat['MaDanhMuc'] ?>" <?= $cat['MaDanhMuc'] == $product['DanhMuc'] ? "selected" : ""?>><?= $cat['TenDanhMuc'] ?></option>
+
+                                    <?php } ?>
                                 </select>
                             </div>
                             <div>
@@ -49,6 +60,14 @@
                                         </svg>
                                     </button>
                                 </div>
+                                <div class="grid grid-cols-7 border my-4">
+                                    <div class="col-start-2 col-span-2">
+                                        <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" alt="">
+                                    </div>
+                                    <div class="col-start-5 col-span-2">
+                                        <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh2'] ?>" alt="">
+                                    </div>
+                                </div>
                                 <div class="grid grid-cols-2 hidden">
                                     <div class="h-10">
                                         <img src="" alt="" class="max-w-full h-auto preview">
@@ -60,16 +79,16 @@
                             </div>
                             <div id="listVariant">
                                 <label id="variantLabel">Biến thể</label>
+                                <?php foreach ($variants as $var) {?>
                                 <div class="grid grid-cols-3 gap-5 mb-3" id="variantSelectBox">
                                     <select name="variant[]" class="w-full py-2 px-3 mt-1 border focus:ring-gray-700 focus:ring-2 transition-all outline-none">
                                         <option selected disabled>Chọn kích thước</option>
-                                        <option value="">S</option>
-                                        <option value="">M</option>
-                                        <option value="">L</option>
-                                        <option value="">XL</option>
+                                        <option value="M" <?= $var['MaSize'] == "M" ? "selected" : ""?>>M</option>
+                                        <option value="L" <?= $var['MaSize'] == "L" ? "selected" : ""?>>L</option>
+                                        <option value="XL" <?= $var['MaSize'] == "XL" ? "selected" : ""?>>XL</option>
                                     </select>
                                     <div class="col-span-2 relative border w-full px-3 py-2 focus:ring-gray-700 focus:ring-2 transition-all">
-                                        <input type="number" class="w-full outline-none text-center" min="0" placeholder="Nhập Số lượng" name="variantValue[]">
+                                        <input type="number" class="w-full outline-none text-center" min="0" placeholder="Nhập Số lượng" name="variantValue[]" value="<?= $var['SoLuong'] ?>">
                                         <button class="bg-red-400 hover:bg-red-500 w-10 h-10 grid place-items-center m-auto transition-all text-white absolute inset-y-0 right-1" id="deleteVariant">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -77,20 +96,21 @@
                                         </button>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div>
-                            <button class="text-xs py-2 px-3 bg-gray-500 hover:bg-gray-600 transition-all text-gray-50 flex items-center space-x-2" id="variant">
+                            <button class="text-xs py-2 px-3 bg-gray-500 hover:bg-gray-600 transition-all text-gray-50 flex items-center space-x-2<?= count($variants) == 2 ? "" : "hidden"?>" id="variant">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 <span>Thêm biến thể</span>
                             </button>
                             <div>
-                                <label>Giá thành</label>
-                                <input type="number" class="border w-full px-3 py-2 mt-1 focus:ring-gray-700 focus:ring-2 transition-all outline-none" min="0" step="10000" required placeholder="Nhập giá thành">
+                                <label>Giá thành (vnđ)</label>
+                                <input type="number" class="border w-full px-3 py-2 mt-1 focus:ring-gray-700 focus:ring-2 transition-all outline-none" min="0" step="10000" required placeholder="Nhập giá thành" value="<?= $product['DonGia'] ?>">
                             </div>
                             <div>
                                 <label>Khuyến mãi (%)</label>
-                                <input type="number" class="border w-full px-3 py-2 mt-1 focus:ring-gray-700 focus:ring-2 transition-all outline-none" min="0" max="100" required placeholder="Nhập mức giảm">
+                                <input type="number" class="border w-full px-3 py-2 mt-1 focus:ring-gray-700 focus:ring-2 transition-all outline-none" min="0" max="100" required placeholder="Nhập mức giảm" value="<?= $product['ChietKhau'] ?>">
                             </div>
                             <div>
                                 <label>Miêu tả</label>
@@ -102,7 +122,7 @@
             </form>
         </div>
     </div>
-    <script src="<?= BASE_URL ?>/public/admin/addProduct.js"></script>
+    <script src="<?= BASE_URL ?>/public/admin/addProduct.js?v=1"></script>
 </body>
 
 </html>

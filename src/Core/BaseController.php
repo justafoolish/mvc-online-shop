@@ -2,23 +2,23 @@
 class BaseController
 {
     protected $params = [];
-    protected $collections = [];
-    protected $totalCartItem = 0;
+    // protected $collections = [];
+    // protected $totalCartItem = 0;
 
     function __construct($params)
     {
         $this->params = $params;
-        $this->collections = [
-            ["id" => "1", "name" => "Tops"],
-            ["id" => "2", "name" => "Bottoms"],
-            ["id" => "3", "name" => "Hats"],
-            ["id" => "4", "name" => "Bags"],
-        ];
-        if(isset($_SESSION['cart'])) {
-            $cart = $_SESSION['cart'];
-            foreach($cart as $product)
-                $this->totalCartItem += $product['SoLuong'];
-        }
+        // $this->collections = [
+        //     ["id" => "1", "name" => "Tops"],
+        //     ["id" => "2", "name" => "Bottoms"],
+        //     ["id" => "3", "name" => "Hats"],
+        //     ["id" => "4", "name" => "Bags"],
+        // ];
+        // if(isset($_SESSION['cart'])) {
+        //     $cart = $_SESSION['cart'];
+        //     foreach($cart as $product)
+        //         $this->totalCartItem += $product['SoLuong'];
+        // }
 
     }
     protected static function view($viewPath, $data = [])
@@ -30,5 +30,11 @@ class BaseController
     protected static function model($model) {
         require_once "./src/Models/".$model.".php";
         return new $model();
+    }
+
+    protected function print($data) {
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
     }
 }

@@ -12,8 +12,9 @@ class BaseModel extends DataBase{
     }
 
     //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
-    protected function getAll($table,$condition = "1", $limit = "8", $subQuery = "") {
-        $sql = "SELECT * FROM ${table} WHERE ${condition} ${subQuery} LIMIT ${limit}";
+    protected function getAll($table,$condition = "1", $limit = "", $subQuery = "") {
+        $limit = $limit ? "LIMIT ${limit}" : "";
+        $sql = "SELECT * FROM ${table} WHERE ${condition} ${subQuery} ${limit}";
 
         // echo $sql;
 
@@ -79,30 +80,35 @@ class BaseModel extends DataBase{
 
     }
 
-    protected function countRecords($table, $column, $condition = "1") {
+    protected function countRecords($table, $column, $condition = "1", $groupColumn = "") {
 
-        $sql = "SELECT count($column) as Tong FROM ${table} WHERE ${condition}";
+        $groupBy = $groupColumn ? "GROUP BY ${groupColumn}" : "";
+
+        $sql = "SELECT count($column) as Tong FROM ${table} WHERE ${condition} ${groupBy}";
 
         // echo $sql;
         $query = $this->query($sql);
 
-        return mysqli_fetch_row($query);
+        //Có điều kiện group by thì trả về mảng
+        return mysqli_fetch_row($query)[0];
     }
 
     protected function getColumns($table) {
         $sql = "SHOW fields FROM ${table}";//query de lay toan bo column trong 1 table 
-        $Col_data = [];
-        $i=0;
+        $colsName = [];
+        // $i=0;
         if($query = $this->query($sql))
         {
             //dua cac column trong 1 table vao array
             while ($row = $query->fetch_row()) {
                 //cai nay se lay tung column nen se de $row[0]
-                $Col_data[$i] = $row[0];
-                $i= $i+1;
+                // $Col_data[$i] = $row[0];
+                // $i= $i+1;
+                array_push($colsName, $row[0]);
             }
+
         }
-        return $Col_data;
+        return $colsName;
     }
 
 

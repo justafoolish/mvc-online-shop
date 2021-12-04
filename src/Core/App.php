@@ -9,8 +9,8 @@ class App
     {
         $url = $this->urlProcess();
         
-        if(!empty($url[0]))
-        if (file_exists("./src/Controllers/" . ucfirst(strtolower($url[0])) . ".php")) {
+        // $file = strtolower($url[0]) == "admin" ? "admin" : $url[0]; 
+        if (!empty($url[0]) && file_exists("./src/Controllers/" . ucfirst(strtolower($url[0])) . ".php")) {
             $this->controller = ucfirst(strtolower($url[0]));
             unset($url[0]);
         }

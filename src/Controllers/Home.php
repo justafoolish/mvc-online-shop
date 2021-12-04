@@ -1,5 +1,5 @@
 <?php
-class Home extends BaseCustomer
+class Home extends CustomerController
 {
     function __construct($params)
     {

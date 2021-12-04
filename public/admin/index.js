@@ -1,3 +1,4 @@
+const BASE_URL = "http://localhost/mvcphp"
 const loc = window.location.pathname;
 const dir = loc.substring(0, loc.lastIndexOf("/"));
 const path = dir.split("/");
@@ -26,6 +27,7 @@ window.onload = () => {
     case "category":
     case "addcategory":
     case "inventory":
+    case "productmanage":
       document.querySelector("#sptarget").classList.remove("h-0");
       document.querySelector("#sp > span.transform").classList.add("rotate-90");
       changeActive(2);

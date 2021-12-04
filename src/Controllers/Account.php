@@ -1,5 +1,5 @@
 <?php
-class Account extends BaseCustomer
+class Account extends CustomerController
 {
     function __construct($params)
     {
@@ -11,8 +11,7 @@ class Account extends BaseCustomer
         if(empty($this->customerLogin)) {
             $this->login();
         } else {
-            // header('Location: '.BASE_URL."/Home/");
-            echo password_hash('abcabc@12', PASSWORD_DEFAULT);
+            header('Location: '.BASE_URL."/Home/");
         }
     }
     
@@ -42,20 +41,19 @@ class Account extends BaseCustomer
 
     function checkregister() {
         if(isset($_POST['submit'])) {
-            $data['firstname'] = $_POST['firstname'];
-            $data['lastname'] = $_POST['lastname'];
-            $data['gender'] = $_POST['gender'];
-            $data['email'] = $_POST['email'];
-            $data['password'] = $_POST['password'];
-            
-            echo "<pre>";
-            print_r($data);
-            echo "</pre>";
+            $data['TenKhachHang'] = isset($_POST['name']) ? $_POST['name'] : "";
+            $data['GioiTinh'] = $_POST['gender'] != "male" ? "Nam" : "Nữ";
+            $data['Email'] = isset($_POST['email']) ? $_POST['email'] : "";
+            $data['Password'] = password_hash($_POST['password'],PASSWORD_DEFAULT);
+            $data['NgaySinh'] = isset($_POST['name']) ? date("Y-m-d",strtotime($_POST['dob'])) : "";
+            $data['SDT'] = isset( $_POST['phone']) ? $_POST['phone'] : "";
+            $data['DiaChi'] = isset( $_POST['address']) ? $_POST['address'] : "";
 
-            //hash password bcrypt
-            $hash = password_hash('khactuan', PASSWORD_DEFAULT);
+            $customerModel = parent::model("CustomerModel");
 
+            echo $customerModel->insertCustomer($data);
         }
+        else echo -1;
     }
 
     function checklogin() {
@@ -75,9 +73,8 @@ class Account extends BaseCustomer
                 //Verify bcrypt
                 $confirmPassword = password_verify($data['password'],$customer['Password']) ? 1 : 0; 
 
-                //$confirmPassword = $customer['Password'] == $data['password'] ? 1 : 0;
-
                 if($confirmPassword) {
+                    unset($customer['Password']);
                     $_SESSION['CustomerLogin'] = $customer;
                 }
                 echo $confirmPassword;

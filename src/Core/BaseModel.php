@@ -14,6 +14,7 @@ class BaseModel extends DataBase{
     //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
     protected function getAll($table,$condition = "1", $limit = "", $subQuery = "") {
         $limit = $limit ? "LIMIT ${limit}" : "";
+        
         $sql = "SELECT * FROM ${table} WHERE ${condition} ${subQuery} ${limit}";
 
         // echo $sql;
@@ -50,26 +51,32 @@ class BaseModel extends DataBase{
 
         $sql = "INSERT INTO ${table}(${column}) VALUES(${newValue})";
 
-        echo $sql;
+        // echo $sql;
 
         if($this->query($sql)) {
             return 1;
         } 
         return 0;
+
     }
 
-    protected function update($table,$condition, $data = []) {
+    protected function update($table,$condition = [], $data = []) {
 
         $updateData = [];
         foreach($data as $key => $val) {
             array_push($updateData,"${key}='${val}'");
         }
-
         $updateData = implode(', ',$updateData);
 
-        $sql = "UPDATE ${table} SET ${updateData} WHERE ${condition}";
+        $updateCondition = [];
+        foreach($condition as $key => $val) {
+            array_push($updateCondition, "${key}='${val}'");
+        }
+        $updateCondition = implode(' AND ',$updateCondition);
 
-        echo $sql;
+        $sql = "UPDATE ${table} SET ${updateData} WHERE ${updateCondition}";
+
+        // echo $sql;
 
         $this->query($sql);
 

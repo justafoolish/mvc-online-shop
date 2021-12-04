@@ -9,4 +9,6 @@ require_once "./src/Core/BaseModel.php";
 
 require_once "./src/Core/BaseController.php";
 
-require_once "./src/Core/BaseCustomer.php";
+require_once "./src/Core/AdminController.php";
+
+require_once "./src/Core/CustomerController.php";

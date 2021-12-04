@@ -1,5 +1,5 @@
 <?php
-class Checkout extends BaseCustomer
+class Checkout extends CustomerController
 {
     function __construct($params)
     {

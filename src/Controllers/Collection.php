@@ -1,5 +1,5 @@
 <?php
-class Collection extends BaseCustomer
+class Collection extends CustomerController
 {
     private $itemPerPage = 8; //Số sản phẩm mỗi trang
     public function __construct($params)
@@ -61,5 +61,9 @@ class Collection extends BaseCustomer
             "totalCartItem" => $this->totalCartItem,
             "customerLogin" => $this->customerLogin
         ]);
+    }
+
+    function addcategory() {
+
     }
 }

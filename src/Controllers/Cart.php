@@ -1,5 +1,5 @@
 <?php
-class Cart extends BaseCustomer
+class Cart extends CustomerController
 {
     function __construct($params)
     {
@@ -8,15 +8,17 @@ class Cart extends BaseCustomer
 
     function index()
     {
-        $cart = [];
-        if(isset($_SESSION['cart'])){
-            $cart = $_SESSION['cart'];
-        }
         parent::view("Cart.index", [
             "customerLogin" => $this->customerLogin,
             "collections" => $this->collections,
             "totalCartItem" => $this->totalCartItem,
-            "cart" => $cart
+            "cart" => $this->cartItem
+        ]);
+    }
+
+    public function getsidecart() {
+        parent::view("Templates.sidecart",[
+            "carts" => $this->cartItem
         ]);
     }
 
@@ -147,7 +149,4 @@ class Cart extends BaseCustomer
             "totalProduct" => $totalProduct
         ]);   
     }
-
-    
 }
-;

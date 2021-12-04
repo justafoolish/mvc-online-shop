@@ -2,6 +2,7 @@
 class ProductModel extends BaseModel 
 {
     const TABLE = "sanpham";
+    const subTABLE = "bienthe";
 
     public function __construct() {
         parent::__construct();
@@ -18,6 +19,7 @@ class ProductModel extends BaseModel
     function getLatestProducts() {
         return $this->getAll(self::TABLE,1, 8, "ORDER BY NgayNhap DESC");
     }
+    
 
     function getProduct($id) {
 
@@ -78,7 +80,15 @@ class ProductModel extends BaseModel
         $fields = $this->getColumns(self::TABLE);
 
         return $this->countRecords(self::TABLE,$fields[0],$condition);
+    }
 
+    function getAllVariants($id = "") {
+        $fields = $this->getColumns(self::TABLE);
+
+        $condition = $id ? "$fields[0]='${id}'" : "1";
+
+        //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
+        return $this->getAll(self::subTABLE,$condition);    
     }
 
 }

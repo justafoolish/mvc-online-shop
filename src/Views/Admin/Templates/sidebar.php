@@ -25,9 +25,9 @@
             </span>
         </button>
         <ul class="ml-12 h-0 transition-all overflow-hidden" id="sptarget">
-            <li class="pl-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-gray-200 py-1.5"><a href="<?= BASE_URL ?>/Admin/Product/" class="block">Tất cả sản phẩm</a></li>
-            <li class="pl-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-gray-200 py-1.5"><a href="<?= BASE_URL ?>/Admin/Category/" class="block">Danh mục sản phẩm</a></li>
-            <li class="pl-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-gray-200 py-1.5"><a href="<?= BASE_URL ?>/Admin/Inventory/" class="block">Tồn kho</a></li>
+            <li class="pl-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-gray-200 py-1.5"><a href="<?= BASE_URL ?>/ProductManage/" class="block">Tất cả sản phẩm</a></li>
+            <li class="pl-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-gray-200 py-1.5"><a href="<?= BASE_URL ?>/ProductManage/Category/" class="block">Danh mục sản phẩm</a></li>
+            <li class="pl-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-gray-200 py-1.5"><a href="<?= BASE_URL ?>/ProductManage/Inventory/" class="block">Tồn kho</a></li>
         </ul>
         <a href="<?= BASE_URL ?>/Admin/Customer/" class="nav-item transition-all hover:bg-gray-600 hover:text-white text-gray-400 flex px-5 py-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">

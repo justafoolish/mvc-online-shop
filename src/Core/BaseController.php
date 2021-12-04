@@ -8,18 +8,6 @@ class BaseController
     function __construct($params)
     {
         $this->params = $params;
-        // $this->collections = [
-        //     ["id" => "1", "name" => "Tops"],
-        //     ["id" => "2", "name" => "Bottoms"],
-        //     ["id" => "3", "name" => "Hats"],
-        //     ["id" => "4", "name" => "Bags"],
-        // ];
-        // if(isset($_SESSION['cart'])) {
-        //     $cart = $_SESSION['cart'];
-        //     foreach($cart as $product)
-        //         $this->totalCartItem += $product['SoLuong'];
-        // }
-
     }
     protected static function view($viewPath, $data = [])
     {

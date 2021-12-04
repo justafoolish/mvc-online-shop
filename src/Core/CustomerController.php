@@ -1,9 +1,10 @@
 <?php
-class BaseCustomer extends BaseController
+class CustomerController extends BaseController
 {
     protected $collections = [];
     protected $totalCartItem = 0;
     protected $customerLogin = [];
+    protected $cartItem = [];
 
     function __construct($params)
     {
@@ -15,8 +16,8 @@ class BaseCustomer extends BaseController
 
         //Check Total quantity of Cart
         if(isset($_SESSION['cart'])) {
-            $cart = $_SESSION['cart'];
-            foreach($cart as $product)
+            $this->cartItem = $_SESSION['cart'];
+            foreach($this->cartItem as $product)
                 $this->totalCartItem += $product['SoLuong'];
         }
 
@@ -29,5 +30,14 @@ class BaseCustomer extends BaseController
                 "name" => $cat['TenDanhMuc'],
             ]);
         }
+    }
+
+    protected function getCart() {
+        return isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? $_SESSION['cart'] : [];
+    }
+
+    protected function setCart($data = []) {
+        $_SESSION['cart'] = $data;
+        $this->cartItem = $_SESSION['cart'];
     }
 }

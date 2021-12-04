@@ -48,7 +48,7 @@
                                         <div class="w-10">
                                             <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" class="max-w-full h-auto object-center object-cover">
                                         </div>
-                                        <a href="<?= BASE_URL ?>/Admin/Product/<?= $product['MaSP'] ?>" class="text-gray-700 hover:text-gray-900 hover:underline transition-all"><?= $product['TenSP'] ?></a>
+                                        <a href="<?= BASE_URL ?>/ProductManage/Detail/<?= $product['MaSP'] ?>" class="text-gray-700 hover:text-gray-900 hover:underline transition-all"><?= $product['TenSP'] ?></a>
                                     </td>
                                     <td class="grid place-items-center"><?= $product['TongSoLuong'] ?></td>
                                     <td class="grid place-items-center"><?= $product['DanhMuc'] ?></td>

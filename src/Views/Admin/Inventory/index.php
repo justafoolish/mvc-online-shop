@@ -1,4 +1,8 @@
 <?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
+<?php 
+    $products = $data['products'];
+    $minQuantity = $data['minQuantity'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,26 +32,30 @@
                 <div class="table-responsive">
                     <table id="product_table" class="table table-borderless table-hover" width="100%" cellspacing="0">
                         <thead class="bg-gray-700 text-gray-50">
-                            <tr class="grid grid-cols-10">
+                            <tr class="grid grid-cols-11">
                                 <th class="col-span-5">Tên Sản Phẩm</th>
                                 <th>ID</th>
+                                <th>Biến thể</th>
                                 <th>Tồn</th>
                                 <th class="col-span-3">Cập nhật tồn kho </th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 30;
-                            while ($i-- > 0) { ?>
-                                <tr class="grid grid-cols-10">
+                            foreach ($products as $product) {
+                                foreach ($product['Variants'] as $variant) {
+                                ?>
+                                <tr class="grid grid-cols-11">
                                     <td class="text-left col-span-5 flex items-center space-x-4">
                                         <div class="w-10">
-                                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto object-center object-cover">
+                                            <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" class="max-w-full h-auto object-center object-cover">
                                         </div>
-                                        <a href="" class="text-gray-700 hover:text-gray-900 hover:underline transition-all">Áo ABC XYZ</a>
+                                        <a href="" class="text-gray-700 hover:text-gray-900 hover:underline transition-all"><?= $product['TenSP'] ?></a>
                                     </td>
-                                    <td class="grid place-items-center">Áo</td>
+                                    <td class="grid place-items-center"><?= $product['MaSP'] ?></td>
+                                    <td class="grid place-items-center"><?= $variant['MaSize'] ?></td>
                                     <td class="flex items-center justify-center">
-                                        <span class="text-green-500" id="current"><?= --$i ?></span>
+                                        <span class="text-<?= $variant['SoLuong'] < $minQuantity ? "yellow" : "green" ?>-500" id="current"><?= $variant['SoLuong'] ?></span>
                                         <span class="flex text-green-500 hidden" id="new"></span>
                                     </td>
                                     <td class="flex items-center justify-center space-x-10 col-span-3">
@@ -64,39 +72,10 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                        <button class="text-gray-100 bg-gray-400 hover:bg-gray-600 transition-all px-3 py-1">Lưu</button>
+                                        <button class="text-gray-100 bg-gray-400 hover:bg-gray-600 transition-all px-3 py-1" id="updateQuantity" pid="<?= $product['MaSP'] ?>" size="<?= $variant['MaSize'] ?>">Lưu</button>
                                     </td>
                                 </tr>
-                                <tr class="grid grid-cols-10">
-                                    <td class="text-left col-span-5 flex items-center space-x-4">
-                                        <div class="w-10">
-                                            <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto object-center object-cover">
-                                        </div>
-                                        <a href="" class="text-gray-700 hover:text-gray-900 hover:underline transition-all">Áo ABC XYZ</a>
-                                    </td>
-                                    <td class="grid place-items-center">Áo</td>
-                                    <td class="flex items-center justify-center">
-                                        <span class="text-yellow-500" id="current"><?= --$i ?></span>
-                                        <span class="flex text-green-500 hidden" id="new"></span>
-                                    </td>
-                                    <td class="flex items-center justify-center space-x-10 col-span-3">
-                                        <div class="flex my-5 w-32 justify-between inline-block">
-                                            <button class="px-3 py-2 bg-gray-300 text-gray-500 hover:text-gray-800" id="decrease">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
-                                                </svg>
-                                            </button>
-                                            <input type="text" class="outline-none w-16 text-center border-t-2 border-b-2 border-gray-300 bg-white" min="0" value="0" id="quantity" name="quantity" />
-                                            <button class="px-3 py-2 bg-gray-300 text-gray-500 hover:text-gray-800" id="increase">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <button class="text-gray-100 bg-gray-400 hover:bg-gray-600 transition-all px-3 py-1">Lưu</button>
-                                    </td>
-                                </tr>
-                            <?php  } ?>
+                            <?php  }} ?>
                         </tbody>
                     </table>
                 </div>
@@ -110,7 +89,7 @@
     </script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
-    <script src="<?= BASE_URL ?>/public/admin/updateInventory.js"></script>
+    <script src="<?= BASE_URL ?>/public/admin/updateInventory.js?v=2"></script>
 </body>
 
 </html>

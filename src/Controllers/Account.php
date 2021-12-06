@@ -39,7 +39,7 @@ class Account extends CustomerController
         ]);
     }
 
-    function checkregister() {
+    function checkRegister() {
         if(isset($_POST['submit'])) {
             $data['TenKhachHang'] = isset($_POST['name']) ? $_POST['name'] : "";
             $data['GioiTinh'] = $_POST['gender'] != "male" ? "Nam" : "Nữ";
@@ -56,7 +56,7 @@ class Account extends CustomerController
         else echo -1;
     }
 
-    function checklogin() {
+    function checkLogin() {
         if(isset($_POST['submit'])) {
             $data['email'] = $_POST['email'];
             $data['password'] = $_POST['password'];

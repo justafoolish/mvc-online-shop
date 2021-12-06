@@ -88,7 +88,7 @@ class ProductManage extends AdminController {
         }
     }
 
-    function updatevariantquantity()
+    function updateVariantQuantity()
     {
         if(isset($_POST['pid']) && isset($_POST['size']) && isset($_POST['quantity'])) {
             $data['MaSP'] = $_POST['pid'];

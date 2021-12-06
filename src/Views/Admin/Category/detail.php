@@ -1,5 +1,8 @@
 <?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
-
+<?php
+    $category = $data['categoryDetail'];
+    $products = $data['products'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,11 +27,11 @@
                         <div class="col-start-1 col-span-4 space-y-3">
                             <div>
                                 <label>Tên danh mục</label>
-                                <input type="text" class="border w-full px-3 py-2 mt-1 focus:ring-gray-700 focus:ring-2 transition-all outline-none" placeholder="Nhập tên danh mục">
+                                <input type="text" class="border w-full px-3 py-2 mt-1 focus:ring-gray-700 focus:ring-2 transition-all outline-none" placeholder="Nhập tên danh mục" name="name" value="<?= $category['TenDanhMuc'] ?>">
                             </div>
                             <div>
                                 <label>Miêu tả</label>
-                                <textarea rows="5" class="border w-full px-3 py-2 mt-1 focus:ring-gray-700 focus:ring-2 transition-all outline-none"></textarea>
+                                <textarea rows="5" class="border w-full px-3 py-2 mt-1 focus:ring-gray-700 focus:ring-2 transition-all outline-none" name="describe"><?= $category['MoTa'] ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -36,19 +39,19 @@
                     <h3 class="font-semibold text-2xl border-b pb-2 mt-7 inline-block">Danh sách sản phẩm</h3>
                     <div class="grid grid-cols-6 mt-2 gap-4">
                         <div class="col-span-4 space-y-3">
-                            <?php $i = 5;
-                            while ($i-- > 0) { ?>
+                            <?php $count = 0;
+                            foreach ($products as $product) { $count++; ?>
                                 <div class="flex space-x-3 border-b border-gray-300 pb-3">
                                     <div class="w-10 min-w-10">
-                                        <img src="<?= BASE_URL ?>/public/images/products/ao1.jpg" class="max-w-full">
+                                        <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" class="max-w-full">
                                     </div>
                                     <div class="flex items-center font-medium">
-                                        Áo ABC XYZ Lorem ipsum dolor sit am
+                                        <?= $product['TenSP'] ?>
                                     </div>
                                 </div>
                             <?php } ?>
                         </div>
-                        <h3 class="col-span-4 text-right font-medium">Tổng có 5 sản phẩm</h3>
+                        <h3 class="col-span-4 text-right font-medium">Tổng có <?= $count ?> sản phẩm</h3>
                     </div>
 
                 </main>

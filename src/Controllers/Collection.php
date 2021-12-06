@@ -62,8 +62,4 @@ class Collection extends CustomerController
             "customerLogin" => $this->customerLogin
         ]);
     }
-
-    function addcategory() {
-
-    }
 }

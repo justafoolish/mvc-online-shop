@@ -40,9 +40,6 @@ class CustomerModel extends BaseModel
         foreach($fields as $key => $value) {
             $fields[$key] = isset($data[$key]) && !empty($data[$key]) ? $data[$key] : " ";
         }
-        // echo "<pre>";
-        // print_r($fields);
-        // echo "</pre>";
         return $this->insert(self::TABLE,$fields);
     }
 

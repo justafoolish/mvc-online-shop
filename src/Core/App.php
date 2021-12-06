@@ -32,6 +32,7 @@ class App
         // echo $act;
 
         $contrObject = new $contr($pars);
+        // $contrObject->$act($pars);
         call_user_func_array([$contrObject, $act], $pars);
     }
 

@@ -24,7 +24,7 @@ window.onload = () => {
       break;
     case "product": 
     case "insertproduct":
-    case "category":
+    case "categorymanage":
     case "addcategory":
     case "inventory":
     case "productmanage":

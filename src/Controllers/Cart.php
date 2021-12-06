@@ -16,7 +16,7 @@ class Cart extends CustomerController
         ]);
     }
 
-    public function getsidecart() {
+    public function getSideCart() {
         parent::view("Templates.sidecart",[
             "carts" => $this->cartItem
         ]);

@@ -32,7 +32,7 @@ class Product extends CustomerController
         
     }
 
-    public function updatequantity() {
+    public function updateQuantity() {
         if(isset($_POST['pid']) && isset($_POST['quantity'])) {
             $pid = $_POST['pid'];
             $quantity = $_POST['quantity'];
@@ -42,7 +42,7 @@ class Product extends CustomerController
         echo 0;  
     }
 
-    public function getquantity() {
+    public function getQuantity() {
         if(isset($_POST['size']) && $_POST['pid']) {
 
             $productModel = parent::model("ProductModel");
@@ -52,7 +52,7 @@ class Product extends CustomerController
         }  
     }
 
-    public function searchproduct() {
+    public function searchProduct() {
         $keyword= "";
         if(isset($_POST['keyword'])){
             $keyword = $_POST['keyword'];

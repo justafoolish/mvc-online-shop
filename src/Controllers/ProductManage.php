@@ -6,7 +6,7 @@ class ProductManage extends AdminController {
         parent::__construct($params);
     }
 
-    function index($pid = "") {
+    function index() {
         //Todo: Check login first
         //Để tạm ! để confirm đã login
         if(!empty($this->adminLogin)) {

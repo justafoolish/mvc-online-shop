@@ -1,7 +1,9 @@
 <?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<?php 
+    $products = $data['products'];
+?>
 <head>
     <?php require_once "./src/Views/Admin/Templates/header.php" ?>
 </head>
@@ -14,7 +16,7 @@
         <div class="flex-1 mb-10">
             <form action="index.php" method="post">
                 <header class='flex justify-end items-center py-4 sticky top-0 inset-x-0 bg-white z-10 shadow-lg px-10 space-x-3'>
-                    <a class="text-xs py-2 px-5 bg-gray-500 hover:bg-gray-600 transition-all text-gray-50" href="../Discount">Huỷ</a>
+                    <a class="text-xs py-2 px-5 bg-gray-500 hover:bg-gray-600 transition-all text-gray-50" href="../">Huỷ</a>
                     <button class="text-xs py-2 px-5 bg-blue-500 hover:bg-blue-600 transition-all text-gray-50" type="submit">Lưu</button>
                 </header>
                 <main class="px-10 mt-5">
@@ -31,10 +33,9 @@
                                     <div id="product" class="flex items-center">
                                         <select name="products[]" class="w-full py-2 px-3 mt-1 border focus:ring-gray-700 focus:ring-2 transition-all outline-none">
                                             <option selected disabled>Chọn sản phẩm</option>
-                                            <option value="">Áo Khoác A</option>
-                                            <option value="">Áo Len B</option>
-                                            <option value="">Mũ A</option>
-                                            <option value="">Balo B</option>
+                                            <?php foreach ($products as $product) { ?>
+                                            <option value="<?= $product['MaSP'] ?>"><?= $product['TenSP'] ?></option>
+                                            <?php } ?>
                                         </select>
                                         <button class="ml-3 bg-red-400 hover:bg-red-500 w-10 h-9 py-1 my-auto grid place-items-center m-auto transition-all text-white block" id="deleteProduct">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

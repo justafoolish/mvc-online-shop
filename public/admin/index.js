@@ -35,9 +35,9 @@ window.onload = () => {
     case "customer":
       changeActive(3);
       break;
-    case "discount":
-    case "automationdiscound":
-    case "adddiscount":
+    case "discountmanage":
+    case "formadd":
+    case "formaddauto":
       changeActive(4);
       break;
     case "report":
@@ -53,3 +53,14 @@ document.querySelector("#sp").addEventListener("click", () => {
   document.querySelector("#sptarget").classList.toggle("h-0");
   document.querySelector("#sp > span.transform").classList.toggle("rotate-90");
 });
+
+
+
+
+const createCode = document.querySelector("#create-code");
+const codeInput = document.querySelector("input[name=code]")
+
+createCode && createCode.addEventListener("click",(e) => {
+  e.preventDefault();
+  codeInput.value = (Math.random() + 1).toString(36).substring(5).toUpperCase();
+})

@@ -26,11 +26,11 @@ class CustomerModel extends BaseModel
         return $execute ? $execute[0] : [];
     }
 
-    public function search($keyword)
-    {
-        $condition = "TenKhachHang LIKE '%${keyword}%'";
-        return $this->getAll(self::TABLE,$condition, 5,"");
-    }
+    // public function search($keyword)
+    // {
+    //     $condition = "TenKhachHang LIKE '%${keyword}%'";
+    //     return $this->getAll(self::TABLE,$condition, 5,"");
+    // }
 
     public function insertCustomer($data = []) {
 
@@ -43,16 +43,16 @@ class CustomerModel extends BaseModel
         return $this->insert(self::TABLE,$fields);
     }
 
-    public function updateCustomer($customerID, $data = []) {
-        $temp = $this->getColumns(self::TABLE);
-        $id = $temp[0];//temp[0] gia tri dau tien la ma khach hang
-        $condition = "$id='${customerID}'";
-        for($i = 1 ; $i < count($temp) ; $i++ ){
-            $updateData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
-             //                \\   //             \\
-            //key cua updateData\\ //value cua $data\\
-        }
-        return $this->update(self::TABLE,$condition,$updateData);
-    }
+    // public function updateCustomer($customerID, $data = []) {
+    //     $temp = $this->getColumns(self::TABLE);
+    //     $id = $temp[0];//temp[0] gia tri dau tien la ma khach hang
+    //     $condition = "$id='${customerID}'";
+    //     for($i = 1 ; $i < count($temp) ; $i++ ){
+    //         $updateData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
+    //          //                \\   //             \\
+    //         //key cua updateData\\ //value cua $data\\
+    //     }
+    //     return $this->update(self::TABLE,$condition,$updateData);
+    // }
 
 }

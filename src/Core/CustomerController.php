@@ -40,4 +40,7 @@ class CustomerController extends BaseController
         $_SESSION['cart'] = $data;
         $this->cartItem = $_SESSION['cart'];
     }
+    protected function removeCart() {
+        unset($_SESSION['cart']);
+    }
 }

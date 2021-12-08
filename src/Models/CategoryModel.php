@@ -25,16 +25,6 @@ class CategoryModel extends BaseModel
     }
 
     public function insertCategory($data = []) {
-        // $temp = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
-
-        // //lay $i = 1 la de bo cai muc ma~ khach hang ra
-        // for($i = 1 ; $i < count($temp) ; $i++ ){
-        //     $insertData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
-        //      //                \\   //             \\
-        //     //key cua insertData\\ //value cua $data\\
-        // }
-        // return $this->insert(self::TABLE,$insertData);
-
         $fields = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
         $fields = array_flip($fields); //Đổi value thành key
 

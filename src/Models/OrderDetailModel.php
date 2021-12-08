@@ -9,8 +9,8 @@ class OrderDetailModel extends BaseModel
 
     public function getAllOrderDetail($id = "") {
         $fields = $this->getColumns(self::TABLE);
-        $condition = $id ? "$fields[0]='$id'" : 1;
-        return $this->getAll(self::TABLE,$condition);
+        $condition = $id ? "$fields[0]='$id' AND chitiethoadon.MaSP=sanpham.MaSP" : 1;
+        return $this->getAll(self::TABLE.", sanpham",$condition);
     }
 
     function getOrderDetailByID($id) {
@@ -26,16 +26,13 @@ class OrderDetailModel extends BaseModel
 
     public function insertOrderDetail($data = []) {
         
-        //ong nho test lai xem co chay hay ko :))
-        $temp = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
+        $fields = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
+        $fields = array_flip($fields); //Đổi value thành key
 
-        // ma chi tiet hoa don co the cung 1 ma nen phai nhap vao
-        for($i = 0 ; $i < count($temp) ; $i++ ){
-            $insertData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
-             //                \\   //             \\
-            //key cua insertData\\ //value cua $data\\
+        foreach($fields as $key => $value) {
+            $fields[$key] = isset($data[$key]) && !empty($data[$key]) ? $data[$key] : " ";
         }
-        return $this->insert(self::TABLE,$insertData);
+        return $this->insert(self::TABLE,$fields);
     }
 
     public function updateOrderDetail($orderDetailID, $data = []) {

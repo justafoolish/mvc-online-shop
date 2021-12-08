@@ -35,7 +35,7 @@ class BaseModel extends DataBase{
     protected function findByID($table, $column, $value) {
         $sql = "SELECT * FROM ${table} WHERE ${column}=${value}";
         
-        echo $sql;
+        // echo $sql;
         $query = $this->query($sql);  
 
         return mysqli_fetch_assoc($query);
@@ -69,12 +69,13 @@ class BaseModel extends DataBase{
         }
         $updateData = implode(', ',$updateData);
 
+
         $updateCondition = [];
         foreach($condition as $key => $val) {
             array_push($updateCondition, "${key}='${val}'");
         }
         $updateCondition = implode(' AND ',$updateCondition);
-
+        $updateCondition = $updateCondition ? $updateCondition : 1;
         $sql = "UPDATE ${table} SET ${updateData} WHERE ${updateCondition}";
 
         // echo $sql;

@@ -51,14 +51,15 @@ class Cart extends CustomerController
                 "MaSP" => $pid,
                 "TenSP" => $product['TenSP'],
                 "Hinh1" => $product['Hinh1'],
+                "ChietKhau" => $product['ChietKhau'],
                 "DonGia" => $product['DonGia'],
-                "size" => $size,
+                "MaSize" => $size,
                 "SoLuong" => 1
             );
             $checkAdd = 1;
         }else {
             $cart = $_SESSION['cart'];
-            if(array_key_exists("$pid"."$size",$cart) && $cart["$pid"."$size"]['size'] === $size) {
+            if(array_key_exists("$pid"."$size",$cart) && $cart["$pid"."$size"]['MaSize'] === $size) {
                 if($cart["$pid"."$size"]["SoLuong"] < $maxQuantity)
                 {
                     $cart["$pid"."$size"]["SoLuong"] += 1;
@@ -70,8 +71,9 @@ class Cart extends CustomerController
                     "MaSP" => $pid,
                     "TenSP" => $product['TenSP'],
                     "Hinh1" => $product['Hinh1'],
+                    "ChietKhau" => $product['ChietKhau'],
                     "DonGia" => $product['DonGia'],
-                    "size" => $size,
+                    "MaSize" => $size,
                     "SoLuong" => 1
                 );
                 $checkAdd = 1;

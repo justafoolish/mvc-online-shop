@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th12 06, 2021 lúc 06:20 PM
+-- Thời gian đã tạo: Th12 08, 2021 lúc 02:07 PM
 -- Phiên bản máy phục vụ: 10.4.22-MariaDB
 -- Phiên bản PHP: 8.0.13
 
@@ -38,7 +38,7 @@ CREATE TABLE `bienthe` (
 --
 
 INSERT INTO `bienthe` (`MaSP`, `MaSize`, `SoLuong`) VALUES
-(4, 'L', 7),
+(4, 'L', 9),
 (4, 'M', 19),
 (4, 'XL', 12),
 (5, 'L', 10),
@@ -140,7 +140,16 @@ CREATE TABLE `chitiethoadon` (
 --
 
 INSERT INTO `chitiethoadon` (`MaHoaDon`, `MaSP`, `MaSize`, `SoLuong`, `DonGia`, `ChietKhau`) VALUES
-(1, 17, 'M', 1, 500000, 0);
+(1, 17, 'M', 4, 500000, 0),
+(15, 4, 'M', 2, 200000, 10),
+(15, 5, 'M', 2, 500000, 10),
+(15, 6, 'M', 1, 600000, 5),
+(16, 4, 'M', 2, 200000, 10),
+(16, 5, 'M', 2, 500000, 10),
+(16, 6, 'M', 1, 600000, 5),
+(17, 4, 'M', 2, 200000, 10),
+(17, 5, 'M', 2, 500000, 10),
+(17, 6, 'M', 1, 600000, 5);
 
 -- --------------------------------------------------------
 
@@ -173,9 +182,10 @@ INSERT INTO `danhmuc` (`MaDanhMuc`, `TenDanhMuc`, `MoTa`) VALUES
 CREATE TABLE `hoadon` (
   `MaHoaDon` int(10) NOT NULL,
   `MaKhachHang` int(10) NOT NULL,
+  `MaGiamGia` varchar(50) DEFAULT NULL,
   `NgayTao` date NOT NULL,
   `TongTien` int(10) NOT NULL,
-  `TrangThaiThanhToan` varchar(20) NOT NULL,
+  `TrangThaiThanhToan` int(1) NOT NULL,
   `DiaChiGiaoHang` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -183,8 +193,12 @@ CREATE TABLE `hoadon` (
 -- Đang đổ dữ liệu cho bảng `hoadon`
 --
 
-INSERT INTO `hoadon` (`MaHoaDon`, `MaKhachHang`, `NgayTao`, `TongTien`, `TrangThaiThanhToan`, `DiaChiGiaoHang`) VALUES
-(1, 1, '2021-12-01', 500000, 'Đã Thanh Toán', 'tphcm');
+INSERT INTO `hoadon` (`MaHoaDon`, `MaKhachHang`, `MaGiamGia`, `NgayTao`, `TongTien`, `TrangThaiThanhToan`, `DiaChiGiaoHang`) VALUES
+(1, 1, '', '2021-12-01', 500000, 1, '273 An D.Vương, Phường 3, Quận 5'),
+(2, 2, '', '2021-12-06', 1300000, 0, '273 An D. Vương, Phường 3, Quận 5'),
+(15, 5, '5QZJ4CR', '2021-12-08', 1738500, 0, 'HCM'),
+(16, 5, '5QZJ4CR', '2021-12-08', 1738500, 0, 'HCM'),
+(17, 5, '5QZJ4CR', '2021-12-08', 1738500, 1, 'HCM');
 
 -- --------------------------------------------------------
 
@@ -208,11 +222,11 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`MaKhachHang`, `TenKhachHang`, `GioiTinh`, `NgaySinh`, `Email`, `Password`, `DiaChi`, `SDT`) VALUES
-(1, 'an', '', NULL, 'lyquocan1@gmail.com', '$2y$10$5a4ZAd0u0QvbqhopI8NyCeAeO4OrhB6/k5SRjVriCax/SY/NTar6O', 'tphcm', '0981234513'),
-(2, 'annnnn', 'Nam', NULL, 'lyquocan171@gmail.co', 'UFyDhH0Qk5YypILf5RNU5eDiRuNwOi9rJk8vM5Xv90eWz5IyQ7zq2', 'ha noi', '0982306613'),
+(1, 'Quốc An', '', NULL, 'lyquocan1@gmail.com', '$2y$10$5a4ZAd0u0QvbqhopI8NyCeAeO4OrhB6/k5SRjVriCax/SY/NTar6O', 'tphcm', '0981234513'),
+(2, 'Khắc Tuấn', 'Nam', NULL, 'lyquocan171@gmail.co', 'UFyDhH0Qk5YypILf5RNU5eDiRuNwOi9rJk8vM5Xv90eWz5IyQ7zq2', 'ha noi', '0982306613'),
 (3, 'annnnn', 'Nữ', NULL, 'lyquocan17@gmail.com', '$2y$10$D6x0M7znwe9hOWu2E1DRz.qa24.Nifz04NM9BZ3kr5Kj8KrR65wWO', 'ha noi', '0982306613'),
 (4, 'anh', 'Nam', NULL, 'aa123123@gmail.com', '$2y$10$WJjjlOkuS2ZYSwHkTW48T.p8B6yM9LCyj7dKCnIVYvBuFPsw8BUZi', 'nha trang', '0981234333'),
-(5, 'Tuấn', 'Nữ', NULL, 'tun@tun.com', '$2y$10$0NPDrIQGHpbsvRu8fFzcd.mC8lTBqTLBQcrAHcqd9.Jzk5en7bq26', 'HCM', '09586128566'),
+(5, 'Tuấn', 'Nữ', '2021-12-09', 'tun@tun.com', '$2y$10$0NPDrIQGHpbsvRu8fFzcd.mC8lTBqTLBQcrAHcqd9.Jzk5en7bq26', 'HCM', '09586128566'),
 (21, 'Shuhwa', 'Nữ', '2021-12-15', 'shuhwa@id.com', '$2y$10$3DTsi6sVpd5jimO1Zbja5ODvI/aOk0APaZ6sA6qNp/CpwxTqLH9Ma', 'Seoul', '0123321123');
 
 -- --------------------------------------------------------
@@ -234,8 +248,10 @@ CREATE TABLE `khuyenmai` (
 --
 
 INSERT INTO `khuyenmai` (`MaKhuyenMai`, `SoLuongSuDung`, `NgayBatDau`, `NgayKetThuc`, `ChietKhau`) VALUES
-('KM001', 10, '2021-12-01', '2021-12-04', 10),
-('KM002', 5, '2021-12-05', '2021-12-07', 50);
+('5QZJ4CR', 10, '2021-12-16', '2021-12-19', 5),
+('8AOWO76', 10, '2021-12-14', '2021-12-26', 10),
+('IAEP3ZR', 50, '2021-12-08', '2021-12-26', 10),
+('PYA5BPK', 50, '2021-12-07', '2021-12-12', 10);
 
 -- --------------------------------------------------------
 
@@ -246,6 +262,7 @@ INSERT INTO `khuyenmai` (`MaKhuyenMai`, `SoLuongSuDung`, `NgayBatDau`, `NgayKetT
 CREATE TABLE `nhanvien` (
   `MaNhanVien` int(10) NOT NULL,
   `TenNhanVien` varchar(50) NOT NULL,
+  `Chức vụ` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Password` varchar(100) NOT NULL,
   `SDT` varchar(11) NOT NULL,
@@ -256,10 +273,10 @@ CREATE TABLE `nhanvien` (
 -- Đang đổ dữ liệu cho bảng `nhanvien`
 --
 
-INSERT INTO `nhanvien` (`MaNhanVien`, `TenNhanVien`, `Email`, `Password`, `SDT`, `DiaChi`) VALUES
-(1, 'quocan', 'lyquocan171@gmail.com', 'P@ss123', '0982306613', 'acvbbcv tphcm'),
-(2, 'an', 'lyquocan1711@gmail.com', 'P@ss1234', '0982306614', 'q1 tphcm'),
-(3, 'aa', 'aa123@gmail.com', 'qweqwe', '098232354', 'go vap tphcm');
+INSERT INTO `nhanvien` (`MaNhanVien`, `TenNhanVien`, `Chức vụ`, `Email`, `Password`, `SDT`, `DiaChi`) VALUES
+(1, 'quocan', '0', 'lyquocan171@gmail.com', 'P@ss123', '0982306613', 'acvbbcv tphcm'),
+(2, 'an', '0', 'lyquocan1711@gmail.com', 'P@ss1234', '0982306614', 'q1 tphcm'),
+(3, 'aa', '0', 'aa123@gmail.com', 'qweqwe', '098232354', 'go vap tphcm');
 
 -- --------------------------------------------------------
 
@@ -337,6 +354,7 @@ ALTER TABLE `bienthe`
 -- Chỉ mục cho bảng `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
+  ADD PRIMARY KEY (`MaHoaDon`,`MaSP`),
   ADD KEY `MaHoaDon` (`MaHoaDon`);
 
 --
@@ -389,7 +407,7 @@ ALTER TABLE `danhmuc`
 -- AUTO_INCREMENT cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHoaDon` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MaHoaDon` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `khachhang`

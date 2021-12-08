@@ -94,7 +94,7 @@ $.fn.serializeObject = function(){
   return o;
 };
 
-submitRegister.addEventListener("click", (e) => {
+submitRegister && submitRegister.addEventListener("click", (e) => {
   e.preventDefault();
   let checkForm = 1;
   

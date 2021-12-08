@@ -17,11 +17,13 @@ class DiscountModel extends BaseModel
     //     return $this->findByID(self::TABLE,$idDiscount,$id);
     // }
 
-    // public function search($keyword)
-    // {
-    //     $condition = "* LIKE '%${keyword}%'";
-    //     return $this->getAll(self::TABLE,$condition, 5,"");
-    // }
+    public function searchDiscount($code)
+    {
+        $fields = $this->getColumns(self::TABLE);
+        $condition = "$fields[0]='$code'";
+        $discount = $this->getAll(self::TABLE,$condition);
+        return $discount ? $discount[0] : [];
+    }
 
     public function insertDiscount($data = []) {
         $fields = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan

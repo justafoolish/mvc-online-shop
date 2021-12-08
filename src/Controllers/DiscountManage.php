@@ -58,4 +58,21 @@ class DiscountManage extends AdminController {
         if($checkCreate) header("Location: ".BASE_URL."/DiscountManage");
         else header("Location: ".BASE_URL."/DiscountManage/FormAdd");
     }
+
+    public function verifyDiscount() {
+        if(isset($_POST['code'])) {
+            $discountModel = parent::model("DiscountModel");
+
+            $discount = $discountModel->searchDiscount($_POST['code']);
+
+            if(empty($discount)) {
+                echo 0;
+            } elseif($discount['SoLuongSuDung'] > 0){
+                echo $discount['ChietKhau'];
+            } else echo 0;
+        } else echo -1;
+    }
+    public function updateDiscount() {
+
+    }
 }

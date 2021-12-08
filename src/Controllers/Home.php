@@ -11,7 +11,7 @@ class Home extends CustomerController
         $productModel = parent::model("ProductModel");
 
         $latestProduct = $productModel->getLatestProducts(); // Lọc danh sách sản phẩm mới nhất
-
+        // $this->print($this->customerLogin);
         parent::view("Home.index", [
             "collections" => $this->collections,
             "latestProduct" => $latestProduct,

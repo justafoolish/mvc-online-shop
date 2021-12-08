@@ -47,16 +47,16 @@
                             </div>
                             <div class="col-span-5 flex flex-col justify-center pl-3">
                                 <h3 class="font-bold text-gray-800"><?= $product['TenSP'] ?></h3>
-                                <p class="font-light text-gray-500">Size: <span class="uppercase"><?= $product['size'] ?></span></p>
+                                <p class="font-light text-gray-500">Size: <span class="uppercase"><?= $product['MaSize'] ?></span></p>
                             </div>
                             <div class="flex justify-between items-center w-20 col-span-2">
-                                <button class="px-1 py-1 bg-gray-100 text-gray-500 hover:text-gray-800 border-2 border-gray-100" id="qty-detail-dec" pid="<?= $product['MaSP'] ?>" size="<?= $product['size'] ?>">
+                                <button class="px-1 py-1 bg-gray-100 text-gray-500 hover:text-gray-800 border-2 border-gray-100" id="qty-detail-dec" pid="<?= $product['MaSP'] ?>" size="<?= $product['MaSize'] ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
                                     </svg>
                                 </button>
                                 <input type="text" class="w-10 text-center border-t-2 border-b-2 border-gray-100 bg-white" min="1" value="<?= $product['SoLuong'] ?>" id="quantity" name="quantity" disabled />
-                                <button class="px-1 py-1 bg-gray-100 text-gray-500 hover:text-gray-800 border-2 border-gray-100" id="qty-detail-inc" pid="<?= $product['MaSP'] ?>" size="<?= $product['size'] ?>">
+                                <button class="px-1 py-1 bg-gray-100 text-gray-500 hover:text-gray-800 border-2 border-gray-100" id="qty-detail-inc" pid="<?= $product['MaSP'] ?>" size="<?= $product['MaSize'] ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                     </svg>
@@ -68,7 +68,7 @@
                             <div class="grid place-items-center col-span-2">
                                 <h3>Thành tiền</h3>
                                 <h3 class="text-sm text-red-600 font-medium" id="product-total"><?= number_format($subTotal,0,",",".") ?> <u>đ</u></h3>
-                                <button class="hover:text-red-400" id="deleteItem" value="<?= $product['MaSP'].$product['size'] ?>">
+                                <button class="hover:text-red-400" id="deleteItem" value="<?= $product['MaSP'].$product['MaSize'] ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>

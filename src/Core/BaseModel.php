@@ -35,6 +35,7 @@ class BaseModel extends DataBase{
     protected function findByID($table, $column, $value) {
         $sql = "SELECT * FROM ${table} WHERE ${column}=${value}";
         
+        echo $sql;
         $query = $this->query($sql);  
 
         return mysqli_fetch_assoc($query);
@@ -116,6 +117,10 @@ class BaseModel extends DataBase{
 
         }
         return $colsName;
+    }
+
+    protected function getLastInsertID() {
+        return $this->con->insert_id;
     }
 
 

@@ -32,7 +32,6 @@
                                 <th>Khách hàng</th>
                                 <th>Địa chỉ</th>
                                 <th>Tổng đơn hàng</th>
-                                <th>Đơn hàng gần nhất</th>
                                 <th>Tổng</th>
                             </tr>
                         </thead>
@@ -45,9 +44,6 @@
                                     </td>
                                     <td class="text-center">HCMC</td>
                                     <td class="text-center">20</td>
-                                    <td class="text-center">
-                                        <a href="<?= BASE_URL ?>/Admin/Order/<?= 4 ?>" class="text-blue-600 hover:text-blue-700 hover:underline transition-all">#22121</a>
-                                    </td>
                                     <td class="text-center">210,000<sup>đ</sup> </td>
                                 </tr>
                             <?php  } ?>

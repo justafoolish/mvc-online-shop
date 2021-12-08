@@ -17,11 +17,11 @@
                 <div class="flex justify-between py-5 mb-3">
                     <h3 class="font-semibold text-2xl">Danh sách đơn hàng</h3>
                     <div class="flex space-x-3">
-                        <button class="flex items-center bg-gray-700 text-gray-200 text-xs px-3 py-2 hover:text-gray-100 hover:bg-gray-800">
+                        <!-- <button class="flex items-center bg-gray-700 text-gray-200 text-xs px-3 py-2 hover:text-gray-100 hover:bg-gray-800">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>Tạo hoá đơn
-                        </button>
+                        </button> -->
                     </div>
                 </div>
 
@@ -38,39 +38,24 @@
                         </thead>
                         <tbody>
                             <?php $i = 30;
-                            while ($i-- > 0) { ?>
+                            foreach ($data['order'] as $orders) { ?>
                                 <tr>
                                     <td>
-                                        <a href="<?= BASE_URL ?>/Admin/Order/<?= 4 ?>" class="text-blue-600 hover:text-blue-800">#00001</a>
+                                        <a href="<?= BASE_URL ?>/OrderManage/OrderDetail/<?= $orders['MaHoaDon'] ?>" class="text-blue-600 hover:text-blue-800"><?= $orders['MaHoaDon'] ?></a>
                                     </td>
                                     <td class="text-center">
-                                        27/10/2021
+                                        <?= $orders['NgayTao'] ?>
                                     </td>
                                     <td class="text-center">
-                                        <a href="" class="text-blue-600 hover:text-blue-800">Hắc Tún</a>
+                                        <a href="#" class="text-blue-600 hover:text-blue-800">
+                                            <?= $orders['TenKhachHang'] ?>
+                                        </a>
                                     </td>
-                                    <td class="text-center text-yellow-500">
-                                        Chưa thanh toán
-                                    </td>
-                                    <td class="text-center">
-                                        1,300,000<sup>đ</sup>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="<?= BASE_URL ?>/Admin/Order/<?= 4 ?>" class="text-blue-600 hover:text-blue-800">#000201</a>
+                                    <td class="text-center text-<?= intval($orders['TrangThaiThanhToan']) ? "green" : "yellow" ?>-500">
+                                        <?= intval($orders['TrangThaiThanhToan']) ? "Đã thanh toán" : "Chưa thanh toán" ?>
                                     </td>
                                     <td class="text-center">
-                                        23/10/2021
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="" class="text-blue-600 hover:text-blue-800">Hắc Tún</a>
-                                    </td>
-                                    <td class="text-center text-green-500">
-                                        Đã thanh toán
-                                    </td>
-                                    <td class="text-center">
-                                        300,000<sup>đ</sup>
+                                        <?= number_format($orders['TongTien'],0,",",".") ?><sup>đ</sup>
                                     </td>
                                 </tr>
                             <?php  } ?>

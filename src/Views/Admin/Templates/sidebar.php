@@ -6,7 +6,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             Tổng quan</a>
-        <a href="<?= BASE_URL ?>/Admin/Order/" class="nav-item transition-all hover:bg-gray-600 hover:text-white text-gray-400 flex px-5 py-3 ">
+        <a href="<?= BASE_URL ?>/OrderManage/" class="nav-item transition-all hover:bg-gray-600 hover:text-white text-gray-400 flex px-5 py-3 ">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
@@ -29,7 +29,7 @@
             <li class="pl-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-gray-200 py-1.5"><a href="<?= BASE_URL ?>/CategoryManage/" class="block">Danh mục sản phẩm</a></li>
             <li class="pl-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-gray-200 py-1.5"><a href="<?= BASE_URL ?>/ProductManage/Inventory/" class="block">Tồn kho</a></li>
         </ul>
-        <a href="<?= BASE_URL ?>/Admin/Customer/" class="nav-item transition-all hover:bg-gray-600 hover:text-white text-gray-400 flex px-5 py-3">
+        <a href="<?= BASE_URL ?>/CustomerManage/" class="nav-item transition-all hover:bg-gray-600 hover:text-white text-gray-400 flex px-5 py-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>

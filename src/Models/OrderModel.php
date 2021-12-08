@@ -12,9 +12,9 @@ class OrderModel extends BaseModel
     }
 
     function getOrder($id) {
-        $temp = $this->getColumns(self::TABLE);
-        $idOrder = $temp[0];//temp[0] gia tri dau tien la ma hoa don
-        return $this->findByID(self::TABLE,$idOrder,$id);
+        $fields = $this->getColumns(self::TABLE);
+        // $idOrder = $temp[0];//temp[0] gia tri dau tien la ma hoa don
+        return $this->findByID(self::TABLE,$fields[0],$id);
     }
 
     public function search($keyword)

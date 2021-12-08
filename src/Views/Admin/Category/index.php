@@ -1,9 +1,7 @@
 <?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
-<pre>
-    <!-- <?php print_r($data['category']) ?> -->
-</pre>
+
 <head>
     <?php require_once "./src/Views/Admin/Templates/header.php" ?>
 </head>
@@ -36,15 +34,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 30;
-                            while ($i-- > 0) { ?>
-                                <tr>
-                                    <td class="text-left flex items-center">
-                                        <a href="<?= BASE_URL ?>/CategoryManage/Detail/<?= 4 ?>" class="text-blue-600 hover:text-blue-700 hover:underline transition-all">Áo ABC XYZ</a>
-                                    </td>
-                                    <td class="text-center">123 </td>
-                                </tr>
-                            <?php  } ?>
+                            <?php
+                            foreach ($data['category'] as $category) {?>
+                            <tr class="text-center">
+                                <td> 
+                                    <a href="<?= BASE_URL ?>/CategoryManage/Detail/<?= $category['MaDanhMuc'] ?>" class="text-blue-600 hover:text-blue-700 hover:underline transition-all"><?= $category['TenDanhMuc'] ?></a>
+                                </td>
+                                <td> <?= $category['SoLuong'] ?></td>
+                            </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

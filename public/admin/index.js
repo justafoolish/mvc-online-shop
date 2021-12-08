@@ -19,7 +19,8 @@ window.onload = () => {
     case "dashboard":
       changeActive(0);
       break;
-    case "order":
+    case "ordermanage":
+    case "orderdetail":
       changeActive(1);
       break;
     case "product": 
@@ -28,11 +29,12 @@ window.onload = () => {
     case "addcategory":
     case "inventory":
     case "productmanage":
+    case "detail":
       document.querySelector("#sptarget").classList.remove("h-0");
       document.querySelector("#sp > span.transform").classList.add("rotate-90");
       changeActive(2);
       break;
-    case "customer":
+    case "customermanage":
       changeActive(3);
       break;
     case "discountmanage":

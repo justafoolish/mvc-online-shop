@@ -14,17 +14,15 @@ class CategoryManage extends AdminController {
         }
         else {
             $categoryModel = parent::model("CategoryModel");
-            $getAll = $categoryModel->getAllCategory();
+            $categories = $categoryModel->getAllCategory();
             $productModel = parent::model("ProductModel");
 
-            $category = [];
-            foreach($getAll as $cat) {
-                $cat['SoLuong'] = $productModel->countTotalProducts($cat['MaDanhMuc']);
-                array_push($category,$cat);
+            foreach($categories as $key => $val) {
+                $categories[$key]['SoLuong'] = $productModel->countTotalProducts($val['MaDanhMuc']);
             }
 
             parent::view("Admin.Category.index", [
-                "category" => $category
+                "category" => $categories
             ]);
         }
     }

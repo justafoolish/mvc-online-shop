@@ -7,14 +7,15 @@ class OrderDetailModel extends BaseModel
         parent::__construct();
     }
 
-    public function getAllOrderDetail($limit = 8) {
-        return $this->getAll(self::TABLE, $limit);
+    public function getAllOrderDetail($id = "") {
+        $fields = $this->getColumns(self::TABLE);
+        $condition = $id ? "$fields[0]='$id'" : 1;
+        return $this->getAll(self::TABLE,$condition);
     }
 
-    function getOrderDetail($id) {
-        $temp = $this->getColumns(self::TABLE);
-        $idOrderDetail = $temp[0];//temp[0] gia tri dau tien la ma chi tiet hoa don
-        return $this->findByID(self::TABLE,$idOrderDetail,$id);
+    function getOrderDetailByID($id) {
+        $fields = $this->getColumns(self::TABLE);
+        return $this->findByID(self::TABLE,$fields[0],$id);
     }
 
     public function search($keyword)

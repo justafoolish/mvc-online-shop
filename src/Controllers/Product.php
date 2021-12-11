@@ -46,8 +46,15 @@ class Product extends CustomerController
         if(isset($_POST['size']) && $_POST['pid']) {
 
             $productModel = parent::model("ProductModel");
-            $product = $productModel->getQuantityByVariant($_POST['pid'],$_POST['size']);
+            $variantModel = parent::model("VariantModel");
+
+            // $product = $productModel->getQuantityByVariant($_POST['pid'],$_POST['size']);
             
+            $product = $variantModel->getQuantity([
+                "MaSP" => $_POST['pid'],
+                "MaSize" => $_POST['size']
+            ]);
+
             echo $product;
         }  
     }

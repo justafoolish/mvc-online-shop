@@ -9,47 +9,52 @@ class Admin extends AdminController
     function index()
     {
         //Todo: is Login ? Dashboard / Login
-        parent::view("Admin.Dashboard.index", []);
+        if(empty($this->adminLogin)) {
+            $this->login();
+        } else parent::view("Admin.Dashboard.index", []);
+
     }
 
     function dashboard() {
         $this->index();
     }
 
-    function customer() {
-        parent::view("Admin.Customer.index", []);
-    }
-
-    function discount() {
-        parent::view("Admin.Discount.index", []);
-    }
-
-    function adddiscound() {
-        parent::view("Admin.Discount.add", []);
-    }
-
-    function automationdiscound() {
-        parent::view("Admin.Discount.auto_add", []);
-    }
-    
-    function employee() {
-        parent::view("Admin.Employee.index", []);
-    }
-
     function login() {
         parent::view("Admin.Login.index", []);
     }
 
-    function order($orderID = "") {
-        if(empty($orderID)) {
-            parent::view("Admin.Order.index", []);
-        }
-        else {
-            parent::view("Admin.Order.detail", []);
-        }
+    function checkLoginAdmin() {
+        if(isset($_POST['submit'])) {
+            $data['email'] = $_POST['email'];
+            $data['password'] = $_POST['password'];
+            
+            $employeeModel = parent::model("EmployeeModel");
+            
+            $employee = $employeeModel->getEmployee([
+                "Email" => $data['email'],
+            ]);
+
+            if(empty($employee)) {
+                echo -1;
+            } else {
+                //Verify bcrypt
+                // $confirmPassword = password_verify($data['password'],$customer['Password']) ? 1 : 0; 
+                $confirmPassword = $data['password'] == $employee['Password'] ? 1 : 0; 
+
+                if($confirmPassword) {
+                    unset($employee['Password']);
+                    $_SESSION['AdminLogin'] = $employee;
+                }
+                echo $confirmPassword;
+            }
+        } 
     }
 
-    function report() {
-        parent::view("Admin.Report.index", []);
+    function logout() {
+        if($this->adminLogin) {
+            unset($_SESSION['AdminLogin']);
+            $this->adminLogin = [];
+        }
+        header('Location: '.BASE_URL."/Admin");
     }
 }

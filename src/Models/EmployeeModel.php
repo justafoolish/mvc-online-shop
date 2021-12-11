@@ -1,5 +1,5 @@
 <?php
-class EmloyeeModel extends BaseModel 
+class EmployeeModel extends BaseModel 
 {
     const TABLE = "nhanvien";
 
@@ -7,14 +7,23 @@ class EmloyeeModel extends BaseModel
         parent::__construct();
     }
 
-    public function getAllEmloyee($limit = 8) {
+    public function getAllEmployee($limit = 8) {
         return $this->getAll(self::TABLE, $limit);
     }
 
-    function getEmloyee($id) {
-        $temp = $this->getColumns(self::TABLE);
-        $idEmployee = $temp[0];//temp[0] gia tri dau tien la ma nhan vien
-        return $this->findByID(self::TABLE,$idEmployee,$id);
+    function getEmployee($data = []) {
+        $condition = [];
+
+        foreach($data as $key => $val) {
+            array_push($condition,"$key='$val'");
+        }
+        $condition = implode(" AND ",$condition);
+
+        $condition = $condition ? $condition : "1";
+        
+        $execute = $this->getAll(self::TABLE,$condition);
+        
+        return $execute ? $execute[0] : [];
     }
 
     public function search($keyword)

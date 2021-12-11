@@ -50,7 +50,7 @@ class OrderManage extends AdminController
 
     function confirmOrder()
     {
-        if (!empty($this->adminLogin)) {
+        if (empty($this->adminLogin)) {
             header("Location: " . BASE_URL . "/Admin");
         } else {
             //Kiểm tra đăng nhập trước

@@ -9,7 +9,7 @@ class CategoryManage extends AdminController {
     function index() {
         //Todo: Check login first
         //Để tạm ! để confirm đã login
-        if(!empty($this->adminLogin)) {
+        if(empty($this->adminLogin)) {
             header("Location: ".BASE_URL."/Admin");
         }
         else {

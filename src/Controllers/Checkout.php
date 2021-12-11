@@ -34,7 +34,9 @@ class Checkout extends CustomerController
             1. Tạo hóa đơn: 
             [
                 mã hóa đơn, mã khách hàng, ngày tạo(current date php), tổng tiền, trạng thái thanh toán, địa chỉ giao hàng
-            ]        
+            ]   
+            
+            Done
         ----------*/
         if(isset($_POST['submitBtn'])) {
             $discountModel = parent::model("DiscountModel");
@@ -45,13 +47,15 @@ class Checkout extends CustomerController
             $customer = $this->customerLogin;
             $carts = $this->getCart();
 
-            // $data['MaHoaDon'] = 16;
+
+            // Lấy dữ liệu từ form, session
             $data['MaGiamGia'] = isset($_POST['discount']) && !empty($_POST['discount']) ? $_POST['discount']  : "";
             $data['DiaChiGiaoHang'] = isset($_POST['address']) && empty($_POST['address']) ? $_POST['address']  : $customer['DiaChi'];
             $data['MaKhachHang'] = $customer['MaKhachHang'];
             $data['NgayTao'] = date('Y-m-d');
             $data['TrangThaiThanhToan'] = 0;
 
+            //Tạo thông tin hóa đơn
             $data['TongTien'] = 0;
             foreach($carts as $product) {
                 $data['TongTien'] += (intval($product['DonGia']) * (1 - intval($product['ChietKhau'])/100)) * intval($product['SoLuong']);
@@ -66,6 +70,7 @@ class Checkout extends CustomerController
             } else {
                 $checkInsert = false;
             }
+            
             /*----------
                 Todo:
                 1. Lấy ra mã hóa đơn vừa thêm
@@ -75,21 +80,20 @@ class Checkout extends CustomerController
             if($checkInsert) {
                 foreach($carts as $product) {
                     $orderDetail['MaSP'] = $product['MaSP'];
-                    $orderDetail['MaSize'] = strtoupper($product['size']);
+                    $orderDetail['MaSize'] = strtoupper($product['MaSize']);
                     $orderDetail['SoLuong'] = $product['SoLuong'];
                     $orderDetail['DonGia'] = $product['DonGia'];
                     $orderDetail['ChietKhau'] = $product['ChietKhau'];
 
                     if(!$orderDetailModel->insertOrderDetail($orderDetail)) {
                         $checkInsert = false;
+                    } else {
+                        $this->updateQuantity($product);
                     }
                 }
             }
 
             if($checkInsert) {
-                //Todo: Cập nhật số lượng trong kho
-
-                ////////////////////////////
                 $this->removeCart();
                 header('Location: '.BASE_URL."/Home");
             }
@@ -100,5 +104,18 @@ class Checkout extends CustomerController
             }
                 
         } else header("Location: ".BASE_URL."/Home/");
+    }
+
+    function updateQuantity($product) {
+        $variantModel = parent::model("VariantModel");
+        //Lấy sô lượng sản phẩm hiện tại
+        $curQuantity = $variantModel->getQuantity([
+            "MaSP" => $product['MaSP'],
+            "MaSize" => strtoupper($product['MaSize'])
+        ]);
+        $variantModel->updateQuantity(
+            ["MaSP" => $product['MaSP'], "MaSize" => strtoupper($product['MaSize'])],
+            ["SoLuong" => intval($curQuantity) - intval($product['SoLuong'])]
+        );
     }
 }

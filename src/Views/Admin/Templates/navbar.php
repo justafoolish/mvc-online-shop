@@ -13,7 +13,7 @@ function getNavBar($location)
                 <img src='".BASE_URL."/public/images/107824882_303977137640006_5725713926320775589_n.jpg' alt='' class='max-w-full rounded-full object-center object-cover'>
             </div>
             <div class='absolute border-l-2 border-gray-400 pl-3 py-1 mb-3 group-hover:translate-y-0 transform translate-y-full transition-all opacity-0 group-hover:opacity-100 self-end'>
-                <a href='' class='text-gray-900'>Đăng Xuất</a>
+                <a href='".BASE_URL."/Admin/Logout' class='text-gray-900'>Đăng Xuất</a>
             </div>
         </div>
     </header> ";

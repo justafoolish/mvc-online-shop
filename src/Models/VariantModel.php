@@ -36,20 +36,33 @@ class VariantModel extends BaseModel
         return $this->insert(self::TABLE,$insertData);
     }
 
-    public function updateQuantity($condition = [], $quantity = []) {
-        return $this->update(self::TABLE,$condition,$quantity);
+    public function updateQuantity($data= [], $condition = []) {
+        return $this->update(self::TABLE,$data,$condition);
     }
 
-    function getquantity($condition = []) {
-        $cond = [];
+    // function getquantity($condition = []) {
+    //     $cond = [];
         
-        foreach($condition as $key => $value) {
-            array_push($cond, "$key='$value'");
+    //     foreach($condition as $key => $value) {
+    //         array_push($cond, "$key='$value'");
+    //     }
+
+    //     $cond = implode(' AND ',$cond);
+
+    //     return $this->getAll(self::TABLE,$condition);
+    // }
+
+    function getQuantity($data) {
+        // $condition = "MaSP='${productID}' AND MaSize='${variant}'";
+        $condition = [];
+
+        foreach($data as $key => $val) {
+            array_push($condition,"$key='$val'");
         }
+        $condition = implode(" AND ",$condition);
 
-        $cond = implode(' AND ',$cond);
-
-        return $this->getAll(self::TABLE,$condition);
+        $condition = $condition ? $condition : "1";
+        return $this->getAll(self::TABLE,$condition, 1,"")[0]['SoLuong'];
     }
 
 

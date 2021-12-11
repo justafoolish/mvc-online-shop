@@ -6,8 +6,8 @@ const currentURL = path[path.length - 1].toLowerCase();
 
 const adminNavItems = document.querySelectorAll(".nav-item");
 const changeActive = (i) => {
-  adminNavItems[i].classList.remove("hover:bg-gray-600", "hover:text-white", "text-gray-400");
-  adminNavItems[i].className += " text-white border-l-4 border-white bg-gray-600";
+  adminNavItems[i] && adminNavItems[i].classList.remove("hover:bg-gray-600", "hover:text-white", "text-gray-400");
+  adminNavItems[i] && (adminNavItems[i].className += " text-white border-l-4 border-white bg-gray-600");
 };
 
 window.onload = () => {
@@ -51,7 +51,9 @@ window.onload = () => {
   }
 };
 
-document.querySelector("#sp").addEventListener("click", () => {
+const arrowIcon = document.querySelector("#sp")
+
+arrowIcon && arrowIcon.addEventListener("click", () => {
   document.querySelector("#sptarget").classList.toggle("h-0");
   document.querySelector("#sp > span.transform").classList.toggle("rotate-90");
 });

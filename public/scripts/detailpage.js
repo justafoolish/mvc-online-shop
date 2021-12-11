@@ -18,7 +18,8 @@ incrButton.addEventListener("click", (e) => {
   e.preventDefault();
   let rad = document.querySelector("input[name=size]:checked");
   let pid = document.querySelector("#product-id");
-  $.post(`${BASE_URL}/Ajax/getquantity`, { pid: pid.innerHTML, size: rad.value }, (data) => {
+  $.post(`${BASE_URL}/Product/GetQuantity`, { pid: pid.innerHTML, size: rad.value }, (data) => {
+    console.log(data)
     let maxQuantity = parseInt(data);
     let curQty = parseInt(quantityInput.value);
     curQty < maxQuantity && quantityInput.setAttribute("value", curQty + 1);
@@ -39,7 +40,6 @@ addcart.addEventListener("click", (e) => {
   e.preventDefault();
   let rad = document.querySelector("input[name=size]:checked");
   $.post(`${BASE_URL}/Cart/checkquantity`, {pid: addcart.value, size: [`${rad.value}`]}, (data)=> {
-    console.log(data);
     document.querySelector("#totalItem").innerHTML = data
   })
 })

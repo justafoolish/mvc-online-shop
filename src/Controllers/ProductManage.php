@@ -9,7 +9,7 @@ class ProductManage extends AdminController {
     function index() {
         //Todo: Check login first
         //Để tạm ! để confirm đã login
-        if(!empty($this->adminLogin)) {
+        if(empty($this->adminLogin)) {
             header("Location: ".BASE_URL."/Admin");
         }
         else {
@@ -105,5 +105,24 @@ class ProductManage extends AdminController {
         }
 
         else echo -1;
+    }
+
+    function getQuantity() {
+        if(isset($_POST['pid']) && isset($_POST['size'])) {
+            $pid = $_POST['pid'];
+            $sizes = $_POST['size'];
+            $productModel = parent::model("ProductModel");
+
+            // echo json_encode($sizes);
+            foreach ($sizes as $size) {
+                $quantityByVariant = $productModel->getQuantityByVariant($pid, $size);
+                if($quantityByVariant > 0) {
+                    echo $quantityByVariant;
+                    break;
+                }
+            }
+        } else {
+            echo 0;
+        }
     }
 }

@@ -87,6 +87,9 @@ class Checkout extends CustomerController
             }
 
             if($checkInsert) {
+                //Todo: Cập nhật số lượng trong kho
+
+                ////////////////////////////
                 $this->removeCart();
                 header('Location: '.BASE_URL."/Home");
             }

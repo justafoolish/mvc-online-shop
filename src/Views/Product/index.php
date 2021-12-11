@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php $product = $data['product']; ?>
-<?php require_once "./src/Views/Templates/head.php"; ?>
-
+<head>
+    <?php require_once "./src/Views/Templates/head.php"; ?>
+</head>
 <body>
     <?php require_once "./src/Views/Templates/header.php" ?>
     <div class="flex">

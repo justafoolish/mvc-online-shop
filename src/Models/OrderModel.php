@@ -7,8 +7,16 @@ class OrderModel extends BaseModel
         parent::__construct();
     }
 
-    public function getAllOrder($limit = 8) {
-        return $this->getAll(self::TABLE, $limit);
+    public function getAllOrder($data = [], $limit = "") {
+        $condition = [];
+        foreach ($data as $key => $value) {
+            array_push($condition,"$key='$value'");
+        }
+        $condition = implode(' AND ',$condition);
+
+        $condition = $condition ? $condition : 1;
+
+        return $this->getAll(self::TABLE, $condition, $limit);
     }
 
     function getOrder($id) {

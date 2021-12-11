@@ -3,7 +3,9 @@
 <?php 
     $custm = $data['customerLogin'];
 ?>
-<?php require_once "./src/Views/Templates/head.php"; ?>
+<head>
+    <?php require_once "./src/Views/Templates/head.php"; ?>
+</head>
 
 <body>
     <?php require_once "./src/Views/Templates/header.php" ?>

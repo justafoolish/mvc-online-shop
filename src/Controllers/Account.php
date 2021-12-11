@@ -11,7 +11,38 @@ class Account extends CustomerController
         if(empty($this->customerLogin)) {
             $this->login();
         } else {
-            header('Location: '.BASE_URL."/Home/");
+            $this->viewOrder();
+        }
+    }
+
+    function viewOrder() {
+        if(empty($this->params)) {
+
+            /*
+                Todo:
+                1. Gọi hàm get all order
+                2. Truyền tham số vào hàm get all order dạng:
+                [
+                    "MaKhachHang" => ""
+                ]
+            */
+            $orders = [];
+
+            parent::view("Account.index", [
+                "customerLogin" => $this->customerLogin,
+                "collections" => $this->collections,
+                "totalCartItem" => $this->totalCartItem,
+                "orders" => $orders,
+            ]);
+        } else {
+            /*
+            
+            */
+            parent::view("Account.order", [
+                "customerLogin" => $this->customerLogin,
+                "collections" => $this->collections,
+                "totalCartItem" => $this->totalCartItem,
+            ]);
         }
     }
     

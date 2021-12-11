@@ -37,7 +37,8 @@
                             <div class="bg-gray-50 text-sm py-2 text-gray-700 font-medium">Số lượng</div>
                             <div class="bg-gray-50 text-sm py-2 text-gray-700 font-medium col-span-2 text-center">Giá</div>
                             <div class="bg-gray-50 text-sm py-2 text-gray-700 font-medium ">Thành tiền</div>
-                            
+                        </div>    
+                        <div> 
                             <?php 
                             $count=0; 
                             $total=0;
@@ -47,6 +48,7 @@
                                 $total += $subTotal;
                                 $count += $product['SoLuong'];
                             ?>
+                            <div class="grid grid-cols-8">
                             <div class="col-span-4 p-2 flex">
                                 <div class="w-14">
                                     <img class="max-w-full" src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" alt="">
@@ -59,13 +61,14 @@
                             <div class="flex items-center justify-center"><?= $product['SoLuong'] ?></div>
                             <div class="col-span-2 justify-center flex items-center"><?= number_format($product['DonGia'],0,",",".") ?><sup>đ</sup></div>
                             <div class="flex items-center"><?= number_format($subTotal,0,",",".") ?><sup>đ</sup></div>
-                            <?php } ?>
-                            <?php if(!$order['TrangThaiThanhToan']) { ?>
-                            <div class="col-span-8 border-t px-4 py-3 flex">
-                                <a href="<?= BASE_URL ?>/OrderManage/ConfirmOrder/<?= $order['MaHoaDon'] ?>" class="bg-gray-500 hover:bg-gray-600 transition-all text-white px-3 py-2 ml-auto">Xác nhận đã thanh toán</a>
-                            </div>
-                            <?php } ?>
                         </div>
+                        <?php } ?>
+                        </div>
+                        <?php if(!$order['TrangThaiThanhToan']) { ?>
+                        <div class="col-span-8 border-t px-4 py-3 flex">
+                            <a href="<?= BASE_URL ?>/OrderManage/ConfirmOrder/<?= $order['MaHoaDon'] ?>" class="bg-gray-500 hover:bg-gray-600 transition-all text-white px-3 py-2 ml-auto">Xác nhận đã thanh toán</a>
+                        </div>
+                        <?php } ?>
                     </div>
                     <div class="">
                         <div class="shadow rounded">

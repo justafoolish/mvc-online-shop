@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require_once "./src/Views/Templates/head.php"; ?>
+<head>
+    <?php require_once "./src/Views/Templates/head.php"; ?>
+</head>
 
 <body>
     <?php require_once "./src/Views/Templates/header.php" ?>

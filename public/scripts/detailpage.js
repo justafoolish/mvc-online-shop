@@ -19,10 +19,10 @@ incrButton.addEventListener("click", (e) => {
   let rad = document.querySelector("input[name=size]:checked");
   let pid = document.querySelector("#product-id");
   $.post(`${BASE_URL}/Product/GetQuantity`, { pid: pid.innerHTML, size: rad.value }, (data) => {
-    console.log(data)
     let maxQuantity = parseInt(data);
     let curQty = parseInt(quantityInput.value);
     curQty < maxQuantity && quantityInput.setAttribute("value", curQty + 1);
+    maxQuantity === 0 && quantityInput.setAttribute("value", 0)
   });
   
 });

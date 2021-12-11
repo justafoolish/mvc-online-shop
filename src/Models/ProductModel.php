@@ -68,10 +68,11 @@ class ProductModel extends BaseModel
         return $this->update(self::TABLE,$condition,$data);
     }
 
-    function getQuantityByVariant($productID,$variant) {
-        $condition = "MaSP='${productID}' AND MaSize='${variant}'";
-        return $this->getAll("bienthe",$condition, 1,"")[0]['SoLuong'];
-    }
+    // function getQuantityByVariant($productID,$variant) {
+    //     $condition = "MaSP='${productID}' AND MaSize='${variant}'";
+    //     $execute = $this->getAll("bienthe",$condition, 1,"");
+    //     return $execute ? $execute[0]['SoLuong'] : 0;
+    // }
 
     function countTotalProducts($collection = "") {
 
@@ -82,13 +83,7 @@ class ProductModel extends BaseModel
         return $this->countRecords(self::TABLE,$fields[0],$condition);
     }
 
-    function getAllVariants($id = "") {
-        $fields = $this->getColumns(self::TABLE);
+    
 
-        $condition = $id ? "$fields[0]='${id}'" : "1";
-
-        //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
-        return $this->getAll(self::subTABLE,$condition);    
-    }
 
 }

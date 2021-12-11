@@ -125,7 +125,7 @@
         </div>
     </div>
     <?php require_once "./src/Views/Templates/sidebar.php" ?>
-    <script src="<?= BASE_URL ?>/public/scripts/detailpage.js?v=3"></script>
+    <script src="<?= BASE_URL ?>/public/scripts/detailpage.js?v=4"></script>
 </body>
 
 </html>

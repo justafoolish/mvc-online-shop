@@ -74,8 +74,10 @@ class BaseModel extends DataBase{
         foreach($condition as $key => $val) {
             array_push($updateCondition, "${key}='${val}'");
         }
+
         $updateCondition = implode(' AND ',$updateCondition);
         $updateCondition = $updateCondition ? $updateCondition : 1;
+        
         $sql = "UPDATE ${table} SET ${updateData} WHERE ${updateCondition}";
 
         // echo $sql;

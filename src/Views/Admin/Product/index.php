@@ -33,30 +33,28 @@
                 <div class="table-responsive">
                     <table id="product_table" class="table table-borderless table-hover" width="100%" cellspacing="0">
                         <thead class="bg-gray-700 text-gray-50">
-                            <tr class="grid grid-cols-5">
+                            <tr class="grid grid-cols-4">
                                 <th class="col-span-2">Tên Sản Phẩm</th>
-                                <th>Số lượng tồn</th>
-                                <th>Danh mục</th>
                                 <th>Giá </th>
+                                <th>Chiết Khấu</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             foreach ($data['products'] as $product) { ?>
-                                <tr class="grid grid-cols-5">
+                                <tr class="grid grid-cols-4">
                                     <td class="text-left col-span-2 flex items-center space-x-4">
                                         <div class="w-10">
                                             <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" class="max-w-full h-auto object-center object-cover">
                                         </div>
                                         <a href="<?= BASE_URL ?>/ProductManage/Detail/<?= $product['MaSP'] ?>" class="text-gray-700 hover:text-gray-900 hover:underline transition-all"><?= $product['TenSP'] ?></a>
                                     </td>
-                                    <td class="grid place-items-center"><?= $product['TongSoLuong'] ?></td>
-                                    <td class="grid place-items-center"><?= $product['DanhMuc'] ?></td>
                                     <td class="grid place-items-center">
                                         <span>
                                         <?= number_format($product['DonGia'],0,",",".") ?><sup>đ</sup>
                                         </span>
                                     </td>
+                                    <td class="text-center"><?= $product['ChietKhau'] ?>%</td>
                                 </tr>
                             <?php  } ?>
                         </tbody>

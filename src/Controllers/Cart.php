@@ -27,16 +27,19 @@ class Cart extends CustomerController
             $pid = $_POST['pid'];
             $sizes = $_POST['size'];
             $productModel = parent::model("ProductModel");
+            $variantModel = parent::model("VariantModel");
 
-            // echo json_encode($sizes);
             foreach ($sizes as $size) {
-                $quantityByVariant = $productModel->getQuantityByVariant($pid, $size);
+                $quantityByVariant = $variantModel->getQuantity([
+                    "MaSP" => $pid,
+                    "MaSize" => $size,
+                ]);
                 if($quantityByVariant > 0) {
                     $this->addToCart($productModel,strtolower(trim($pid)),strtolower(trim($size)), $quantityByVariant);
-                    echo $this->countcartitem();
-                    break;
+                   break;
                 }
-            }
+            } 
+            echo $this->countCartItem();
         } else {
             header('Location:'.BASE_URL);
         }
@@ -86,7 +89,7 @@ class Cart extends CustomerController
         
     }
 
-    function countcartitem() {
+    function countCartItem() {
         $total = 0;
         if(isset($_SESSION['cart'])) {
             $cart = $_SESSION['cart'];

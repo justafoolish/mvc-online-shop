@@ -62,7 +62,11 @@ class VariantModel extends BaseModel
         $condition = implode(" AND ",$condition);
 
         $condition = $condition ? $condition : "1";
-        return $this->getAll(self::TABLE,$condition, 1,"")[0]['SoLuong'];
+
+        // echo $condition;
+        $execute = $this->getAll(self::TABLE,$condition, 1,"");
+
+        return $execute ? $execute[0]['SoLuong'] : 0;
     }
 
 

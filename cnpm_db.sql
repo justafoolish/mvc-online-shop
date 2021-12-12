@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th12 08, 2021 lúc 02:07 PM
+-- Thời gian đã tạo: Th12 12, 2021 lúc 01:39 PM
 -- Phiên bản máy phục vụ: 10.4.22-MariaDB
 -- Phiên bản PHP: 8.0.13
 
@@ -39,22 +39,22 @@ CREATE TABLE `bienthe` (
 
 INSERT INTO `bienthe` (`MaSP`, `MaSize`, `SoLuong`) VALUES
 (4, 'L', 9),
-(4, 'M', 19),
+(4, 'M', 0),
 (4, 'XL', 12),
-(5, 'L', 10),
-(5, 'M', 10),
-(5, 'XL', 10),
+(5, 'L', 0),
+(5, 'M', 0),
+(5, 'XL', 0),
 (6, 'L', 10),
-(6, 'M', 10),
+(6, 'M', 5),
 (6, 'XL', 10),
 (7, 'L', 10),
-(7, 'M', 10),
+(7, 'M', 5),
 (7, 'XL', 10),
 (10, 'L', 10),
-(10, 'M', 10),
+(10, 'M', 9),
 (10, 'XL', 10),
 (11, 'L', 10),
-(11, 'M', 10),
+(11, 'M', 9),
 (11, 'XL', 10),
 (12, 'L', 10),
 (12, 'M', 10),
@@ -66,7 +66,7 @@ INSERT INTO `bienthe` (`MaSP`, `MaSize`, `SoLuong`) VALUES
 (14, 'M', 10),
 (14, 'XL', 10),
 (15, 'L', 10),
-(15, 'M', 10),
+(15, 'M', 9),
 (15, 'XL', 10),
 (16, 'L', 10),
 (16, 'M', 10),
@@ -140,16 +140,9 @@ CREATE TABLE `chitiethoadon` (
 --
 
 INSERT INTO `chitiethoadon` (`MaHoaDon`, `MaSP`, `MaSize`, `SoLuong`, `DonGia`, `ChietKhau`) VALUES
-(1, 17, 'M', 4, 500000, 0),
-(15, 4, 'M', 2, 200000, 10),
-(15, 5, 'M', 2, 500000, 10),
-(15, 6, 'M', 1, 600000, 5),
-(16, 4, 'M', 2, 200000, 10),
-(16, 5, 'M', 2, 500000, 10),
-(16, 6, 'M', 1, 600000, 5),
-(17, 4, 'M', 2, 200000, 10),
-(17, 5, 'M', 2, 500000, 10),
-(17, 6, 'M', 1, 600000, 5);
+(31, 4, 'M', 5, 200000, 10),
+(31, 6, 'M', 4, 600000, 5),
+(31, 7, 'M', 4, 400000, 5);
 
 -- --------------------------------------------------------
 
@@ -182,7 +175,7 @@ INSERT INTO `danhmuc` (`MaDanhMuc`, `TenDanhMuc`, `MoTa`) VALUES
 CREATE TABLE `hoadon` (
   `MaHoaDon` int(10) NOT NULL,
   `MaKhachHang` int(10) NOT NULL,
-  `MaGiamGia` varchar(50) DEFAULT NULL,
+  `MaGiamGia` varchar(10) DEFAULT NULL,
   `NgayTao` date NOT NULL,
   `TongTien` int(10) NOT NULL,
   `TrangThaiThanhToan` int(1) NOT NULL,
@@ -194,11 +187,7 @@ CREATE TABLE `hoadon` (
 --
 
 INSERT INTO `hoadon` (`MaHoaDon`, `MaKhachHang`, `MaGiamGia`, `NgayTao`, `TongTien`, `TrangThaiThanhToan`, `DiaChiGiaoHang`) VALUES
-(1, 1, '', '2021-12-01', 500000, 1, '273 An D.Vương, Phường 3, Quận 5'),
-(2, 2, '', '2021-12-06', 1300000, 0, '273 An D. Vương, Phường 3, Quận 5'),
-(15, 5, '5QZJ4CR', '2021-12-08', 1738500, 0, 'HCM'),
-(16, 5, '5QZJ4CR', '2021-12-08', 1738500, 0, 'HCM'),
-(17, 5, '5QZJ4CR', '2021-12-08', 1738500, 1, 'HCM');
+(31, 5, ' ', '2021-12-11', 4700000, 0, 'HCM');
 
 -- --------------------------------------------------------
 
@@ -276,7 +265,8 @@ CREATE TABLE `nhanvien` (
 INSERT INTO `nhanvien` (`MaNhanVien`, `TenNhanVien`, `Chức vụ`, `Email`, `Password`, `SDT`, `DiaChi`) VALUES
 (1, 'quocan', '0', 'lyquocan171@gmail.com', 'P@ss123', '0982306613', 'acvbbcv tphcm'),
 (2, 'an', '0', 'lyquocan1711@gmail.com', 'P@ss1234', '0982306614', 'q1 tphcm'),
-(3, 'aa', '0', 'aa123@gmail.com', 'qweqwe', '098232354', 'go vap tphcm');
+(3, 'aa', '0', 'aa123@gmail.com', 'qweqwe', '098232354', 'go vap tphcm'),
+(4, 'Tuan', 'admin', 'tun@tun.com', '123', '09586128566', 'ok');
 
 -- --------------------------------------------------------
 
@@ -354,8 +344,9 @@ ALTER TABLE `bienthe`
 -- Chỉ mục cho bảng `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
-  ADD PRIMARY KEY (`MaHoaDon`,`MaSP`),
-  ADD KEY `MaHoaDon` (`MaHoaDon`);
+  ADD PRIMARY KEY (`MaHoaDon`,`MaSP`,`MaSize`),
+  ADD KEY `MaHoaDon` (`MaHoaDon`),
+  ADD KEY `FK_MaSP_HD` (`MaSP`);
 
 --
 -- Chỉ mục cho bảng `danhmuc`
@@ -367,7 +358,8 @@ ALTER TABLE `danhmuc`
 -- Chỉ mục cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  ADD PRIMARY KEY (`MaHoaDon`);
+  ADD PRIMARY KEY (`MaHoaDon`),
+  ADD KEY `FK_MaKH` (`MaKhachHang`);
 
 --
 -- Chỉ mục cho bảng `khachhang`
@@ -407,7 +399,7 @@ ALTER TABLE `danhmuc`
 -- AUTO_INCREMENT cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHoaDon` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `MaHoaDon` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT cho bảng `khachhang`
@@ -419,13 +411,36 @@ ALTER TABLE `khachhang`
 -- AUTO_INCREMENT cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `MaNhanVien` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaNhanVien` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
   MODIFY `MaSP` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `bienthe`
+--
+ALTER TABLE `bienthe`
+  ADD CONSTRAINT `FK_MaSP_BT` FOREIGN KEY (`MaSP`) REFERENCES `sanpham` (`MaSP`);
+
+--
+-- Các ràng buộc cho bảng `chitiethoadon`
+--
+ALTER TABLE `chitiethoadon`
+  ADD CONSTRAINT `FK_MaHD` FOREIGN KEY (`MaHoaDon`) REFERENCES `hoadon` (`MaHoaDon`),
+  ADD CONSTRAINT `FK_MaSP_HD` FOREIGN KEY (`MaSP`) REFERENCES `sanpham` (`MaSP`);
+
+--
+-- Các ràng buộc cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD CONSTRAINT `FK_MaKH` FOREIGN KEY (`MaKhachHang`) REFERENCES `khachhang` (`MaKhachHang`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

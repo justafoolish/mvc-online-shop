@@ -32,21 +32,29 @@
                                 <th>Khách hàng</th>
                                 <th>Địa chỉ</th>
                                 <th>Tổng đơn hàng</th>
+                                <!-- <th>Đơn hàng gần nhất</th> -->
                                 <th>Tổng</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 30;
-                            while ($i-- > 0) { ?>
+                            <?php
+                            foreach ($data['customer'] as $customers) { ?>
                                 <tr>
                                     <td class="text-left flex items-center">
-                                        <a href="" class="text-blue-600 hover:text-blue-700 hover:underline transition-all">Khắc Tuấn</a>
+                                        <a href="" class="text-blue-600 hover:text-blue-700 hover:underline transition-all"><?= $customers['TenKhachHang'] ?></a>
                                     </td>
-                                    <td class="text-center">HCMC</td>
-                                    <td class="text-center">20</td>
-                                    <td class="text-center">210,000<sup>đ</sup> </td>
+                                    <td class="text-center"><?= $customers['DiaChi'] ?></td>
+                                    <td class="text-center"><?= $customers['TongDonHang'] ?></td>
+                                    <!-- <td> 
+                                        <a href="<?= BASE_URL ?>/OrderManage/OrderDetail/<?=$customers['NgayGanNhat'][1] ?>" class="text-blue-600 hover:text-blue-800"><?= $customers['NgayGanNhat'][0]?></a>
+                                    </td> -->
+                                    <td class="text-center">
+                                        <span>
+                                            <?= number_format($customers['TongTien'],0,",",".") ?><sup>đ</sup>
+                                        </span>
+                                    </td>
                                 </tr>
-                            <?php  } ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

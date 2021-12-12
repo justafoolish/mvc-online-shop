@@ -126,5 +126,79 @@ class BaseModel extends DataBase{
         return $this->con->insert_id;
     }
 
+    protected function sumRecords($table, $column, $condition = "1", $groupColumn = "") {
 
+        $groupBy = $groupColumn ? "GROUP BY ${groupColumn}" : "";
+
+        $sql = "SELECT sum($column) as Tong FROM ${table} WHERE ${condition} ${groupBy}";
+
+        // echo $sql;
+        $query = $this->query($sql);
+
+        //Có điều kiện group by thì trả về mảng
+        return mysqli_fetch_row($query)[0];
+    }
+
+    /****************************************************
+    * Danh sách tham số getAllRecords
+    * 
+    * $table: Tên bảng truy vấn
+    * 
+    * $select: Danh sách các cột cần lấy trong bảng
+    * Ví dụ: ["MaKhachHang", "TenKhachHang"] => Cần lấy cột MaKhachHang và TenKhachHang
+    * sql sẽ được viết thành: SELECT MaKhachHang, TenKhachHang
+    * Default value của $select là *
+    *
+    * $condition: Danh sách các điều kiện
+    * Ví dụ: ["MaKhachHang" => 1, "TenKhachHang" => "Tuan"]
+    * sql được viết thành WHERE MaKhachHang=1 AND TenKhachHang='Tuan'
+    * Default value của $condition là 1
+    *
+    * $limit: Giới hạn số record cần lấy
+    * Kiểu truyền vào: "10, 8" => Lấy từ record 10 đến 8 record tiếp theo
+    *
+    * $groupBys: Danh sách điều kiện gom nhóm
+    * Ví dụ: ["MaKhachHang"]
+    *
+    * $orderBys: Danh sách điều kiện sắp xếp các columns
+    * Ví dụ: ["TenKhachHang" => "asc"]
+    *
+    ****************************************************/
+    function getAllRecords($table, $select = ['*'], $condition = [], $limit = "",$groupBys = [], $orderBys = []) {
+
+        $columns = implode(',', $select);
+        $limit = $limit ? "LIMIT ${limit}" : "";
+
+        $orderString = [];
+        foreach ($orderBys as $key => $value) {
+            array_push($orderString,"$key $value");           
+        }
+        $orderString = $orderString ? "ORDER BY ".implode(",",$orderString) : "";
+
+        $groupByString = $groupBys ? "GROUP BY ".implode(",",$groupBys) : "";
+
+        if(!empty($condition)) {
+            $conditionString = [];
+            foreach($condition as $key => $val) {
+                array_push($conditionString, "${key}='${val}'");
+            }
+            $conditionString = implode(', ', $conditionString);
+        } else {
+            $conditionString = 1;
+        }
+
+        $sql = "SELECT $columns FROM $table WHERE $conditionString $groupByString $orderString $limit";
+
+        // echo $sql;
+
+        $query = $this->query($sql);  
+        
+        $data=[];
+
+        while($row = mysqli_fetch_assoc($query) ) {
+            array_push($data,$row);
+        }
+
+        return count($data) > 1 ? $data : $data[0];
+    }
 }

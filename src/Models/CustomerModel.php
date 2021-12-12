@@ -55,4 +55,5 @@ class CustomerModel extends BaseModel
     //     return $this->update(self::TABLE,$condition,$updateData);
     // }
 
+    
 }

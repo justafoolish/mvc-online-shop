@@ -60,11 +60,14 @@ class Checkout extends CustomerController
             foreach($carts as $product) {
                 $data['TongTien'] += (intval($product['DonGia']) * (1 - intval($product['ChietKhau'])/100)) * intval($product['SoLuong']);
             }
+
+            //Tính tổng tiền, chiết khấu
             $discount = $discountModel->searchDiscount($data['MaGiamGia']);
             if(!empty($discount)) {
                 $data['TongTien'] = (1 - intval($discount['ChietKhau'])/100) * $data['TongTien'];
             }
 
+            //Thêm hoá đơn mới
             if($orderModel->insertOrder($data)) {
                 $orderDetail['MaHoaDon'] = $orderModel->getLastID();
             } else {
@@ -83,8 +86,7 @@ class Checkout extends CustomerController
                     $orderDetail['MaSize'] = strtoupper($product['MaSize']);
                     $orderDetail['SoLuong'] = $product['SoLuong'];
                     $orderDetail['DonGia'] = $product['DonGia'];
-                    $orderDetail['ChietKhau'] = $product['ChietKhau'];
-
+                    $orderDetail['ChietKhau'] = empty($product['ChietKhau']) ? $product['ChietKhau'] : "0";
                     if(!$orderDetailModel->insertOrderDetail($orderDetail)) {
                         $checkInsert = false;
                     } else {

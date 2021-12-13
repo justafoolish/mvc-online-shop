@@ -42,15 +42,16 @@ class BaseModel extends DataBase{
     }
 
     protected function insert($table, $data = []) {
-        $column = implode(",",array_keys($data));
+        
+        $insertColumn = implode(",",array_keys($data));
 
-        $newValue = array_map(function ($value) {
-            return "'${value}'";
-        }, array_values($data));
+        $insertValue = [];
+        foreach ($data as $value) {
+            array_push($insertValue,"'$value'");
+        }
+        $valueString = implode(",",$insertValue);
 
-        $newValue = implode(",",$newValue);
-
-        $sql = "INSERT INTO ${table}(${column}) VALUES(${newValue})";
+        $sql = "INSERT INTO $table($insertColumn) VALUES($valueString)";
 
         // echo $sql;
 
@@ -164,9 +165,14 @@ class BaseModel extends DataBase{
     * Ví dụ: ["TenKhachHang" => "asc"]
     *
     ****************************************************/
-    function getAllRecords($table, $select = ['*'], $condition = [], $limit = "",$groupBys = [], $orderBys = []) {
+    //4 tham số getAllRecords: $table, $select = ['*'], $condition = [], $limit = [],$groupBys = [], $orderBys = []
+    function getAllRecords($table, $select = ['*'], $condition = [], $limit = [],$groupBys = [], $orderBys = []) {
 
         $columns = implode(',', $select);
+        $limit = implode(',', $limit);
+
+        $isSingleRecord = $limit == 1 ? 1 : 0; 
+
         $limit = $limit ? "LIMIT ${limit}" : "";
 
         $orderString = [];
@@ -199,6 +205,6 @@ class BaseModel extends DataBase{
             array_push($data,$row);
         }
 
-        return count($data) > 1 ? $data : $data[0];
+        return $isSingleRecord ? $data[0] : $data;
     }
 }

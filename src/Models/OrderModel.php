@@ -8,17 +8,8 @@ class OrderModel extends BaseModel
         parent::__construct();
     }
 
-    public function getAllOrder($data = [], $limit = "")
-    {
-        $condition = [];
-        foreach ($data as $key => $value) {
-            array_push($condition, "$key='$value'");
-        }
-        $condition = implode(' AND ', $condition);
-
-        $condition = $condition ? $condition : 1;
-
-        return $this->getAll(self::TABLE, $condition, $limit);
+    public function getAllOrders($condition = [], $limit = []) {
+        return $this->getAllRecords(self::TABLE,["*"],$condition,$limit);
     }
 
     function getOrder($id)
@@ -29,14 +20,7 @@ class OrderModel extends BaseModel
 
     public function insertOrder($data = [])
     {
-
-        $fields = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
-        $fields = array_flip($fields); //Đổi value thành key
-
-        foreach ($fields as $key => $value) {
-            $fields[$key] = isset($data[$key]) && !empty($data[$key]) ? $data[$key] : " ";
-        }
-        return $this->insert(self::TABLE, $fields);
+        return $this->insert(self::TABLE, $data);
     }
 
     function getLastID()
@@ -52,12 +36,12 @@ class OrderModel extends BaseModel
     function countTotalCustomerOrder($condition = [])
     {
         $resultColumn = "TongHoaDon";
-        return $this->getAllRecords(self::TABLE, ["count(MaHoaDon) as $resultColumn"], $condition, "", ["MaKhachHang"])[$resultColumn];
+        return $this->getAllRecords(self::TABLE, ["count(MaHoaDon) as $resultColumn"], $condition, [1], ["MaKhachHang"])[$resultColumn];
     }
 
     function countTotalCustomerSpend($condition = [])
     {
         $resultColumn = "TongTien";
-        return $this->getAllRecords(self::TABLE, ["sum(TongTien) as $resultColumn"], $condition, "", ["MaKhachHang"])[$resultColumn];
+        return $this->getAllRecords(self::TABLE, ["sum(TongTien) as $resultColumn"], $condition, [1], ["MaKhachHang"])[$resultColumn];
     }
 }

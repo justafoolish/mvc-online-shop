@@ -7,9 +7,10 @@ class CategoryModel extends BaseModel
         parent::__construct();
     }
 
-    public function getAllCategory($limit = "") {
+    //4 tham số getAllRecords: $table, $select = ['*'], $condition = [], $limit = [],$groupBys = [], $orderBys = []
+    public function getAllCategory($limit = []) {
         //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
-        return $this->getAll(self::TABLE,1,$limit);
+        return $this->getAllRecords(self::TABLE,["*"],[],$limit);
     }
 
     function getCategory($id) {
@@ -18,20 +19,8 @@ class CategoryModel extends BaseModel
         return $this->findByID(self::TABLE,$idCategory,$id);
     }
 
-    public function search($keyword)
-    {
-        $condition = "TenDanhMuc LIKE '%${keyword}%'";
-        return $this->getAll(self::TABLE,$condition, 5,"");
-    }
-
     public function insertCategory($data = []) {
-        $fields = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
-        $fields = array_flip($fields); //Đổi value thành key
-
-        foreach($fields as $key => $value) {
-            $fields[$key] = isset($data[$key]) && !empty($data[$key]) ? $data[$key] : " ";
-        }
-        return $this->insert(self::TABLE,$fields);
+        return $this->insert(self::TABLE,$data);
     }
 
     public function updateCategory($categoryID, $data = []) {

@@ -6,9 +6,9 @@ class DiscountModel extends BaseModel
     public function __construct() {
         parent::__construct();
     }
-
+    //4 tham số getAllRecords: $table, $select = ['*'], $condition = [], $limit = [],$groupBys = [], $orderBys = []
     public function getAllDiscount() {
-        return $this->getAll(self::TABLE);
+        return $this->getAllRecords(self::TABLE);
     }
 
     // function getDiscount($id) {
@@ -26,13 +26,7 @@ class DiscountModel extends BaseModel
     }
 
     public function insertDiscount($data = []) {
-        $fields = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
-        $fields = array_flip($fields); //Đổi value thành key
-
-        foreach($fields as $key => $value) {
-            $fields[$key] = isset($data[$key]) && !empty($data[$key]) ? $data[$key] : " ";
-        }
-        return $this->insert(self::TABLE,$fields);
+        return $this->insert(self::TABLE,$data);
     }
 
     // public function updateDiscount($discountID, $data = []) {

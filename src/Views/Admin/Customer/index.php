@@ -41,7 +41,7 @@
                             foreach ($data['customer'] as $customers) { ?>
                                 <tr>
                                     <td class="text-left flex items-center">
-                                        <a href="" class="text-blue-600 hover:text-blue-700 hover:underline transition-all"><?= $customers['TenKhachHang'] ?></a>
+                                        <a href="<?= BASE_URL ?>/CustomerManage/ViewDetail/<?= $customers['MaKhachHang'] ?>" class="text-blue-600 hover:text-blue-700 hover:underline transition-all"><?= $customers['TenKhachHang'] ?></a>
                                     </td>
                                     <td class="text-center"><?= $customers['DiaChi'] ?></td>
                                     <td class="text-center"><?= $customers['TongDonHang'] ?></td>

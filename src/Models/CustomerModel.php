@@ -11,6 +11,10 @@ class CustomerModel extends BaseModel
         return $this->getAll(self::TABLE,1,$limit);
     }
 
+    function getOneCustomer($condition = []) {
+        return $this->getAllRecords(self::TABLE,["*"],$condition,[1]);
+    }
+
     function getCustomer($data = []) {
         $condition = [];
 
@@ -26,21 +30,8 @@ class CustomerModel extends BaseModel
         return $execute ? $execute[0] : [];
     }
 
-    // public function search($keyword)
-    // {
-    //     $condition = "TenKhachHang LIKE '%${keyword}%'";
-    //     return $this->getAll(self::TABLE,$condition, 5,"");
-    // }
-
     public function insertCustomer($data = []) {
-
-        $fields = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
-        $fields = array_flip($fields); //Đổi value thành key
-
-        foreach($fields as $key => $value) {
-            $fields[$key] = isset($data[$key]) && !empty($data[$key]) ? $data[$key] : " ";
-        }
-        return $this->insert(self::TABLE,$fields);
+        return $this->insert(self::TABLE,$data);
     }
 
     // public function updateCustomer($customerID, $data = []) {
@@ -54,6 +45,8 @@ class CustomerModel extends BaseModel
     //     }
     //     return $this->update(self::TABLE,$condition,$updateData);
     // }
+
+
 
     
 }

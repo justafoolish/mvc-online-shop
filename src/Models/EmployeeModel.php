@@ -7,29 +7,12 @@ class EmployeeModel extends BaseModel
         parent::__construct();
     }
 
-    public function getAllEmployee($limit = 8) {
+    public function getAllEmployee($limit = []) {
         return $this->getAll(self::TABLE, $limit);
     }
 
-    function getEmployee($data = []) {
-        $condition = [];
-
-        foreach($data as $key => $val) {
-            array_push($condition,"$key='$val'");
-        }
-        $condition = implode(" AND ",$condition);
-
-        $condition = $condition ? $condition : "1";
-        
-        $execute = $this->getAll(self::TABLE,$condition);
-        
-        return $execute ? $execute[0] : [];
-    }
-
-    public function search($keyword)
-    {
-        $condition = "TenNhanVien LIKE '%${keyword}%'";
-        return $this->getAll(self::TABLE,$condition, 5,"");
+    function getEmployee($condition = []) {
+        return $this->getAllRecords(self::TABLE,["*"], $condition, [1]);
     }
 
     // public function insertEmployee($data = []) {

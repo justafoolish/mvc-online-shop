@@ -12,10 +12,10 @@ class OrderManage extends AdminController
         $orderModel = parent::model("OrderModel");
         $customerModel = parent::model("CustomerModel");
 
-        $orders = $orderModel->getAllOrder();
+        $orders = $orderModel->getAllOrders();
 
         foreach ($orders as $key => $value) {
-            $orders[$key]['TenKhachHang'] = $customerModel->getCustomer([
+            $orders[$key]['TenKhachHang'] = $customerModel->getOneCustomer([
                 "MaKhachHang" => $value['MaKhachHang'],
             ])['TenKhachHang'];
         }
@@ -36,7 +36,7 @@ class OrderManage extends AdminController
 
             $order = $orderModel->getOrder($orderID);
             $detail = $orderDetailModel->getAllOrderDetail($orderID);
-            $customer = $customerModel->getCustomer([
+            $customer = $customerModel->getOneCustomer([
                 "MaKhachHang" => $order['MaKhachHang']
             ]);
 

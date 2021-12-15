@@ -15,7 +15,7 @@ class ProductManage extends AdminController {
         else {
             $productModel = parent::model("ProductModel");
             
-            $products = $productModel->getAllProducts();
+            $products = $productModel->getAllProduct();
             parent::view("Admin.Product.index", [
                 "products" => $products
             ]);
@@ -32,11 +32,11 @@ class ProductManage extends AdminController {
             $categoryModel = parent::model("CategoryModel");
             $variantModel = parent::model("VariantModel");
             
-            $product = $productModel->getProduct($pid); //Lấy thông tin sản phẩm theo product ID
+            $product = $productModel->getProductDetail(["MaSP" => $pid]); //Lấy thông tin sản phẩm theo product ID
             
             $categories = $categoryModel->getAllCategory(); //Lấy thông tin tất cả danh mục cho view option
             
-            $variant = $variantModel->getAllVariants($product['MaSP']);
+            $variant = $variantModel->getVariants(["MaSP" => $product['MaSP']]);
             
             // $this->print($variant);
             parent::view("Admin.Product.detail", [
@@ -51,10 +51,10 @@ class ProductManage extends AdminController {
         $productModel = parent::model("ProductModel");
         $variantModel = parent::model("VariantModel");
 
-        $products = $productModel->getAllProducts();
+        $products = $productModel->getAllProduct();
 
         foreach($products as $key => $product) {
-            $products[$key]['Variants'] = $variantModel->getAllVariants($product['MaSP']);
+            $products[$key]['Variants'] = $variantModel->getVariants(["MaSP" => $product['MaSP']]);
         }        
 
         // $this->print($products);

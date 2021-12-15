@@ -62,7 +62,7 @@ class Checkout extends CustomerController
             }
 
             //Tính tổng tiền, chiết khấu
-            $discount = $discountModel->searchDiscount($data['MaGiamGia']);
+            $discount = $discountModel->getDiscount(['MaKhuyenMai' => $data['MaGiamGia']]);
             if(!empty($discount)) {
                 $data['TongTien'] = (1 - intval($discount['ChietKhau'])/100) * $data['TongTien'];
             }

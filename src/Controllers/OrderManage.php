@@ -9,20 +9,24 @@ class OrderManage extends AdminController
 
     public function index()
     {
-        $orderModel = parent::model("OrderModel");
-        $customerModel = parent::model("CustomerModel");
+        if (empty($this->adminLogin)) {
+            header("Location: " . BASE_URL . "/Admin");
+        } else {
+            $orderModel = parent::model("OrderModel");
+            $customerModel = parent::model("CustomerModel");
 
-        $orders = $orderModel->getAllOrders();
+            $orders = $orderModel->getAllOrders();
 
-        foreach ($orders as $key => $value) {
-            $orders[$key]['TenKhachHang'] = $customerModel->getOneCustomer([
-                "MaKhachHang" => $value['MaKhachHang'],
-            ])['TenKhachHang'];
+            foreach ($orders as $key => $value) {
+                $orders[$key]['TenKhachHang'] = $customerModel->getCustomerDetail([
+                    "MaKhachHang" => $value['MaKhachHang'],
+                ])['TenKhachHang'];
+            }
+
+            parent::view("Admin.Order.index", [
+                "order" => $orders
+            ]);
         }
-
-        parent::view("Admin.Order.index", [
-            "order" => $orders
-        ]);
     }
 
     function orderDetail($orderID = "")
@@ -33,12 +37,16 @@ class OrderManage extends AdminController
             $orderModel = parent::model("OrderModel");
             $orderDetailModel = parent::model("OrderDetailModel");
             $customerModel = parent::model("CustomerModel");
+            $discountModel = parent::model("DiscountModel");
+
 
             $order = $orderModel->getOrder($orderID);
             $detail = $orderDetailModel->getAllOrderDetail($orderID);
-            $customer = $customerModel->getOneCustomer([
+            $customer = $customerModel->getCustomerDetail([
                 "MaKhachHang" => $order['MaKhachHang']
             ]);
+
+            $order['ChietKhau'] = $discountModel->getDiscount(['MaKhuyenMai' => $order['MaGiamGia']])['ChietKhau'] ?? 0;
 
             parent::view("Admin.Order.detail", [
                 "order" => $order,
@@ -59,14 +67,14 @@ class OrderManage extends AdminController
                 $orderModel = parent::model("OrderModel");
                 $updateOrder =  $orderModel->updateOrder([
                     "MaHoaDon" => $this->params[0],
-                    ],[
+                ], [
                     "TrangThaiThanhToan" => 1
                 ]);
 
-                if($updateOrder) {
-                    header("Location: " . BASE_URL . "/OrderManage/OrderDetail/".$this->params[0]);
+                if ($updateOrder) {
+                    header("Location: " . BASE_URL . "/OrderManage/OrderDetail/" . $this->params[0]);
                 } else {
-                    header("Location: " . BASE_URL . "/OrderManage/OrderDetail/".$this->params[0]);
+                    header("Location: " . BASE_URL . "/OrderManage/OrderDetail/" . $this->params[0]);
                 }
             } else {
                 header('Location: ' . BASE_URL . "/OrderManage");

@@ -22,7 +22,7 @@ class Cart extends CustomerController
         ]);
     }
 
-    function checkquantity() {
+    function checkQuantity() {
         if(isset($_POST['pid']) && isset($_POST['size'])) {
             $pid = $_POST['pid'];
             $sizes = $_POST['size'];
@@ -30,12 +30,14 @@ class Cart extends CustomerController
             $variantModel = parent::model("VariantModel");
 
             foreach ($sizes as $size) {
-                $quantityByVariant = $variantModel->getQuantity([
+                $productQuantity = $variantModel->getQuantity([
                     "MaSP" => $pid,
-                    "MaSize" => $size,
+                    "MaSize" => strtoupper($size),
                 ]);
-                if($quantityByVariant > 0) {
-                    $this->addToCart($productModel,strtolower(trim($pid)),strtolower(trim($size)), $quantityByVariant);
+
+                // echo $productQuantity;
+                if($productQuantity > 0) {
+                    $this->addToCart($productModel,strtolower(trim($pid)),strtolower(trim($size)), $productQuantity);
                    break;
                 }
             } 
@@ -46,7 +48,7 @@ class Cart extends CustomerController
     }
 
     function addToCart($productModel, $pid, $size, $maxQuantity) {
-        $product = $productModel->getProduct($pid);
+        $product = $productModel->getProductDetail(["MaSP" => $pid]);
 
         $checkAdd = 0;
         if(!isset($_SESSION['cart'])) {

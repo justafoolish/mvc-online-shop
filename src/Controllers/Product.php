@@ -19,14 +19,13 @@ class Product extends CustomerController
         else {
             $productModel = parent::model("ProductModel");
 
-            $product = $productModel->getProduct($pid); //Lấy thông tin sản phẩm theo product ID
+            $product = $productModel->getProductDetail(['MaSP' => $pid]); //Lấy thông tin sản phẩm theo product ID
 
             parent::view("Product.index", [
                 "collections" => $this->collections,
                 "product" => $product,
                 "totalCartItem" => $this->totalCartItem,
                 "customerLogin" => $this->customerLogin
-
             ]);
         }
         
@@ -47,12 +46,12 @@ class Product extends CustomerController
          
             $variantModel = parent::model("VariantModel");
 
-            $product = $variantModel->getQuantity([
+            $quantity = $variantModel->getQuantity([
                 "MaSP" => $_POST['pid'],
                 "MaSize" => strtoupper($_POST['size'])
             ]);
 
-            echo $product;
+            echo $quantity;
         }  
     }
 

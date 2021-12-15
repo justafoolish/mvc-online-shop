@@ -165,7 +165,6 @@ class BaseModel extends DataBase{
     * Ví dụ: ["TenKhachHang" => "asc"]
     *
     ****************************************************/
-    //4 tham số getAllRecords: $table, $select = ['*'], $condition = [], $limit = [],$groupBys = [], $orderBys = []
     function getAllRecords($table, $select = ['*'], $condition = [], $limit = [],$groupBys = [], $orderBys = []) {
 
         $columns = implode(',', $select);
@@ -188,7 +187,7 @@ class BaseModel extends DataBase{
             foreach($condition as $key => $val) {
                 array_push($conditionString, "${key}='${val}'");
             }
-            $conditionString = implode(', ', $conditionString);
+            $conditionString = implode(' AND ', $conditionString);
         } else {
             $conditionString = 1;
         }

@@ -1,71 +1,49 @@
 <?php
-class ProductModel extends BaseModel 
+class ProductModel extends BaseModel
 {
     const TABLE = "sanpham";
     const subTABLE = "bienthe";
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    function getAllProducts($limit = "", $collection = "") {
-        //Lọc theo danh mục
-        $condition = $collection ? "DanhMuc='${collection}'" : "1";
-
-        //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
-        return $this->getAll(self::TABLE,$condition, $limit);
+    function getAllProduct($limit = [], $condition = [])
+    {
+        return $this->getAllRecords(self::TABLE, ["*"], $condition, $limit);
     }
 
-    function getLatestProducts() {
-        return $this->getAll(self::TABLE,1, 8, "ORDER BY NgayNhap DESC");
+    function getLatestProducts($limit)
+    {
+        return $this->getAllRecords(self::TABLE, ["*"], [], $limit, [], ["NgayNhap" => "DESC"]);
     }
-    
 
-    function getProduct($id) {
+    function getProductDetail($condition)
+    {
+        return $this->getAllRecords(self::TABLE, ["*"], $condition, [1]);
+    }
 
-        $fields = $this->getColumns(self::TABLE);
-
-        return $this->findByID(self::TABLE,$fields[0],$id);
+    function totalProduct($condition = [])
+    {
+        $resultColumn = "MaSP";
+        return $this->getAllRecords(self::TABLE, ["count(MaSP) as $resultColumn"], $condition, [1])[$resultColumn];
     }
 
     function search($keyword)
     {
         $condition = "TenSP LIKE '%${keyword}%'";
-        return $this->getAll(self::TABLE,$condition, 5,"");
+        return $this->getAll(self::TABLE, $condition, 5, "");
     }
 
-    function insertProduct($data = []) {
-        // $insertData = [
-        //     "TenSP" => $data['TenSP'],
-        //     "Hinh1" => $data['Hinh1'],
-        //     "Hinh2" => $data['Hinh2'],
-        //     "TongSoLuong" => $data['TongSoLuong'],
-        //     "DanhMuc" => $data['DanhMuc'],
-        //     "NgayNhap" => $data['NgayNhap'],
-        //     "DonGia" => $data['DonGia'],
-        //     "ChietKhau" => $data['DanhMuc'],
-        // ];
 
-        // return $this->insert(self::TABLE,$insertData);
-
-        //ong nho test lai xem co chay hay ko :))
-        $temp = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
-
-        //lay $i = 1 la de bo cai muc ma~ san pham ra
-        for($i = 1 ; $i < count($temp) ; $i++ ){
-            $insertData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
-             //                \\   //    lay      \\
-            //  key insertData  \\ //value cua $data\\
-        }
-        return $this->insert(self::TABLE,$insertData);
-    }
-
-    function updateQuantity($productID, $quantity) {
+    function updateQuantity($productID, $quantity)
+    {
         $condition = "MaSP='${productID}'";
         $data = [
             "TongSoLuong" => $quantity,
         ];
-        return $this->update(self::TABLE,$condition,$data);
+        return $this->update(self::TABLE, $condition, $data);
     }
 
     // function getQuantityByVariant($productID,$variant) {
@@ -73,17 +51,26 @@ class ProductModel extends BaseModel
     //     $execute = $this->getAll("bienthe",$condition, 1,"");
     //     return $execute ? $execute[0]['SoLuong'] : 0;
     // }
+    // function insertProduct($data = []) {
+    //     //ong nho test lai xem co chay hay ko :))
+    //     $temp = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
 
-    function countTotalProducts($collection = "") {
+    //     //lay $i = 1 la de bo cai muc ma~ san pham ra
+    //     for($i = 1 ; $i < count($temp) ; $i++ ){
+    //         $insertData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
+    //          //                \\   //    lay      \\
+    //         //  key insertData  \\ //value cua $data\\
+    //     }
+    //     return $this->insert(self::TABLE,$insertData);
+    // }
+
+    function countTotalProducts($collection = "")
+    {
 
         $condition = $collection ? "DanhMuc='${collection}'" : "1";
 
         $fields = $this->getColumns(self::TABLE);
 
-        return $this->countRecords(self::TABLE,$fields[0],$condition);
+        return $this->countRecords(self::TABLE, $fields[0], $condition);
     }
-
-    
-
-
 }

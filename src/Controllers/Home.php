@@ -9,8 +9,8 @@ class Home extends CustomerController
     function index()
     {
         $productModel = parent::model("ProductModel");
-
-        $latestProduct = $productModel->getLatestProducts(); // Lọc danh sách sản phẩm mới nhất
+        $limit = [8];
+        $latestProduct = $productModel->getLatestProducts($limit); // Lọc danh sách sản phẩm mới nhất
         // $this->print($this->customerLogin);
         parent::view("Home.index", [
             "collections" => $this->collections,

@@ -32,23 +32,28 @@
                 <div class="grid grid-cols-4 gap-4">
                     <div class="col-span-3 shadow rounded">
                         <h3 class="font-bold p-3 text-lg text-gray-800 border-b">Danh sách sản phẩm đặt mua</h3>
-                        <div class="grid grid-cols-8">
+                        <div class="grid grid-cols-10">
                             <div class="bg-gray-50 text-sm col-span-4"></div>
                             <div class="bg-gray-50 text-sm py-2 text-gray-700 font-medium">Số lượng</div>
                             <div class="bg-gray-50 text-sm py-2 text-gray-700 font-medium col-span-2 text-center">Giá</div>
+                            <div class="bg-gray-50 text-sm py-2 text-gray-700 font-medium col-span-2 text-center">Chiết Khấu</div>
                             <div class="bg-gray-50 text-sm py-2 text-gray-700 font-medium ">Thành tiền</div>
                         </div>    
                         <div> 
                             <?php 
                             $count=0; 
                             $total=0;
-                            $subTotal=0;    
+                            $subTotal=0;   
+                            $discount=0; 
+                            $preDiscount=0;
                             foreach ($detail as $product) {
-                                $subTotal += intval($product['DonGia'])*intval($product['SoLuong']);  
+                                $preDiscount += intval($product['DonGia'])*intval($product['SoLuong']);
+                                $subTotal = intval($product['DonGia'])*intval($product['SoLuong'])*(1 - intval($product['ChietKhau'])/100);
+                                $discount += $preDiscount*(intval($product['ChietKhau'])/100);
                                 $total += $subTotal;
                                 $count += $product['SoLuong'];
                             ?>
-                            <div class="grid grid-cols-8">
+                            <div class="grid grid-cols-10">
                             <div class="col-span-4 p-2 flex">
                                 <div class="w-14">
                                     <img class="max-w-full" src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" alt="">
@@ -60,6 +65,7 @@
                             </div>
                             <div class="flex items-center justify-center"><?= $product['SoLuong'] ?></div>
                             <div class="col-span-2 justify-center flex items-center"><?= number_format($product['DonGia'],0,",",".") ?><sup>đ</sup></div>
+                            <div class="col-span-2 justify-center flex items-center"><?= $product['ChietKhau'] ?>%</div>
                             <div class="flex items-center"><?= number_format($subTotal,0,",",".") ?><sup>đ</sup></div>
                         </div>
                         <?php } ?>
@@ -96,16 +102,16 @@
                                 Tổng tiền hàng
                             </div>
                             <div>
-                            <?= number_format($total,0,",",".") ?><sup>đ</sup>
+                            <?= number_format($preDiscount,0,",",".") ?><sup>đ</sup>
                             </div>
-                            <div>Giảm giá</div>
-                            <div>0 ₫</div>
-                            <div>Vận chuyển</div>
-                            <div>0 ₫</div>
+                            <div>Giảm giá sản phảm</div>
+                            <div><?= number_format($discount,0,",",".") ?><sup>đ</sup></div>
+                            <div>Mã Giảm Giá (<?= $order['MaGiamGia'] ? $order['MaGiamGia'] : "#" ?>)</div>
+                            <div> <?= number_format($total*(intval($order['ChietKhau'])/100),0,",",".") ?><sup>đ</sup></div>
                             <div class="font-bold">Tổng giá trị đơn hàng</div>
-                            <div><?= number_format($total,0,",",".") ?><sup>đ</sup></div>
+                            <div><?= number_format($total*(1 - intval($order['ChietKhau'])/100),0,",",".") ?><sup>đ</sup></div>
                             <div>Đã thanh toán</div>
-                            <div><?= number_format($total,0,",",".") ?><sup>đ</sup></div>
+                            <div><?= $order['TrangThaiThanhToan'] ? number_format($total*(1 - intval($order['ChietKhau'])/100),0,",",".") : 0 ?><sup>đ</sup></div>
                         </div>
                     </div>
                 </div>

@@ -11,8 +11,23 @@ class Admin extends AdminController
         //Todo: is Login ? Dashboard / Login
         if(empty($this->adminLogin)) {
             $this->login();
-        } else parent::view("Admin.Dashboard.index", []);
+        } else {
+            $customerModel = parent::model("CustomerModel");
+            $productModel = parent::model("ProductModel");
+            $orderModel = parent::model("OrderModel");
 
+            $customerCount = $customerModel->totalCustomer();
+            $productCount = $productModel->totalProduct();
+            $orderCount = $orderModel->totalOrder();
+            $profit = $orderModel->totalProfit();
+
+            parent::view("Admin.Dashboard.index", [
+                "totalCustomer" => $customerCount,
+                "totalProduct" => $productCount,
+                "totalOrder" => $orderCount,
+                "profit" => $profit
+            ]);
+        }
     }
 
     function dashboard() {

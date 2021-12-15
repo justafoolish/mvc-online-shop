@@ -11,24 +11,28 @@ class DiscountModel extends BaseModel
         return $this->getAllRecords(self::TABLE);
     }
 
-    // function getDiscount($id) {
-    //     $temp = $this->getColumns(self::TABLE);
-    //     $idDiscount = $temp[0];//temp[0] gia tri dau tien la ma khuyen mai
-    //     return $this->findByID(self::TABLE,$idDiscount,$id);
-    // }
-
-    public function searchDiscount($code)
+    function getDiscount($condition = []) 
     {
-        $fields = $this->getColumns(self::TABLE);
-        $condition = "$fields[0]='$code'";
-        $discount = $this->getAll(self::TABLE,$condition);
-        return $discount ? $discount[0] : [];
+        return $this->getAllRecords(self::TABLE,["*"],$condition,[1]);
     }
 
     public function insertDiscount($data = []) {
         return $this->insert(self::TABLE,$data);
     }
 
+    
+    
+    // function countTotalProducts() {
+    //     $PK = $this->getColumns(self::TABLE);
+    //     return $this->countRecords(self::TABLE,$PK[0]);
+    // }
+    // public function searchDiscount($code)
+    // {
+    //     $fields = $this->getColumns(self::TABLE);
+    //     $condition = "$fields[0]='$code'";
+    //     $discount = $this->getAll(self::TABLE,$condition);
+    //     return $discount ? $discount[0] : [];
+    // }
     // public function updateDiscount($discountID, $data = []) {
     //     $temp = $this->getColumns(self::TABLE);
     //     $id = $temp[0];//temp[0] gia tri dau tien la ma khuyen mai
@@ -40,11 +44,4 @@ class DiscountModel extends BaseModel
     //     }
     //     return $this->update(self::TABLE,$condition,$updateData);
     // }
-
-    function countTotalProducts() {
-        $PK = $this->getColumns(self::TABLE);
-        return $this->countRecords(self::TABLE,$PK[0]);
-    }
-
-
 }

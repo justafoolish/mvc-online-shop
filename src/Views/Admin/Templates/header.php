@@ -8,5 +8,5 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/styles/bootstrap.datatable.css">
     <!-- Jquery for datatable -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="<?= BASE_URL ?>/public/admin/index.js?v=8" defer></script>
+    <script src="<?= BASE_URL ?>/public/admin/index.js?v=9" defer></script>
 </head>

@@ -16,7 +16,7 @@ class DiscountManage extends AdminController {
             $discountModel = parent::model("DiscountModel");
             $productModel = parent::model("ProductModel");
 
-            $products = $productModel->getAllProducts();
+            $products = $productModel->getAllProduct();
             $discounts = $discountModel->getAllDiscount();
             parent::view("Admin.Discount.index", [
                 "discounts" => $discounts,
@@ -31,7 +31,7 @@ class DiscountManage extends AdminController {
 
     public function formAddAuto() {
         $productModel = parent::model("ProductModel");
-        $products = $productModel->getAllProducts();
+        $products = $productModel->getAllProduct();
         
         parent::view("Admin.Discount.auto_add", [
             "products" => $products
@@ -63,11 +63,14 @@ class DiscountManage extends AdminController {
         if(isset($_POST['code'])) {
             $discountModel = parent::model("DiscountModel");
 
-            $discount = $discountModel->searchDiscount($_POST['code']);
+            $discount = $discountModel->getDiscount(["MaKhuyenMai" => $_POST['code']]);
 
             if(empty($discount)) {
                 echo 0;
             } elseif($discount['SoLuongSuDung'] > 0){
+                //Kiểm tra Ngày
+
+                
                 echo $discount['ChietKhau'];
             } else echo 0;
         } else echo -1;

@@ -9,25 +9,29 @@ class CustomerManage extends AdminController
     function index()
     {
         // //Todo: is Login ? Dashboard / Login
-        $customerModel = parent::model("CustomerModel");
-        $orderModel = parent::model("OrderModel");
+        if (empty($this->adminLogin)) {
+            header("Location: " . BASE_URL . "/Admin");
+        } else {
+            $customerModel = parent::model("CustomerModel");
+            $orderModel = parent::model("OrderModel");
 
-        $customers = $customerModel->getAllCustomer();
+            $customers = $customerModel->getAllCustomer();
 
-        foreach ($customers as $key => $val) {
+            foreach ($customers as $key => $val) {
 
-            $customers[$key]['TongDonHang'] = $orderModel->countTotalCustomerOrder(["MaKhachHang" => $val['MaKhachHang']]) ?? 0;
-            $customers[$key]['TongTien'] = $orderModel->countTotalCustomerSpend(["MaKhachHang" => $val['MaKhachHang']]) ?? 0;
-            // $c['NgayGanNhat'] = $orderModel->lastestOrder($c['MaKhachHang']);
-            // if($c['NgayGanNhat'] == NULL){
-            //     $c['NgayGanNhat'] = "0";
-            // }
-            unset($customers[$key]['Password']);
+                $customers[$key]['TongDonHang'] = $orderModel->countTotalCustomerOrder(["MaKhachHang" => $val['MaKhachHang']]) ?? 0;
+                $customers[$key]['TongTien'] = $orderModel->countTotalCustomerSpend(["MaKhachHang" => $val['MaKhachHang']]) ?? 0;
+                // $c['NgayGanNhat'] = $orderModel->lastestOrder($c['MaKhachHang']);
+                // if($c['NgayGanNhat'] == NULL){
+                //     $c['NgayGanNhat'] = "0";
+                // }
+                unset($customers[$key]['Password']);
+            }
+
+            parent::view("Admin.Customer.index", [
+                "customer" => $customers
+            ]);
         }
-
-        parent::view("Admin.Customer.index", [
-            "customer" => $customers
-        ]);
     }
 
     function viewDetail($customerID = "")
@@ -38,7 +42,7 @@ class CustomerManage extends AdminController
             $orderModel = parent::model("OrderModel");
             $customerModel = parent::model("CustomerModel");
 
-            $customer = $customerModel->getOneCustomer(["MaKhachHang" => $customerID]);            
+            $customer = $customerModel->getCustomerDetail(["MaKhachHang" => $customerID]);
             unset($customer['Password']);
 
             $orders = $orderModel->getAllOrders(["MaKhachHang" => $customerID]);

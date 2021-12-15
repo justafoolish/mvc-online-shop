@@ -44,4 +44,15 @@ class OrderModel extends BaseModel
         $resultColumn = "TongTien";
         return $this->getAllRecords(self::TABLE, ["sum(TongTien) as $resultColumn"], $condition, [1], ["MaKhachHang"])[$resultColumn];
     }
+
+    function totalOrder()
+    {
+        $resultColumn = "MaHoaDon";
+        return $this->getAllRecords(self::TABLE,["count(MaHoaDon) as $resultColumn"],[],[1])[$resultColumn];
+    }
+    function totalProfit()
+    {
+        $resultColumn = "TongTien";
+        return $this->getAllRecords(self::TABLE,["sum(TongTien) as $resultColumn"],[],[1])[$resultColumn];
+    }
 }

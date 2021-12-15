@@ -47,7 +47,7 @@
                                         <?= $orders['NgayTao'] ?>
                                     </td>
                                     <td class="text-center">
-                                        <a href="#" class="text-blue-600 hover:text-blue-800">
+                                        <a href="<?= BASE_URL ?>/CustomerManage/ViewDetail/<?= $orders['MaKhachHang'] ?>" class="text-blue-600 hover:text-blue-800">
                                             <?= $orders['TenKhachHang'] ?>
                                         </a>
                                     </td>

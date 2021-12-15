@@ -27,7 +27,7 @@ loginElement &&
     e.preventDefault();
 
     $.post(
-      `${BASE_URL}/Admin/checkLoginAdmin`,
+      `${BASE_UR}/Admin/checkLoginAdmin`,
       {
         submit: true,
         email: emailElement.value,
@@ -36,7 +36,7 @@ loginElement &&
       (data) => {
         switch (parseInt(data)) {
           case 1:
-            document.location.href = `${BASE_URL}/Admin/`;
+            document.location.href = `${BASE_UR}/Admin/`;
             console.log(data);
             break;
           case 0:

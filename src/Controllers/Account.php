@@ -94,7 +94,7 @@ class Account extends CustomerController
             
             $customerModel = parent::model("CustomerModel");
             
-            $customer = $customerModel->getOneCustomer([
+            $customer = $customerModel->getCustomerDetail([
                 "Email" => $data['email'],
             ]);
 

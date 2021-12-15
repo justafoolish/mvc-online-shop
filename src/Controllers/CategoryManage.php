@@ -35,7 +35,7 @@ class CategoryManage extends AdminController {
             $categoryModel = parent::model("CategoryModel");
             $productModel = parent::model("ProductModel");
             $getCategory = $categoryModel->getCategory($categoryID);
-            $products = $productModel->getAllProducts("",$categoryID);
+            $products = $productModel->getAllProduct(["DanhMuc" => $categoryID]);
             parent::view("Admin.Category.detail", [
                 "categoryDetail" => $getCategory,
                 "products" => $products
@@ -61,6 +61,23 @@ class CategoryManage extends AdminController {
         parent::view("Admin.Category.add", [
             "previousData" => $previousData,
         ]);
+    }
+
+    function updateCategory()
+    {
+        if(isset($_POST['submit'])) {
+            $data['TenDanhMuc'] = $_POST['name'];
+            $data['MoTa'] = $_POST['describe'];
+            $id = $_POST['id'];
+
+            // $this->print($data);
+
+            $categoryModel = parent::model("CategoryModel");
+            if($categoryModel->updateCategory(['MaDanhMuc' => $id], $data)) {
+                header("Location: ".BASE_URL."/CategoryManage/");
+            } else header("Location: ".BASE_URL."/CategoryManage/Detail/$id");
+        } 
+        else header("Location: ".BASE_URL."/CategoryManage/");
     }
 
 }

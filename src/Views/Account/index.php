@@ -43,22 +43,22 @@ $customer = $data['customerLogin'];
                             </thead>
                             <tbody>
                                 <?php
-                                //foreach ($data['products'] as $product) { ?>
+                                foreach ($data['orders'] as $orders) { ?>
                                     <tr class="grid grid-cols-4">
                                         <td class="text-center">
-                                            <a href="<?= BASE_URL ?>/Account/ViewOrder/<?= 4 ?>" class="text-gray-900 hover:text-blue-500 hover:underline transition-all"><?= 1 ?></a>
+                                            <a href="<?= BASE_URL ?>/Account/ViewOrder/<?= $orders['MaHoaDon'] ?>" class="text-gray-900 hover:text-blue-500 hover:underline transition-all"><?= $orders['MaHoaDon'] ?></a>
                                         </td>
-                                        <td class="text-center"><?= "29/03/1999" ?></td>
+                                        <td class="text-center"><?= $orders['NgayTao'] ?></td>
                                         <td class="text-center">
                                             <span>
-                                                <?= number_format(1, 0, ",", ".") ?><sup>đ</sup>
+                                                <?= number_format($orders['TongTien'], 0, ",", ".") ?><sup>đ</sup>
                                             </span>
                                         </td>
                                         <td class="text-center">
-                                        <?= 1 ?>
+                                            <?= $orders['TrangThaiThanhToan'] ? "Đã thanh toán" : "Chưa thanh toán" ?>
                                         </td>
                                     </tr>
-                                <?php  //} ?>
+                                <?php  } ?>
                             </tbody>
                         </table>
                     </div>

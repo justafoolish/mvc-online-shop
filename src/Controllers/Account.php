@@ -17,6 +17,8 @@ class Account extends CustomerController
     }
 
     function viewOrder() {
+        empty($this->customerLogin) && header("Location: ".BASE_URL."/Account");
+        $orderModel = parent::model("OrderModel");
         if(empty($this->params)) {
             /*
                 Todo:
@@ -26,7 +28,9 @@ class Account extends CustomerController
                     "MaKhachHang" => ""
                 ]
             */
-            $orders = [];
+            $orders = $orderModel->getAllOrders([
+                "MaKhachHang" => $this->customerLogin["MaKhachHang"]    
+            ]) ?? [];
 
             parent::view("Account.index", [
                 "customerLogin" => $this->customerLogin,
@@ -35,13 +39,21 @@ class Account extends CustomerController
                 "orders" => $orders,
             ]);
         } else {
-            /*
-            
-            */
+            $id = $this->params[0];
+            $orders = $orderModel->getOrder([
+                "MaHoaDon" => $id   
+            ]) ?? [];
+
+            $orderDetail = $orderModel->getAllOrderDetail([
+                "MaHoaDon" => $id 
+            ]) ?? [];
+
             parent::view("Account.order", [
                 "customerLogin" => $this->customerLogin,
                 "collections" => $this->collections,
                 "totalCartItem" => $this->totalCartItem,
+                "orders" => $orders,
+                "details" => $orderDetail
             ]);
         }
     }

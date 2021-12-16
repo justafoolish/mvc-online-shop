@@ -6,41 +6,6 @@ class BaseModel extends DataBase{
         $this->con = $this->connect();
     }
 
-    protected function query($sql)
-    {
-        return mysqli_query($this->con, $sql);
-    }
-
-    //Get all nhận 4 tham số gồm tên bảng, điều kiện, giới hạn, và các câu order
-    protected function getAll($table,$condition = "1", $limit = "", $subQuery = "") {
-        $limit = $limit ? "LIMIT ${limit}" : "";
-        
-        $sql = "SELECT * FROM ${table} WHERE ${condition} ${subQuery} ${limit}";
-
-        // echo $sql;
-
-        $query = $this->query($sql);  
-        
-        $data=[];
-
-        while($row = mysqli_fetch_assoc($query) ) {
-            array_push($data,$row);
-        }
-
-        return $data;
-
-    }
-
-    //findByID nhận 3 tham số gồm bảng, cột cần tìm và giá trị tại record cần tìm
-    protected function findByID($table, $column, $value) {
-        $sql = "SELECT * FROM ${table} WHERE ${column}=${value}";
-        
-        // echo $sql;
-        $query = $this->query($sql);  
-
-        return mysqli_fetch_assoc($query);
-    }
-
     protected function insert($table, $data = []) {
         
         $insertColumn = implode(",",array_keys($data));
@@ -53,9 +18,9 @@ class BaseModel extends DataBase{
 
         $sql = "INSERT INTO $table($insertColumn) VALUES($valueString)";
 
-        // echo $sql;
+        echo $sql;
 
-        if($this->query($sql)) {
+        if(mysqli_query($this->con, $sql)) {
             return 1;
         } 
         return 0;
@@ -83,61 +48,13 @@ class BaseModel extends DataBase{
 
         // echo $sql;
 
-        $this->query($sql);
+        mysqli_query($this->con, $sql);
 
         return mysqli_affected_rows($this->con);
     }
 
-    protected function delete() {
-
-    }
-
-    protected function countRecords($table, $column, $condition = "1", $groupColumn = "") {
-
-        $groupBy = $groupColumn ? "GROUP BY ${groupColumn}" : "";
-
-        $sql = "SELECT count($column) as Tong FROM ${table} WHERE ${condition} ${groupBy}";
-
-        // echo $sql;
-        $query = $this->query($sql);
-
-        //Có điều kiện group by thì trả về mảng
-        return mysqli_fetch_row($query)[0];
-    }
-
-    protected function getColumns($table) {
-        $sql = "SHOW fields FROM ${table}";//query de lay toan bo column trong 1 table 
-        $colsName = [];
-        // $i=0;
-        if($query = $this->query($sql))
-        {
-            //dua cac column trong 1 table vao array
-            while ($row = $query->fetch_row()) {
-                //cai nay se lay tung column nen se de $row[0]
-                // $Col_data[$i] = $row[0];
-                // $i= $i+1;
-                array_push($colsName, $row[0]);
-            }
-
-        }
-        return $colsName;
-    }
-
     protected function getLastInsertID() {
         return $this->con->insert_id;
-    }
-
-    protected function sumRecords($table, $column, $condition = "1", $groupColumn = "") {
-
-        $groupBy = $groupColumn ? "GROUP BY ${groupColumn}" : "";
-
-        $sql = "SELECT sum($column) as Tong FROM ${table} WHERE ${condition} ${groupBy}";
-
-        // echo $sql;
-        $query = $this->query($sql);
-
-        //Có điều kiện group by thì trả về mảng
-        return mysqli_fetch_row($query)[0];
     }
 
     /****************************************************
@@ -165,7 +82,7 @@ class BaseModel extends DataBase{
     * Ví dụ: ["TenKhachHang" => "asc"]
     *
     ****************************************************/
-    function getAllRecords($table, $select = ['*'], $condition = [], $limit = [],$groupBys = [], $orderBys = []) {
+    protected function getAllRecords($table, $select = ['*'], $condition = [], $limit = [],$groupBys = [], $orderBys = []) {
 
         $columns = implode(',', $select);
         $limit = implode(',', $limit);
@@ -196,7 +113,7 @@ class BaseModel extends DataBase{
 
         // echo $sql;
 
-        $query = $this->query($sql);  
+        $query = mysqli_query($this->con, $sql);  
         
         $data=[];
 

@@ -41,7 +41,7 @@ class Checkout extends CustomerController
         if(isset($_POST['submitBtn'])) {
             $discountModel = parent::model("DiscountModel");
             $orderModel = parent::model("OrderModel");
-            $orderDetailModel = parent::model("OrderDetailModel");
+            // $orderDetailModel = parent::model("OrderDetailModel");
 
             $checkInsert = true;
             $customer = $this->customerLogin;
@@ -63,6 +63,8 @@ class Checkout extends CustomerController
 
             //Tính tổng tiền, chiết khấu
             $discount = $discountModel->getDiscount(['MaKhuyenMai' => $data['MaGiamGia']]);
+            
+            //Thiếu bước kiểm tra ngày hiện tại có thoả mãn ngày bắt đầu kết thúc 
             if(!empty($discount)) {
                 $data['TongTien'] = (1 - intval($discount['ChietKhau'])/100) * $data['TongTien'];
             }
@@ -87,7 +89,7 @@ class Checkout extends CustomerController
                     $orderDetail['SoLuong'] = $product['SoLuong'];
                     $orderDetail['DonGia'] = $product['DonGia'];
                     $orderDetail['ChietKhau'] = empty($product['ChietKhau']) ? $product['ChietKhau'] : "0";
-                    if(!$orderDetailModel->insertOrderDetail($orderDetail)) {
+                    if(!$orderModel->insertOrderDetail($orderDetail)) {
                         $checkInsert = false;
                     } else {
                         $this->updateQuantity($product);
@@ -109,13 +111,13 @@ class Checkout extends CustomerController
     }
 
     function updateQuantity($product) {
-        $variantModel = parent::model("VariantModel");
+        $productModel = parent::model("ProductModel");
         //Lấy sô lượng sản phẩm hiện tại
-        $curQuantity = $variantModel->getQuantity([
+        $curQuantity = $productModel->getQuantity([
             "MaSP" => $product['MaSP'],
             "MaSize" => strtoupper($product['MaSize'])
         ]);
-        $variantModel->updateQuantity(
+        $productModel->updateQuantity(
             ["MaSP" => $product['MaSP'], "MaSize" => strtoupper($product['MaSize'])],
             ["SoLuong" => intval($curQuantity) - intval($product['SoLuong'])]
         );

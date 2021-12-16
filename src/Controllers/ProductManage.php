@@ -7,8 +7,6 @@ class ProductManage extends AdminController {
     }
 
     function index() {
-        //Todo: Check login first
-        //Để tạm ! để confirm đã login
         if(empty($this->adminLogin)) {
             header("Location: ".BASE_URL."/Admin");
         }
@@ -30,62 +28,42 @@ class ProductManage extends AdminController {
         else {
             $productModel = parent::model("ProductModel");
             $categoryModel = parent::model("CategoryModel");
-            $variantModel = parent::model("VariantModel");
             
             $product = $productModel->getProductDetail(["MaSP" => $pid]); //Lấy thông tin sản phẩm theo product ID
             
             $categories = $categoryModel->getAllCategory(); //Lấy thông tin tất cả danh mục cho view option
             
-            $variant = $variantModel->getVariants(["MaSP" => $product['MaSP']]);
-            
-            // $this->print($variant);
             parent::view("Admin.Product.detail", [
                 "product" => $product,
                 "categories" => $categories,
-                "variant" => $variant
             ]);
         }
+    }
+
+    function formInsert() 
+    {
+        if(empty($this->adminLogin)) {
+            $this->index();
+        }
+        else {
+            $categoryModel = parent::model("CategoryModel");
+            $categories = $categoryModel->getAllCategory(); //Lấy thông tin tất cả danh mục cho view option
+
+            parent::view("Admin.Product.add", [
+                "categories" => $categories,
+            ]);
+        } 
     }
 
     function inventory() {
         $productModel = parent::model("ProductModel");
-        $variantModel = parent::model("VariantModel");
 
-        $products = $productModel->getAllProduct();
+        $products = $productModel->getProductVariant();
 
-        foreach($products as $key => $product) {
-            $products[$key]['Variants'] = $variantModel->getVariants(["MaSP" => $product['MaSP']]);
-        }        
-
-        // $this->print($products);
         parent::view("Admin.Inventory.index", [
             "products" => $products,
             "minQuantity" => 5
         ]);
-    }
-
-    function category($categoryID = "") {
-        $categoryModel = parent::model("CategoryModel");
-        if(empty($categoryID)) {
-            $getAll = $categoryModel->getAllCategory();
-            $productModel = parent::model("ProductModel");
-
-            $category = [];
-            foreach($getAll as $cat) {
-                $cat['SoLuong'] = $productModel->countTotalProducts($cat['MaDanhMuc']);
-                array_push($category,$cat);
-            }
-
-            parent::view("Admin.Category.index", [
-                "category" => $category
-            ]);
-        }
-        else {
-            $getCategory = $categoryModel->getCategory($categoryID);
-            parent::view("Admin.Category.detail", [
-                "categoryDetail" => $getCategory
-            ]);
-        }
     }
 
     function updateVariantQuantity()
@@ -95,11 +73,9 @@ class ProductManage extends AdminController {
             $data['MaSize'] = $_POST['size'];
             $quantity['SoLuong'] = $_POST['quantity'];
 
-            // $this->print($data);
+            $productModel = parent::model("ProductModel");
 
-            $variantModel = parent::model("VariantModel");
-
-            if($variantModel->updateQuantity($data,$quantity)) {
+            if($productModel->updateQuantity($data,$quantity)) {
                 echo $quantity['SoLuong'];
             } else echo 0;
         }
@@ -111,11 +87,10 @@ class ProductManage extends AdminController {
         if(isset($_POST['pid']) && isset($_POST['size'])) {
             $pid = $_POST['pid'];
             $sizes = $_POST['size'];
-            $variantModel = parent::model("VariantModel");
+            $productModel = parent::model("ProductModel");
 
-            // echo json_encode($sizes);
             foreach ($sizes as $size) {
-                $quantityByVariant = $variantModel->getQuantity([
+                $quantityByVariant = $productModel->getQuantity([
                     "MaSP" => $pid,
                     "MaSize" => $size,
                 ]);
@@ -127,5 +102,49 @@ class ProductManage extends AdminController {
         } else {
             echo 0;
         }
+    }
+
+    function createProduct()
+    {
+        
+        $dirUpload = "./public/images/products/";
+
+        if(isset($_POST['submit'])) {
+            $checkInsert = true;
+
+            $data['TenSP'] = $_POST['TenSP'];
+            $data['DanhMuc'] = $_POST['DanhMuc'];
+            $data['Hinh1'] = $_FILES['Hinh1']['name'];
+            $data['Hinh2'] = $_FILES['Hinh2']['name'];
+            $data['DonGia'] = $_POST['DonGia'];
+            $data['ChietKhau'] = $_POST['ChietKhau'];
+            $data['MoTa'] = $_POST['MoTa'];
+            $data['NgayNhap'] = date('Y-m-d');
+
+            $variant = array_combine(array_values($_POST['variant']), array_values($_POST['variantValue']));
+            $this->print($variant);
+            $productModel = parent::model("ProductModel");
+
+            $insertedID = $productModel->insertProduct($data);
+            if($insertedID) {
+                move_uploaded_file($_FILES['Hinh1']['tmp_name'],$dirUpload. $data['Hinh1']);
+                move_uploaded_file($_FILES['Hinh2']['tmp_name'],$dirUpload. $data['Hinh2']);
+
+                // Lấy mã sản phẩm vừa insert
+                echo $insertedID;
+                foreach($variant as $key => $value) {
+                    if(!$productModel->insertVariant([
+                        "MaSP" => $insertedID,
+                        "MaSize" => $key,
+                        "SoLuong" => $value
+                    ])) $checkInsert = false;
+                }
+            } else $checkInsert = false;
+
+            if($checkInsert) {
+                header("Location: ".BASE_URL."/ProductManage");
+            } else header("Location: ".BASE_URL."/ProductManage/FormInsert");
+
+        } else header("Location: ".BASE_URL."/ProductManage/FormInsert");
     }
 }

@@ -70,7 +70,12 @@ $customer = $data['customerLogin'];
     <?php require_once "./src/Views/Templates/sidebar.php" ?>
     <script>
         $(document).ready(function() {
-            $('#order_table').DataTable();
+            $('#order_table').DataTable({
+                "searching": false,
+                "info": false,
+                "bLengthChange": false
+                // "ordering":false
+            });
         });
     </script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>

@@ -6,6 +6,7 @@ class Account extends CustomerController
         parent::__construct($params);
     }
 
+    //7 Phương thúc
     function index()
     {
         if(empty($this->customerLogin)) {
@@ -17,7 +18,6 @@ class Account extends CustomerController
 
     function viewOrder() {
         if(empty($this->params)) {
-
             /*
                 Todo:
                 1. Gọi hàm get all order
@@ -112,6 +112,7 @@ class Account extends CustomerController
             }
         }
     }
+    
 
     function logout() {
         if($this->customerLogin) {

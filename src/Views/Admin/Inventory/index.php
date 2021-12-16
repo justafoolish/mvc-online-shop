@@ -41,9 +41,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 30;
+                            <?php
                             foreach ($products as $product) {
-                                foreach ($product['Variants'] as $variant) {
                                 ?>
                                 <tr class="grid grid-cols-11">
                                     <td class="text-left col-span-5 flex items-center space-x-4">
@@ -53,9 +52,9 @@
                                         <a href="" class="text-gray-700 hover:text-gray-900 hover:underline transition-all"><?= $product['TenSP'] ?></a>
                                     </td>
                                     <td class="grid place-items-center"><?= $product['MaSP'] ?></td>
-                                    <td class="grid place-items-center"><?= $variant['MaSize'] ?></td>
+                                    <td class="grid place-items-center"><?= $product['MaSize'] ?></td>
                                     <td class="flex items-center justify-center">
-                                        <span class="text-<?= $variant['SoLuong'] < $minQuantity ? "yellow" : "green" ?>-500" id="current"><?= $variant['SoLuong'] ?></span>
+                                        <span class="text-<?= $product['SoLuong'] < $minQuantity ? "yellow" : "green" ?>-500" id="current"><?= $product['SoLuong'] ?></span>
                                         <span class="flex text-green-500 hidden" id="new"></span>
                                     </td>
                                     <td class="flex items-center justify-center space-x-10 col-span-3">
@@ -72,10 +71,10 @@
                                                 </svg>
                                             </button>
                                         </div>
-                                        <button class="text-gray-100 bg-gray-400 hover:bg-gray-600 transition-all px-3 py-1" id="updateQuantity" pid="<?= $product['MaSP'] ?>" size="<?= $variant['MaSize'] ?>">Lưu</button>
+                                        <button class="text-gray-100 bg-gray-400 hover:bg-gray-600 transition-all px-3 py-1" id="updateQuantity" pid="<?= $product['MaSP'] ?>" size="<?= $product['MaSize'] ?>">Lưu</button>
                                     </td>
                                 </tr>
-                            <?php  }} ?>
+                            <?php  } ?>
                         </tbody>
                     </table>
                 </div>

@@ -41,13 +41,13 @@
             </svg>
             Khuyến mãi
         </a>
-        <a href="<?= BASE_URL ?>/Admin/Report/" class="nav-item transition-all hover:bg-gray-600 hover:text-white text-gray-400 flex px-5 py-3">
+        <a href="<?= BASE_URL ?>/OrderManage/Report/" class="nav-item transition-all hover:bg-gray-600 hover:text-white text-gray-400 flex px-5 py-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             Báo cáo
         </a>
-        <a href="<?= BASE_URL ?>/Admin/Employee/" class="nav-item transition-all hover:bg-gray-600 hover:text-white text-gray-400 flex px-5 py-3">
+        <a href="<?= BASE_URL ?>/EmployeeManage/" class="nav-item transition-all hover:bg-gray-600 hover:text-white text-gray-400 flex px-5 py-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle h-6 w-6 mr-3" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <circle cx="12" cy="12" r="9"></circle>

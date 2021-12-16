@@ -35,13 +35,12 @@ class OrderManage extends AdminController
             header("Location: " . BASE_URL . "/OrderManage/");
         } else {
             $orderModel = parent::model("OrderModel");
-            $orderDetailModel = parent::model("OrderDetailModel");
             $customerModel = parent::model("CustomerModel");
             $discountModel = parent::model("DiscountModel");
 
 
-            $order = $orderModel->getOrder($orderID);
-            $detail = $orderDetailModel->getAllOrderDetail($orderID);
+            $order = $orderModel->getOrder(["MaHoaDon" => $orderID]);
+            $detail = $orderModel->getAllOrderDetail(["MaHoaDon" => $orderID]);
             $customer = $customerModel->getCustomerDetail([
                 "MaKhachHang" => $order['MaKhachHang']
             ]);
@@ -80,5 +79,38 @@ class OrderManage extends AdminController
                 header('Location: ' . BASE_URL . "/OrderManage");
             }
         }
+    }
+
+    function report()
+    {
+        if (empty($this->adminLogin)) {
+            header("Location: " . BASE_URL . "/Admin");
+        } else {
+            $currentDate = intval(date("d"));
+            $currentDate++;
+            $dateProfit = [];
+            while($currentDate-- > 1) {
+                $dateProfit[date("Y-m")."-$currentDate"] = $this->getProfit($currentDate);
+            }
+
+            parent::view("Admin.Report.index",[
+                "profits" => $dateProfit
+            ]);
+        }
+    }
+
+    function getProfit($date = "") {
+        if(empty($date)) return 0;
+        // echo __METHOD__ ;
+        // echo date("Y-m")."-02";
+        $orderModel = parent::model("OrderModel");
+        $profit = $orderModel->totalProfit(["NgayTao" => date("Y-m")."-$date"], true);
+    //
+            // $this->print($profit);
+
+        if(isset($_POST['ajax'])) {
+            echo json_encode($profit);
+        }
+        else return $profit;
     }
 }

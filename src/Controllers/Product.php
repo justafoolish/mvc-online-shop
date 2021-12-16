@@ -31,22 +31,12 @@ class Product extends CustomerController
         
     }
 
-    public function updateQuantity() {
-        if(isset($_POST['pid']) && isset($_POST['quantity'])) {
-            $pid = $_POST['pid'];
-            $quantity = $_POST['quantity'];
-            $productModel = parent::model("ProductModel");
-            echo $productModel->updateQuantity($pid,$quantity);
-        }
-        echo 0;  
-    }
-
     public function getQuantity() {
         if(isset($_POST['size']) && $_POST['pid']) {
          
-            $variantModel = parent::model("VariantModel");
+            $productModel = parent::model("ProductModel");
 
-            $quantity = $variantModel->getQuantity([
+            $quantity = $productModel->getQuantity([
                 "MaSP" => $_POST['pid'],
                 "MaSize" => strtoupper($_POST['size'])
             ]);

@@ -12,10 +12,8 @@ class CategoryModel extends BaseModel
         return $this->getAllRecords(self::TABLE,["*"],[],$limit);
     }
 
-    function getCategory($id) {
-        $temp = $this->getColumns(self::TABLE);
-        $idCategory = $temp[0];//temp[0] gia tri dau tien la ma danh muc
-        return $this->findByID(self::TABLE,$idCategory,$id);
+    function getCategory($condition) {
+        return $this->getAllRecords(self::TABLE,["*"], $condition,[1]);
     }
 
     public function insertCategory($data = []) {
@@ -25,6 +23,4 @@ class CategoryModel extends BaseModel
     public function updateCategory($condition = [], $data = []) {
         return $this->update(self::TABLE,$condition,$data);
     }
-
-    
 }

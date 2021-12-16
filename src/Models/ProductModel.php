@@ -2,16 +2,26 @@
 class ProductModel extends BaseModel
 {
     const TABLE = "sanpham";
-    const subTABLE = "bienthe";
+    const SUB_TABLE_SP = "bienthe";
 
     public function __construct()
     {
         parent::__construct();
     }
 
+    /*------- Thao tác trên table sanpham --------*/
     function getAllProduct($limit = [], $condition = [])
     {
         return $this->getAllRecords(self::TABLE, ["*"], $condition, $limit);
+    }
+    
+    function getProductVariant()
+    {
+        $mainTable = self::TABLE;
+        $subTable = self::SUB_TABLE_SP;
+        $table = "$mainTable JOIN $subTable on $mainTable.MaSP=$subTable.MaSP";
+
+        return $this->getAllRecords($table,["$mainTable.MaSP","$mainTable.TenSP","$mainTable.Hinh1","$subTable.MaSize","$subTable.SoLuong"]);
     }
 
     function getLatestProducts($limit)
@@ -27,50 +37,40 @@ class ProductModel extends BaseModel
     function totalProduct($condition = [])
     {
         $resultColumn = "MaSP";
-        return $this->getAllRecords(self::TABLE, ["count(MaSP) as $resultColumn"], $condition, [1])[$resultColumn];
+        return $this->getAllRecords(self::TABLE, ["count($resultColumn) as $resultColumn"], $condition, [1])[$resultColumn];
     }
 
     function search($keyword)
     {
-        $condition = "TenSP LIKE '%${keyword}%'";
-        return $this->getAll(self::TABLE, $condition, 5, "");
+        $selfTable = self::TABLE;
+        $table = "$selfTable sp1 join $selfTable sp2 ON sp1.MaSP = sp2.MaSP AND sp1.TenSP LIKE '%$keyword%'";
+        return $this->getAllRecords($table,["sp1.MaSP","sp1.TenSP","sp1.Hinh1","sp1.DonGia","sp1.ChietKhau"],[], [5]);
     }
 
+    public function insertProduct($data = []) {
+        if($this->insert(self::TABLE,$data)) 
+            return $this->getLastInsertID();
+        return 0;
+    }
+    
 
-    function updateQuantity($productID, $quantity)
+    /*---------------------------------------------------*/
+
+    /*------- Thao tác trên table bienthe --------*/
+
+    public function updateQuantity($condition = [], $data = [])
     {
-        $condition = "MaSP='${productID}'";
-        $data = [
-            "TongSoLuong" => $quantity,
-        ];
-        return $this->update(self::TABLE, $condition, $data);
+        return $this->update(self::SUB_TABLE_SP, $condition, $data);
     }
 
-    // function getQuantityByVariant($productID,$variant) {
-    //     $condition = "MaSP='${productID}' AND MaSize='${variant}'";
-    //     $execute = $this->getAll("bienthe",$condition, 1,"");
-    //     return $execute ? $execute[0]['SoLuong'] : 0;
-    // }
-    // function insertProduct($data = []) {
-    //     //ong nho test lai xem co chay hay ko :))
-    //     $temp = $this->getColumns(self::TABLE); //dua vao 1 cai array de khong can goi ham nhieu lan
-
-    //     //lay $i = 1 la de bo cai muc ma~ san pham ra
-    //     for($i = 1 ; $i < count($temp) ; $i++ ){
-    //         $insertData[$temp[$i]] = $data[$temp[$i]];   //them $key va $value vao array $insertData (de cau truc nhu vay moi khong bi trung lap du lieu trong array)
-    //          //                \\   //    lay      \\
-    //         //  key insertData  \\ //value cua $data\\
-    //     }
-    //     return $this->insert(self::TABLE,$insertData);
-    // }
-
-    function countTotalProducts($collection = "")
+    function getQuantity($data)
     {
+        $execute = $this->getAllRecords(self::SUB_TABLE_SP,["*"], $data,[1]);
 
-        $condition = $collection ? "DanhMuc='${collection}'" : "1";
+        return $execute ? $execute['SoLuong'] : 0;
+    }
 
-        $fields = $this->getColumns(self::TABLE);
-
-        return $this->countRecords(self::TABLE, $fields[0], $condition);
+    public function insertVariant($data = []) {
+        return $this->insert(self::SUB_TABLE_SP,$data);
     }
 }

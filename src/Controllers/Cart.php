@@ -27,10 +27,10 @@ class Cart extends CustomerController
             $pid = $_POST['pid'];
             $sizes = $_POST['size'];
             $productModel = parent::model("ProductModel");
-            $variantModel = parent::model("VariantModel");
+            // $variantModel = parent::model("VariantModel");
 
             foreach ($sizes as $size) {
-                $productQuantity = $variantModel->getQuantity([
+                $productQuantity = $productModel->getQuantity([
                     "MaSP" => $pid,
                     "MaSize" => strtoupper($size),
                 ]);

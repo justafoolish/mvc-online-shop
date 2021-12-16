@@ -7,8 +7,6 @@ class CategoryManage extends AdminController {
     }
 
     function index() {
-        //Todo: Check login first
-        //Để tạm ! để confirm đã login
         if(empty($this->adminLogin)) {
             header("Location: ".BASE_URL."/Admin");
         }
@@ -18,7 +16,7 @@ class CategoryManage extends AdminController {
             $productModel = parent::model("ProductModel");
 
             foreach($categories as $key => $val) {
-                $categories[$key]['SoLuong'] = $productModel->countTotalProducts($val['MaDanhMuc']);
+                $categories[$key]['SoLuong'] = $productModel->totalProduct(["DanhMuc" => $val['MaDanhMuc']]);
             }
 
             parent::view("Admin.Category.index", [
@@ -34,14 +32,16 @@ class CategoryManage extends AdminController {
         else {
             $categoryModel = parent::model("CategoryModel");
             $productModel = parent::model("ProductModel");
-            $getCategory = $categoryModel->getCategory($categoryID);
-            $products = $productModel->getAllProduct(["DanhMuc" => $categoryID]);
+            $categories = $categoryModel->getCategory(["MaDanhMuc" => $categoryID]);
+            
+            $products = $productModel->getAllProduct([],["DanhMuc" => $categoryID]);
             parent::view("Admin.Category.detail", [
-                "categoryDetail" => $getCategory,
+                "categoryDetail" => $categories,
                 "products" => $products
             ]);
         }
     }
+
     function submitNewCategory() {
         if(isset($_POST['submit'])) {
             $data['TenDanhMuc'] = $_POST['name'];

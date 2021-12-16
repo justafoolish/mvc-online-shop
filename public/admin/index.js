@@ -46,7 +46,7 @@ window.onload = () => {
     case "report":
       changeActive(5);
       break;
-    case "employee":
+    case "employeemanage":
       changeActive(6);
       break;
   }

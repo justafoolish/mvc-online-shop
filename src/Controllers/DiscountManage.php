@@ -63,15 +63,16 @@ class DiscountManage extends AdminController {
         if(isset($_POST['code'])) {
             $discountModel = parent::model("DiscountModel");
 
+            $currentDate = date("Y-m-d");
             $discount = $discountModel->getDiscount(["MaKhuyenMai" => $_POST['code']]);
 
             if(empty($discount)) {
                 echo 0;
             } elseif($discount['SoLuongSuDung'] > 0){
                 //Kiểm tra Ngày
-
-                
-                echo $discount['ChietKhau'];
+                if($discount['NgayBatDau'] < $currentDate && $currentDate < $discount['NgayKetThuc']) 
+                    echo $discount['ChietKhau'];
+                else echo 0;
             } else echo 0;
         } else echo -1;
     }

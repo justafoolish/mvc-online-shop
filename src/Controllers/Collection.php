@@ -17,7 +17,7 @@ class Collection extends CustomerController
         //Lấy tổng số sản phẩm để tính tổng số trang cần thiết
         $productCount = $productModel->totalProduct();
 
-        $totalPage = ceil($productCount / 8); // Tổng số trang
+        $totalPage = ceil($productCount / $this->itemPerPage); // Tổng số trang
 
         $countFrom = ($currentPage - 1) * $totalPage; // Số thự tự bắt đàu lấy sản phẩm trong records
 

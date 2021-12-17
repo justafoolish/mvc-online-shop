@@ -15,7 +15,7 @@
             <span>Hi</span>
             <a class="text-gray-100 hover:text-gray-400" href="<?= BASE_URL ?>/Account/"><?= $customer['TenKhachHang'] ?></a>
             <span>/</span>
-            <a class="text-gray-100 hover:text-gray-400" href="<?= BASE_URL ?>/Account/Logout">Đăng xuất</a>
+            <a class="text-gray-100 hover:text-gray-400" href="<?= BASE_URL ?>/Account/Index/Logout">Đăng xuất</a>
         </div>
         <?php } ?>
         <div class="flex ml-5 pl-4">

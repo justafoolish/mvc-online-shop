@@ -6,13 +6,22 @@ class Account extends CustomerController
         parent::__construct($params);
     }
 
-    //7 Phương thúc
     function index()
     {
         if(empty($this->customerLogin)) {
-            $this->login();
+            // $this->login();
+            parent::view("Account.login", [
+                "customerLogin" => $this->customerLogin,
+                "collections" => $this->collections,
+                "totalCartItem" => $this->totalCartItem
+            ]);
         } else {
-            $this->viewOrder();
+            if(strtolower($this->params[0]) === "logout") {
+                unset($_SESSION['CustomerLogin']);
+                $this->customerLogin = [];
+                header("Location: ".BASE_URL);
+            }
+            else $this->viewOrder();
         }
     }
 
@@ -57,18 +66,6 @@ class Account extends CustomerController
             ]);
         }
     }
-    
-    function login()
-    {
-        if(!empty($this->customerLogin)) {
-            header('Location: '.BASE_URL."/Home/");
-        }
-        parent::view("Account.login", [
-            "customerLogin" => $this->customerLogin,
-            "collections" => $this->collections,
-            "totalCartItem" => $this->totalCartItem
-        ]);
-    }
 
     function register()
     {
@@ -110,27 +107,22 @@ class Account extends CustomerController
                 "Email" => $data['email'],
             ]);
 
-            if(empty($customer)) {
-                echo -1;
-            } else {
-                //Verify bcrypt
-                $confirmPassword = password_verify($data['password'],$customer['Password']) ? 1 : 0; 
-
-                if($confirmPassword) {
-                    unset($customer['Password']);
-                    $_SESSION['CustomerLogin'] = $customer;
-                }
-                echo $confirmPassword;
-            }
+            echo $this->verifyLogin($customer,$data);
         }
     }
-    
 
-    function logout() {
-        if($this->customerLogin) {
-            unset($_SESSION['CustomerLogin']);
-            $this->customerLogin = [];
+    function verifyLogin($customer, $data) {
+        if(empty($customer)) {
+            return -1;
+        } else {
+            //Verify bcrypt
+            $confirmPassword = password_verify($data['password'],$customer['Password']) ? 1 : 0; 
+
+            if($confirmPassword) {
+                unset($customer['Password']);
+                $_SESSION['CustomerLogin'] = $customer;
+            }
+            return $confirmPassword;
         }
-        header("Location: ".BASE_URL);
     }
 }

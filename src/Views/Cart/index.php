@@ -99,7 +99,7 @@
 
                     <?php $i = 4;
                     while ($i--) { ?>
-                        <div class="group cursor-pointer">
+                        <!-- <div class="group cursor-pointer">
                             <div class="relative overflow-hidden">
                                 <a href="<?= BASE_URL ?>/Product/ID/<?= 5 ?>">
                                     <img src="<?= BASE_URL ?>/public/images/products/ao1.jpeg" class="max-w-full h-auto" />
@@ -117,7 +117,7 @@
                                     <h4 class="font-light text-sm text-gray-700 line-through">380.000 <sup>vnđ</sup></h4>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     <?php } ?>
                 </div>
             </div>

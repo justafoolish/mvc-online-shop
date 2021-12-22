@@ -44,7 +44,7 @@
                 ?>
                     <div class="group cursor-pointer">
                         <div class="relative overflow-hidden">
-                            <a href="<?= BASE_URL ?>/Product/ID/<?= $product['MaSP'] ?>">
+                            <a href="<?= BASE_URL ?>/Product/Index/<?= $product['MaSP'] ?>">
                                 <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" class="max-w-full h-auto" />
                             </a>
                             
@@ -54,19 +54,13 @@
                             </div>
                             <?php }?>
 
-                            <?php if (!$product['TongSoLuong']) {?>
-                            <div class="absolute top-3 right-1 bg-black rounded-full w-10 h-10 grid place-items-center">
-                                <span class="text-white text-xs font-semibold text-gray-200">Hết</span>
-                            </div>
-                            <?php } ?>
-
                             <div class="grid grid-cols-2 gap-2 absolute w-full bottom-0 left-0 group-hover:translate-y-0 transform translate-y-full transition-all">
                                 <button class="uppercase bg-black text-white text-xs py-3">Mua Ngay</button>
                                 <button class="uppercase bg-black text-white text-xs py-3" value="<?= $product['MaSP'] ?>" id="addtocart">Thêm vào giỏ</button>
                             </div>
                         </div>
                         <div class="text-center pb-3 pt-2 cursor-default">
-                            <a href="<?= BASE_URL ?>/Product/ID/<?= 4 ?>">
+                            <a href="<?= BASE_URL ?>/Product/Index/<?= 4 ?>">
                                 <h3 class="font-medium text-md mb-1 text-gray-800 uppercase"><?= $product['TenSP'] ?></h3>
                             </a>
                             <div class="flex justify-center items-center">

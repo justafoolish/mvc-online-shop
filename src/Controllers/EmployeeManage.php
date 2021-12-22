@@ -26,12 +26,7 @@ class EmployeeManage extends AdminController
         if (empty($this->adminLogin)) {
             header("Location: " . BASE_URL . "/Admin");
         } else {
-            $employeeModel = parent::model("EmployeeModel");
-
-            $employees = $employeeModel->getAllEmployee();
-            parent::view("Admin.Employee.add", [
-                "employees" => $employees
-            ]);
+            parent::view("Admin.Employee.add", []);
         }
     }
 

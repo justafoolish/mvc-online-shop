@@ -38,7 +38,7 @@ class Account extends CustomerController
                 ]
             */
             $orders = $orderModel->getAllOrders([
-                "MaKhachHang" => $this->customerLogin["MaKhachHang"]    
+                "KhachHang.MaKhachHang" => $this->customerLogin["MaKhachHang"]    
             ]) ?? [];
 
             parent::view("Account.index", [

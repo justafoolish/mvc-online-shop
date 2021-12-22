@@ -12,6 +12,11 @@ class Admin extends AdminController
         if(empty($this->adminLogin)) {
             $this->login();
         } else {
+            if(strtolower($this->params[0]) === "logout") {
+                unset($_SESSION['AdminLogin']);
+                $this->adminLogin = [];
+                header("Location: ".BASE_URL."/Admin/");
+            }
             $customerModel = parent::model("CustomerModel");
             $productModel = parent::model("ProductModel");
             $orderModel = parent::model("OrderModel");
@@ -28,10 +33,6 @@ class Admin extends AdminController
                 "profit" => $profit
             ]);
         }
-    }
-
-    function dashboard() {
-        $this->index();
     }
 
     function login() {
@@ -65,11 +66,4 @@ class Admin extends AdminController
         } 
     }
 
-    function logout() {
-        if($this->adminLogin) {
-            unset($_SESSION['AdminLogin']);
-            $this->adminLogin = [];
-        }
-        header('Location: '.BASE_URL."/Admin");
-    }
 }

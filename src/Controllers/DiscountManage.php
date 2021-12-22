@@ -29,15 +29,6 @@ class DiscountManage extends AdminController {
         parent::view("Admin.Discount.add", []);
     }
 
-    public function formAddAuto() {
-        $productModel = parent::model("ProductModel");
-        $products = $productModel->getAllProduct();
-        
-        parent::view("Admin.Discount.auto_add", [
-            "products" => $products
-        ]);
-    }
-
     public function addDiscount() {
         $checkCreate = false;
         if(isset($_POST['submit'])) {
@@ -75,8 +66,5 @@ class DiscountManage extends AdminController {
                 else echo 0;
             } else echo 0;
         } else echo -1;
-    }
-    public function updateDiscount() {
-
     }
 }

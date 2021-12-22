@@ -13,15 +13,8 @@ class OrderManage extends AdminController
             header("Location: " . BASE_URL . "/Admin");
         } else {
             $orderModel = parent::model("OrderModel");
-            $customerModel = parent::model("CustomerModel");
 
             $orders = $orderModel->getAllOrders();
-
-            foreach ($orders as $key => $value) {
-                $orders[$key]['TenKhachHang'] = $customerModel->getCustomerDetail([
-                    "MaKhachHang" => $value['MaKhachHang'],
-                ])['TenKhachHang'];
-            }
 
             parent::view("Admin.Order.index", [
                 "order" => $orders
@@ -35,22 +28,17 @@ class OrderManage extends AdminController
             header("Location: " . BASE_URL . "/OrderManage/");
         } else {
             $orderModel = parent::model("OrderModel");
-            $customerModel = parent::model("CustomerModel");
             $discountModel = parent::model("DiscountModel");
 
 
             $order = $orderModel->getOrder(["MaHoaDon" => $orderID]);
             $detail = $orderModel->getAllOrderDetail(["MaHoaDon" => $orderID]);
-            $customer = $customerModel->getCustomerDetail([
-                "MaKhachHang" => $order['MaKhachHang']
-            ]);
 
             $order['ChietKhau'] = $discountModel->getDiscount(['MaKhuyenMai' => $order['MaGiamGia']])['ChietKhau'] ?? 0;
 
             parent::view("Admin.Order.detail", [
                 "order" => $order,
                 "detail" => $detail,
-                "customer" => $customer
             ]);
         }
     }
@@ -91,8 +79,8 @@ class OrderManage extends AdminController
             $dateProfit = [];
             while($currentDate-- > 1) {
                 $dateProfit[date("Y-m")."-$currentDate"] = $this->getProfit($currentDate);
+                if(!$dateProfit[date("Y-m")."-$currentDate"]['TongHoaDon']) unset($dateProfit[date("Y-m")."-$currentDate"]);
             }
-
             parent::view("Admin.Report.index",[
                 "profits" => $dateProfit
             ]);

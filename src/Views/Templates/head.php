@@ -7,4 +7,4 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/styles/custom.css" />
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="<?= BASE_URL ?>/public/scripts/index.js?v=5" defer></script>
+    <script src="<?= BASE_URL ?>/public/scripts/index.js?v=6" defer></script>

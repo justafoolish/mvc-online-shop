@@ -20,26 +20,6 @@ class ProductManage extends AdminController {
         }
     }
 
-    function detail($pid="") 
-    {
-        if(empty($pid)) {
-            $this->index();
-        }
-        else {
-            $productModel = parent::model("ProductModel");
-            $categoryModel = parent::model("CategoryModel");
-            
-            $product = $productModel->getProductDetail(["MaSP" => $pid]); //Lấy thông tin sản phẩm theo product ID
-            
-            $categories = $categoryModel->getAllCategory(); //Lấy thông tin tất cả danh mục cho view option
-            
-            parent::view("Admin.Product.detail", [
-                "product" => $product,
-                "categories" => $categories,
-            ]);
-        }
-    }
-
     function formInsert() 
     {
         if(empty($this->adminLogin)) {
@@ -81,27 +61,6 @@ class ProductManage extends AdminController {
         }
 
         else echo -1;
-    }
-
-    function getQuantity() {
-        if(isset($_POST['pid']) && isset($_POST['size'])) {
-            $pid = $_POST['pid'];
-            $sizes = $_POST['size'];
-            $productModel = parent::model("ProductModel");
-
-            foreach ($sizes as $size) {
-                $quantityByVariant = $productModel->getQuantity([
-                    "MaSP" => $pid,
-                    "MaSize" => $size,
-                ]);
-                if($quantityByVariant > 0) {
-                    echo $quantityByVariant;
-                    break;
-                }
-            }
-        } else {
-            echo 0;
-        }
     }
 
     function createProduct()

@@ -4,6 +4,7 @@ class OrderModel extends BaseModel
     const TABLE = "hoadon";
     const SUB_TABLE_HD = "chitiethoadon";
     const SUB_TABLE_CTHD = "sanpham";
+    const SUB_TABLE_HD2 = "khachhang";
 
     public function __construct()
     {
@@ -14,12 +15,24 @@ class OrderModel extends BaseModel
     *   Thao tác trên table hoadon
     */
     public function getAllOrders($condition = [], $limit = []) {
-        return $this->getAllRecords(self::TABLE,["*"],$condition,$limit);
+        $table1 = self::TABLE;
+        $table2 = self::SUB_TABLE_HD2;
+        $joinField = "MaKhachHang";
+
+        $table = "$table1 JOIN $table2 ON $table1.$joinField=$table2.$joinField";
+
+        return $this->getAllRecords($table,["*"],$condition,$limit);
     }
 
     function getOrder($condition)
     {
-        return $this->getAllRecords(self::TABLE,["*"],$condition, [1]);
+        $table1 = self::TABLE;
+        $table2 = self::SUB_TABLE_HD2;
+        $joinField = "MaKhachHang";
+
+        $table = "$table1 JOIN $table2 ON $table1.$joinField=$table2.$joinField";
+
+        return $this->getAllRecords($table,["*"],$condition, [1]);
     }
 
     public function insertOrder($data = [])
@@ -35,19 +48,6 @@ class OrderModel extends BaseModel
     public function updateOrder($condition = [], $data = [])
     {
         return $this->update(self::TABLE, $condition, $data);
-    }
-
-    function countTotalCustomerOrder($condition = [])
-    {
-        $resultColumn = "TongHoaDon";
-        return $this->getAllRecords(self::TABLE, ["count($resultColumn) as $resultColumn"], $condition, [1], ["MaKhachHang"])[$resultColumn];
-    }
-
-
-    function countTotalCustomerSpend($condition = [])
-    {
-        $resultColumn = "TongTien";
-        return $this->getAllRecords(self::TABLE, ["sum($resultColumn) as $resultColumn"], $condition, [1], ["MaKhachHang"])[$resultColumn];
     }
 
     function totalOrder()

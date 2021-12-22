@@ -63,21 +63,4 @@ class CategoryManage extends AdminController {
         ]);
     }
 
-    function updateCategory()
-    {
-        if(isset($_POST['submit'])) {
-            $data['TenDanhMuc'] = $_POST['name'];
-            $data['MoTa'] = $_POST['describe'];
-            $id = $_POST['id'];
-
-            // $this->print($data);
-
-            $categoryModel = parent::model("CategoryModel");
-            if($categoryModel->updateCategory(['MaDanhMuc' => $id], $data)) {
-                header("Location: ".BASE_URL."/CategoryManage/");
-            } else header("Location: ".BASE_URL."/CategoryManage/Detail/$id");
-        } 
-        else header("Location: ".BASE_URL."/CategoryManage/");
-    }
-
 }

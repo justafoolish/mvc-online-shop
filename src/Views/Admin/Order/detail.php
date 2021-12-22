@@ -4,7 +4,6 @@
 <?php
     $order = $data['order'];
     $detail = $data['detail'];
-    $customer = $data['customer'];
 ?>
 <head>
     <?php require_once "./src/Views/Admin/Templates/header.php" ?>
@@ -80,10 +79,10 @@
                         <div class="shadow rounded">
                         <h3 class="font-bold py-3 px-4 text-lg text-gray-800 border-b">Thông tin người mua</h3>
                             <div class="px-4 py-2">
-                                <a href="" class="py-3 text-lg"><?= $customer['TenKhachHang'] ?></a>
+                                <a href="" class="py-3 text-lg"><?= $order['TenKhachHang'] ?></a>
                                 <div class="flex justify-between my-1">
                                     <span class="">SDT</span>
-                                    <span class="font-bold"><?= $customer['SDT'] ?></span>
+                                    <span class="font-bold"><?= $order['SDT'] ?></span>
                                 </div>
                             </div>
                             <div class="border-t">

@@ -139,14 +139,14 @@
                         <div class="flex justify-between items-center">
                             <h3>Giảm giá</h3>
                             <p class="font-medium text-lg">
-                                <span id="discount">40.000<sup>đ</sup></span>
+                                <span id="discount">0<sup>đ</sup></span>
                             </p>
                         </div>
                     </div>
                     <div class="flex justify-between items-center pt-7 pb-2">
                         <h3>Tổng tiền</h3>
                         <span class="hidden" id="hidden-total"><?= $total; ?></span>
-                        <span class="font-semibold text-2xl" id="total"><?= number_format($total - 40000,0,",",".") ?><sup>đ</sup></span>
+                        <span class="font-semibold text-2xl" id="total"><?= number_format($total,0,",",".") ?><sup>đ</sup></span>
                     </div>
                 </div>
             </main>

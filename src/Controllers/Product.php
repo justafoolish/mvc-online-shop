@@ -5,18 +5,27 @@ class Product extends CustomerController
     {
         parent::__construct($params);
     }
-    
-    function index() {
-        header("Location: ".BASE_URL."/Collection/");
-    }
 
-    public function id($pid = "")
+    public function index($pid = "")
     {
-        
-        if(empty($pid)) {
-            $this->index(); // Quay về trang chủ nếu không get được product ID
+        if (strtolower($this->params[0]) === "search") {
+            $keyword = "";
+            if (isset($_POST['keyword'])) {
+                $keyword = $_POST['keyword'];
+            }
+            $productModel = parent::model("ProductModel");
+            $products = $keyword != "" ? $productModel->search($keyword) : [];
+
+
+            parent::view("Templates.search", [
+                "result" => $keyword,
+                "products" => $products
+            ]);
+            return;
         }
-        else {
+        if (empty($pid)) {
+            header("Location: " . BASE_URL . "/Collection/");
+        } else {
             $productModel = parent::model("ProductModel");
 
             $product = $productModel->getProductDetail(['MaSP' => $pid]); //Lấy thông tin sản phẩm theo product ID
@@ -28,12 +37,12 @@ class Product extends CustomerController
                 "customerLogin" => $this->customerLogin
             ]);
         }
-        
     }
 
-    public function getQuantity() {
-        if(isset($_POST['size']) && $_POST['pid']) {
-         
+    public function getQuantity()
+    {
+        if (isset($_POST['size']) && $_POST['pid']) {
+
             $productModel = parent::model("ProductModel");
 
             $quantity = $productModel->getQuantity([
@@ -42,21 +51,6 @@ class Product extends CustomerController
             ]);
 
             echo $quantity;
-        }  
-    }
-
-    public function searchProduct() {
-        $keyword= "";
-        if(isset($_POST['keyword'])){
-            $keyword = $_POST['keyword'];
         }
-        $productModel = parent::model("ProductModel");
-        $products = $keyword != "" ? $productModel->search($keyword) : [];
-
-
-        parent::view("Templates.search",[
-            "result" => $keyword,
-            "products" => $products
-        ]);
     }
 }

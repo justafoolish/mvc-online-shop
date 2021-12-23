@@ -39,7 +39,9 @@ const addcart = document.querySelector("#addcart")
 addcart.addEventListener("click", (e) => {
   e.preventDefault();
   let rad = document.querySelector("input[name=size]:checked");
-  $.post(`${BASE_URL}/Cart/checkQuantity`, {pid: addcart.value, size: [`${rad.value}`]}, (data)=> {
+  let qty = parseInt(quantityInput.value)
+  // console.log(qty)
+  $.post(`${BASE_URL}/Cart/checkQuantity`, {pid: addcart.value, size: [`${rad.value}`], quantity: qty ?? 1}, (data)=> {
     document.querySelector("#totalItem").innerHTML = data
   })
 })

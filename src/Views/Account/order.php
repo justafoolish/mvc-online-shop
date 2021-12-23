@@ -87,7 +87,7 @@ $orders = $data['orders'];
                             Thông tin thanh Toán:
                         </span>
                         <span>
-                            <?= 1 ? "Đã thanh toán" : "Chưa thanh toán" ?>
+                            <?= $orders['TrangThaiThanhToan'] ? "Đã thanh toán" : "Chưa thanh toán" ?>
                         </span>
                     </div>
                     <div class="border px-4 py-2">

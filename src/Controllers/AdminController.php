@@ -7,10 +7,6 @@ class AdminController extends BaseController
     {
         parent::__construct($params);
         //Check Admin Login
-        $this->adminLogin = $this->checkLogin();
-    }
-
-    protected function checkLogin() {
-        return isset($_SESSION['AdminLogin']) ? $_SESSION['AdminLogin'] : [];
+        $this->adminLogin = isset($_SESSION['AdminLogin']) ? $_SESSION['AdminLogin'] : [];
     }
 }

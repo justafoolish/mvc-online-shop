@@ -10,7 +10,7 @@ class Home extends CustomerController
     {
         $productModel = parent::model("ProductModel");
         $limit = [8];
-        $latestProduct = $productModel->getLatestProducts($limit); // Lọc danh sách sản phẩm mới nhất
+        $latestProduct = $productModel->getAllProduct($limit,[],["NgayNhap" => "DESC"]); // Lọc danh sách sản phẩm mới nhất
         // $this->print($this->customerLogin);
         parent::view("Home.index", [
             "collections" => $this->collections,

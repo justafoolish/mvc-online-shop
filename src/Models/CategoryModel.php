@@ -2,6 +2,7 @@
 class CategoryModel extends BaseModel 
 {
     const TABLE = "danhmuc";
+    const TABLE_SP = "sanpham";
 
     public function __construct() {
         parent::__construct();
@@ -9,7 +10,12 @@ class CategoryModel extends BaseModel
 
     //4 tham số getAllRecords: $table, $select = ['*'], $condition = [], $limit = [],$groupBys = [], $orderBys = []
     public function getAllCategory($limit = []) {
-        return $this->getAllRecords(self::TABLE,["*"],[],$limit);
+        $table1 = self::TABLE;
+        $table2 = self::TABLE_SP;
+        
+        $table = "$table1 JOIN $table2 ON $table1.MaDanhMuc=$table2.DanhMuc";
+
+        return $this->getAllRecords($table,["MaDanhMuc", "TenDanhMuc","count(MaSP) as SoLuong"],[],$limit,["MaDanhMuc","TenDanhMuc"]);
     }
 
     function getCategory($condition) {

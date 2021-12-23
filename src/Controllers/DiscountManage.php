@@ -26,7 +26,14 @@ class DiscountManage extends AdminController {
     }
 
     public function formAdd() {
-        parent::view("Admin.Discount.add", []);
+        echo __METHOD__;
+        if(empty($this->adminLogin)) {
+            header("Location: ".BASE_URL."/Admin");
+        }
+        else {
+
+            parent::view("Admin.Discount.add", []);
+        }
     }
 
     public function addDiscount() {

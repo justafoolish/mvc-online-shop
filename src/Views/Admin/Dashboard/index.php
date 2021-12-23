@@ -76,21 +76,17 @@
                         <div class="border rounded-lg overflow-hidden shadow-xl">
                             <div class="flex justify-between bg-pink-500 px-6 py-4 text-white">
                                 <div>
-                                    <h3 class="text-2xl">Khách hàng</h3>
-                                    <h3 class="font-medium text-2xl"><?= $data['totalCustomer'] ?></h3>
+                                    <h3 class="text-2xl">Lợi nhuận</h3>
+                                    <h3 class="font-medium text-2xl"><?= number_format($data['income'],0,",",".") ?><sup>đ</sup></h3>
                                 </div>
                                 <div class="flex-1 grid place-items-end">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="45" height="45" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <circle cx="9" cy="7" r="4"></circle>
-                                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                        <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
                             </div>
                             <div class="px-6 py-2 text-pink-500 hover:text-pink-600">
-                                <a href="<?= BASE_URL ?>/CustomerManage/" class="flex justify-between">
+                                <a href="<?= BASE_URL ?>/OrderManage/" class="flex justify-between">
                                     <span>Xem chi tiết</span>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -17,17 +17,16 @@ class Admin extends AdminController
                 $this->adminLogin = [];
                 header("Location: ".BASE_URL."/Admin/");
             }
-            $customerModel = parent::model("CustomerModel");
             $productModel = parent::model("ProductModel");
             $orderModel = parent::model("OrderModel");
 
-            $customerCount = $customerModel->totalCustomer();
             $productCount = $productModel->totalProduct();
             $orderCount = $orderModel->totalOrder();
             $profit = $orderModel->totalProfit();
+            $income = $orderModel->totalProfit(["TrangThaiThanhToan" => 1]);
 
             parent::view("Admin.Dashboard.index", [
-                "totalCustomer" => $customerCount,
+                "income" => $income,
                 "totalProduct" => $productCount,
                 "totalOrder" => $orderCount,
                 "profit" => $profit

@@ -6,6 +6,7 @@ class CategoryManage extends AdminController {
         parent::__construct($params);
     }
 
+    //Màn hình quản lý danh mục
     function index() {
         if(empty($this->adminLogin)) {
             header("Location: ".BASE_URL."/Admin");
@@ -13,31 +14,9 @@ class CategoryManage extends AdminController {
         else {
             $categoryModel = parent::model("CategoryModel");
             $categories = $categoryModel->getAllCategory();
-            $productModel = parent::model("ProductModel");
-
-            foreach($categories as $key => $val) {
-                $categories[$key]['SoLuong'] = $productModel->totalProduct(["DanhMuc" => $val['MaDanhMuc']]);
-            }
 
             parent::view("Admin.Category.index", [
                 "category" => $categories
-            ]);
-        }
-    }
-
-    function detail($categoryID = "") {
-        if(empty($categoryID)) {
-            $this->index();
-        }
-        else {
-            $categoryModel = parent::model("CategoryModel");
-            $productModel = parent::model("ProductModel");
-            $categories = $categoryModel->getCategory(["MaDanhMuc" => $categoryID]);
-            
-            $products = $productModel->getAllProduct([],["DanhMuc" => $categoryID]);
-            parent::view("Admin.Category.detail", [
-                "categoryDetail" => $categories,
-                "products" => $products
             ]);
         }
     }
@@ -54,6 +33,7 @@ class CategoryManage extends AdminController {
         } else $this->addCategory();
     }
 
+    //Màn hình thêm danh mục
     function addCategory($previousData = [
         "TenDanhMuc" => "",
         "MoTa" => ""

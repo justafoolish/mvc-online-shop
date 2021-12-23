@@ -143,4 +143,48 @@ ProductManage:
         public function formAdd() {
         parent::view("Admin.Discount.add", []);
     }
+
+    Product Search index method:
+    if (strtolower($this->params[0]) === "search") {
+            $keyword = "";
+            if (isset($_POST['keyword'])) {
+                $keyword = $_POST['keyword'];
+            }
+            $productModel = parent::model("ProductModel");
+            $products = $keyword != "" ? $productModel->search($keyword) : [];
+
+
+            parent::view("Templates.search", [
+                "result" => $keyword,
+                "products" => $products
+            ]);
+            return;
+        }
+
+    Product Model: 
+        function search($keyword)
+    {
+        $selfTable = self::TABLE;
+        $table = "$selfTable sp1 join $selfTable sp2 ON sp1.MaSP = sp2.MaSP AND sp1.TenSP LIKE '%$keyword%'";
+        return $this->getAllRecords($table,["sp1.MaSP","sp1.TenSP","sp1.Hinh1","sp1.DonGia","sp1.ChietKhau"],[], [5]);
+    }
+
+    Category Manage:
+        //Màn hình chi tiết danh mục
+    function detail($categoryID = "") {
+        if(empty($categoryID)) {
+            $this->index();
+        }
+        else {
+            $categoryModel = parent::model("CategoryModel");
+            $productModel = parent::model("ProductModel");
+            $categories = $categoryModel->getCategory(["MaDanhMuc" => $categoryID]);
+            
+            $products = $productModel->getAllProduct([],["DanhMuc" => $categoryID]);
+            parent::view("Admin.Category.detail", [
+                "categoryDetail" => $categories,
+                "products" => $products
+            ]);
+        }
+    }
 */

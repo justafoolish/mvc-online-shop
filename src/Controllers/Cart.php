@@ -36,7 +36,8 @@ class Cart extends CustomerController
 
                 // echo $productQuantity;
                 if($productQuantity > 0) {
-                    $this->addToCart($productModel,strtolower(trim($pid)),strtolower(trim($size)), $productQuantity);
+                    $updateQuantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
+                    $this->addToCart($productModel,strtolower(trim($pid)),strtolower(trim($size)), $productQuantity, $updateQuantity);
                    break;
                 }
             } 
@@ -46,7 +47,7 @@ class Cart extends CustomerController
         }
     }
 
-    function addToCart($productModel, $pid, $size, $maxQuantity) {
+    function addToCart($productModel, $pid, $size, $maxQuantity, $updateQuantity = 1) {
         $product = $productModel->getProductDetail(["MaSP" => $pid]);
 
         $checkAdd = 0;
@@ -66,7 +67,7 @@ class Cart extends CustomerController
             if(array_key_exists("$pid"."$size",$cart) && $cart["$pid"."$size"]['MaSize'] === $size) {
                 if($cart["$pid"."$size"]["SoLuong"] < $maxQuantity)
                 {
-                    $cart["$pid"."$size"]["SoLuong"] += 1;
+                    $cart["$pid"."$size"]["SoLuong"] += $updateQuantity;
                     $checkAdd = 1;
                 }
                 else $checkAdd = 0;
@@ -97,6 +98,7 @@ class Cart extends CustomerController
             foreach($cart as $product)
                 $total += $product['SoLuong'];
         }
+        $this->totalCartItem = $total;
         return $total;
     }
 

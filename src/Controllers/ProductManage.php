@@ -1,74 +1,134 @@
-<?php 
-class ProductManage extends AdminController {
+<?php
+class ProductManage extends AdminController
+{
 
     function __construct($params)
     {
         parent::__construct($params);
     }
 
-    function index() {
-        if(empty($this->adminLogin)) {
-            header("Location: ".BASE_URL."/Admin");
-        }
-        else {
+    function index()
+    {
+        if (empty($this->adminLogin)) {
+            header("Location: " . BASE_URL . "/Admin");
+        } else {
             $productModel = parent::model("ProductModel");
+
+            $products = $productModel->getProductVariant();
             
-            $products = $productModel->getAllProduct();
             parent::view("Admin.Product.index", [
                 "products" => $products
             ]);
         }
     }
 
-    function formInsert() 
+    function formInsert()
     {
-        if(empty($this->adminLogin)) {
+        if (empty($this->adminLogin)) {
             $this->index();
-        }
-        else {
+        } else {
             $categoryModel = parent::model("CategoryModel");
             $categories = $categoryModel->getAllCategory(); //Lấy thông tin tất cả danh mục cho view option
 
             parent::view("Admin.Product.add", [
                 "categories" => $categories,
             ]);
-        } 
+        }
     }
 
-    function inventory() {
-        $productModel = parent::model("ProductModel");
+    function inventory()
+    {
+        $inventoryModel = parent::model("InventoryModel");
 
-        $products = $productModel->getProductVariant();
+        $receipt = $inventoryModel->getAllReceipt();
 
         parent::view("Admin.Inventory.index", [
-            "products" => $products,
-            "minQuantity" => 5
+            "receipts" => $receipt
         ]);
     }
 
-    function updateVariantQuantity()
+    function updateInventory()
     {
-        if(isset($_POST['pid']) && isset($_POST['size']) && isset($_POST['quantity'])) {
-            $data['MaSP'] = $_POST['pid'];
-            $data['MaSize'] = $_POST['size'];
-            $quantity['SoLuong'] = $_POST['quantity'];
+        $productModel = parent::model("ProductModel");
+        $inventory = parent::model("InventoryModel");
 
-            $productModel = parent::model("ProductModel");
+        $products = $productModel->getProductVariant();
+        $suppliers = $inventory->getAllSups();
 
-            if($productModel->updateQuantity($data,$quantity)) {
-                echo $quantity['SoLuong'];
-            } else echo 0;
-        }
+        // $this->print($suppliers);
 
-        else echo -1;
+        parent::view("Admin.Inventory.update", [
+            "products" => $products,
+            "minQuantity" => 5,
+            "employee" => $this->adminLogin,
+            "sups" => $suppliers,
+        ]);
+    }
+
+
+    function createInventoryReceipt()
+    {
+        # code...
+        if (isset($_POST['submit'])) {
+            $inventoryModel = parent::model("InventoryModel");
+            $checkInsert = true;
+
+            $products = $_POST['data'];
+            $receipt['MaNhaCungCap'] = $_POST['supplier'];
+            $receipt['NgayNhap'] = date('Y-m-d');
+            $receipt['MaNhanVien'] = $this->adminLogin['MaNhanVien'];
+
+            foreach ($products as $product) {
+                $receipt['TongTien'] += intval($product['soluong']) * intval($product['dongia']);
+            }
+
+            //Lấy được dữ liệu phiếu nhập
+            //Thêm phiếu nhập:
+            if ($inventoryModel->insertInventoryReceipt($receipt)) {
+                $receiptDetail['MaPhieuNhap'] = $inventoryModel->getLastID();
+            } else {
+                $checkInsert = false;
+            }
+
+            //Thêm chi tiết phiếu nhập
+            if ($checkInsert) {
+                foreach ($products as $product) {
+                    $receiptDetail['MaSP'] = $product['masp'];
+                    $receiptDetail['MaSize'] = strtoupper($product['size']);
+                    $receiptDetail['SoLuong'] = $product['soluong'];
+                    $receiptDetail['DonGia'] = $product['dongia'];
+
+                    if (!$inventoryModel->insertReceiptDetail($receiptDetail)) {
+                        $checkInsert = false;
+                    } else {
+                        $this->updateVariantQuantity($receiptDetail,$product['ton']);
+                    }
+                }
+            }
+            if($checkInsert) echo 1;
+            else echo 0;
+            // $this->print($receipt);
+            // $this->print($products);
+        } else echo -1;
+    }
+    //Thừa
+    function updateVariantQuantity($product,$inventory)
+    {
+        $productModel = parent::model("ProductModel");
+
+        $data['MaSP'] = $product['MaSP'];
+        $data['MaSize'] = $product['MaSize'];
+        $quantity['SoLuong'] = intval($product['SoLuong']) + intval($inventory);
+
+        $productModel->updateQuantity($data, $quantity);
     }
 
     function createProduct()
     {
-        
+
         $dirUpload = "./public/images/products/";
 
-        if(isset($_POST['submit'])) {
+        if (isset($_POST['submit'])) {
             $checkInsert = true;
 
             $data['TenSP'] = $_POST['TenSP'];
@@ -85,14 +145,14 @@ class ProductManage extends AdminController {
             $productModel = parent::model("ProductModel");
 
             $insertedID = $productModel->insertProduct($data);
-            if($insertedID) {
-                move_uploaded_file($_FILES['Hinh1']['tmp_name'],$dirUpload. $data['Hinh1']);
-                move_uploaded_file($_FILES['Hinh2']['tmp_name'],$dirUpload. $data['Hinh2']);
+            if ($insertedID) {
+                move_uploaded_file($_FILES['Hinh1']['tmp_name'], $dirUpload . $data['Hinh1']);
+                move_uploaded_file($_FILES['Hinh2']['tmp_name'], $dirUpload . $data['Hinh2']);
 
                 // Lấy mã sản phẩm vừa insert
                 echo $insertedID;
-                foreach($variant as $key => $value) {
-                    if(!$productModel->insertVariant([
+                foreach ($variant as $key => $value) {
+                    if (!$productModel->insertVariant([
                         "MaSP" => $insertedID,
                         "MaSize" => $key,
                         "SoLuong" => $value
@@ -100,10 +160,9 @@ class ProductManage extends AdminController {
                 }
             } else $checkInsert = false;
 
-            if($checkInsert) {
-                header("Location: ".BASE_URL."/ProductManage");
-            } else header("Location: ".BASE_URL."/ProductManage/FormInsert");
-
-        } else header("Location: ".BASE_URL."/ProductManage/FormInsert");
+            if ($checkInsert) {
+                header("Location: " . BASE_URL . "/ProductManage");
+            } else header("Location: " . BASE_URL . "/ProductManage/FormInsert");
+        } else header("Location: " . BASE_URL . "/ProductManage/FormInsert");
     }
 }

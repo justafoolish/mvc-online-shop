@@ -1,7 +1,6 @@
 <?php require_once "./src/Views/Admin/Templates/navbar.php"; ?>
-<?php 
-    $products = $data['products'];
-    $minQuantity = $data['minQuantity'];
+<?php
+    $receipts = $data['receipts'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,11 +20,11 @@
                 <div class="flex justify-between py-5 mb-3">
                     <h3 class="font-semibold text-2xl">Tồn kho</h3>
                     <div class="flex space-x-3">
-                        <button class="flex items-center bg-gray-700 text-gray-200 text-xs px-3 py-2 hover:text-gray-100 hover:bg-gray-800">
+                        <a href="<?= BASE_URL ?>/ProductManage/UpdateInventory" class="flex items-center bg-gray-700 text-gray-200 text-xs px-3 py-2 hover:text-gray-100 hover:bg-gray-800">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>Xuất dữ liệu
-                        </button>
+                            </svg>Tạo phiếu nhập
+                        </a>
                     </div>
                 </div>
 
@@ -33,18 +32,25 @@
                     <table id="product_table" class="table table-borderless table-hover" width="100%" cellspacing="0">
                         <thead class="bg-gray-700 text-gray-50">
                             <tr class="grid grid-cols-11">
-                                <th class="col-span-5">Tên Sản Phẩm</th>
-                                <th>ID</th>
-                                <th>Biến thể</th>
-                                <th>Tồn</th>
-                                <th class="col-span-3">Cập nhật tồn kho </th>
+                                <th class="col-span-2">Mã phiếu nhập</th>
+                                <th class="col-span-2">Ngày nhập</th>
+                                <th class="col-span-2">Nhà cung cấp</th>
+                                <th class="col-span-3">Nhân viên thực hiện</th>
+                                <th class="col-span-2">Tổng tiền</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            foreach ($products as $product) {
-                                ?>
-                                <tr class="grid grid-cols-11">
+                            <?php $i = 4;
+                            foreach ($receipts as $receipt) {
+                            ?>
+                                <tr class="grid grid-cols-11 text-center">
+                                    <td class="col-span-2"><?= $receipt['MaPhieuNhap'] ?></td>
+                                    <td class="col-span-2"><?= $receipt['NgayNhap'] ?></td>
+                                    <td class="col-span-2"><?= $receipt['TenNhaCungCap'] ?></td>
+                                    <td class="col-span-3"><?= $receipt['TenNhanVien'] ?></td>
+                                    <td class="col-span-2"><?= number_format($receipt['TongTien'],0,",",".") ?><sup>đ</sup></td>
+                                </tr>
+                                <!-- <tr class="grid grid-cols-11">
                                     <td class="text-left col-span-5 flex items-center space-x-4">
                                         <div class="w-10">
                                             <img src="<?= BASE_URL ?>/public/images/products/<?= $product['Hinh1'] ?>" class="max-w-full h-auto object-center object-cover">
@@ -73,7 +79,7 @@
                                         </div>
                                         <button class="text-gray-100 bg-gray-400 hover:bg-gray-600 transition-all px-3 py-1" id="updateQuantity" pid="<?= $product['MaSP'] ?>" size="<?= $product['MaSize'] ?>">Lưu</button>
                                     </td>
-                                </tr>
+                                </tr> -->
                             <?php  } ?>
                         </tbody>
                     </table>

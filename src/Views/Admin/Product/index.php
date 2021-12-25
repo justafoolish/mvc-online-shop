@@ -35,8 +35,8 @@
                         <thead class="bg-gray-700 text-gray-50">
                             <tr class="grid grid-cols-4">
                                 <th class="col-span-2">Tên Sản Phẩm</th>
-                                <th>Giá </th>
-                                <th>Chiết Khấu</th>
+                                <th>Biến thể</th>
+                                <th>Số lượng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,10 +51,10 @@
                                     </td>
                                     <td class="grid place-items-center">
                                         <span>
-                                        <?= number_format($product['DonGia'],0,",",".") ?><sup>đ</sup>
+                                            <?= $product['MaSize'] ?>
                                         </span>
                                     </td>
-                                    <td class="text-center"><?= $product['ChietKhau'] ?>%</td>
+                                    <td class="text-center"> <span class="text-<?= $product['SoLuong'] < 5 ? "yellow" : "green" ?>-500" id="current"><?= $product['SoLuong'] ?></span></td>
                                 </tr>
                             <?php  } ?>
                         </tbody>
@@ -65,7 +65,10 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#product_table').DataTable();
+            $('#product_table').DataTable({
+                "info": false,
+                "bLengthChange": false
+            });
         });
     </script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>

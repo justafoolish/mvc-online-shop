@@ -18,7 +18,7 @@ class BaseModel extends DataBase{
 
         $sql = "INSERT INTO $table($insertColumn) VALUES($valueString)";
 
-        echo $sql;
+        // echo $sql;
 
         if(mysqli_query($this->con, $sql)) {
             return 1;

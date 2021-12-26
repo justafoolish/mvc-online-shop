@@ -6,11 +6,12 @@ class Admin extends AdminController
         parent::__construct($params);
     }
 
+    //Hiển thị trang đăng nhập admin (Nếu đã đăng nhập hiển thị trang chủ admin)
     function index()
     {
         //Todo: is Login ? Dashboard / Login
         if(empty($this->adminLogin)) {
-            $this->login();
+            parent::view("Admin.Login.index", []);
         } else {
             if(strtolower($this->params[0]) === "logout") {
                 unset($_SESSION['AdminLogin']);
@@ -34,10 +35,7 @@ class Admin extends AdminController
         }
     }
 
-    function login() {
-        parent::view("Admin.Login.index", []);
-    }
-
+    //Xác nhận đăng nhập
     function checkLoginAdmin() {
         if(isset($_POST['submit'])) {
             $data['email'] = $_POST['email'];
@@ -52,17 +50,23 @@ class Admin extends AdminController
             if(empty($employee)) {
                 echo -1;
             } else {
-                //Verify bcrypt
-                // $confirmPassword = password_verify($data['password'],$customer['Password']) ? 1 : 0; 
-                $confirmPassword = $data['password'] == $employee['Password'] ? 1 : 0; 
-
-                if($confirmPassword) {
-                    unset($employee['Password']);
-                    $_SESSION['AdminLogin'] = $employee;
-                }
-                echo $confirmPassword;
+                echo $this->verifyLogin($employee, $data);
             }
         } 
     }
 
+    //Kiểm tra đăng nhập
+    function verifyLogin($admin, $data) {
+        if(empty($admin)) {
+            return -1;
+        } else {
+            $confirmPassword = $data['password'] == $admin['Password'] ? 1 : 0; 
+
+            if($confirmPassword) {
+                unset($admin['Password']);
+                $_SESSION['AdminLogin'] = $admin;
+            }
+            return $confirmPassword;
+        }
+    }
 }

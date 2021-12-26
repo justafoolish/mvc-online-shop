@@ -35,10 +35,10 @@ incrButton.forEach((ele, idx) => {
     //gọi ajax tăng quantity    
     $.post(`${BASE_URL}/Cart/updateQuantity`, {pid: productID, size: productSize, option: 1}, (data)=> {
       data = jQuery.parseJSON(data);
-
-      let prod = data.cart[productID+productSize]
-
-      updateDom(idx,++quantity,parseInt(data.totalAmount),parseInt(prod['SoLuong'])*parseInt(prod['DonGia']),data.totalProduct)
+      if(data.update) {
+        let prod = data.cart[productID+productSize]
+        updateDom(idx,++quantity,parseInt(data.totalAmount),parseInt(prod['SoLuong'])*parseInt(prod['DonGia']),data.totalProduct)
+      }
     })
     
   });

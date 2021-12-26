@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:8889
--- Thời gian đã tạo: Th12 16, 2021 lúc 05:22 PM
+-- Thời gian đã tạo: Th12 25, 2021 lúc 11:12 AM
 -- Phiên bản máy phục vụ: 5.7.32
 -- Phiên bản PHP: 7.4.12
 
@@ -31,14 +31,14 @@ CREATE TABLE `bienthe` (
 --
 
 INSERT INTO `bienthe` (`MaSP`, `MaSize`, `SoLuong`) VALUES
-(4, 'L', 16),
-(4, 'M', 6),
-(4, 'XL', 12),
+(4, 'L', 47),
+(4, 'M', 23),
+(4, 'XL', 10),
 (5, 'L', 20),
-(5, 'M', 6),
+(5, 'M', 2),
 (5, 'XL', 5),
 (6, 'L', 14),
-(6, 'M', 7),
+(6, 'M', 4),
 (6, 'XL', 6),
 (7, 'L', 5),
 (7, 'M', 2),
@@ -98,7 +98,7 @@ INSERT INTO `bienthe` (`MaSP`, `MaSize`, `SoLuong`) VALUES
 (27, 'M', 10),
 (27, 'XL', 10),
 (31, 'L', 10),
-(31, 'M', 10),
+(31, 'M', 8),
 (31, 'XL', 10),
 (32, 'L', 10),
 (32, 'M', 10),
@@ -111,7 +111,7 @@ INSERT INTO `bienthe` (`MaSP`, `MaSize`, `SoLuong`) VALUES
 (36, 'XL', 10),
 (37, 'L', 10),
 (37, 'M', 10),
-(37, 'XL', 10);
+(37, 'XL', 13);
 
 -- --------------------------------------------------------
 
@@ -151,7 +151,47 @@ INSERT INTO `chitiethoadon` (`MaHoaDon`, `MaSP`, `MaSize`, `SoLuong`, `DonGia`, 
 (78, 4, 'M', 1, 200000, 0),
 (78, 5, 'M', 1, 500000, 0),
 (78, 6, 'M', 1, 600000, 0),
-(78, 7, 'M', 1, 400000, 0);
+(78, 7, 'M', 1, 400000, 0),
+(79, 4, 'M', 3, 200000, 0),
+(80, 4, 'M', 3, 200000, 0),
+(80, 5, 'M', 2, 500000, 0),
+(80, 6, 'M', 3, 600000, 0),
+(81, 4, 'L', 3, 200000, 0),
+(82, 4, 'M', 1, 200000, 0),
+(82, 31, 'M', 2, 400000, 0),
+(83, 4, 'M', 2, 200000, 0),
+(83, 5, 'M', 2, 500000, 0),
+(84, 4, 'XL', 2, 200000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chitietphieunhap`
+--
+
+CREATE TABLE `chitietphieunhap` (
+  `MaPhieuNhap` int(11) NOT NULL,
+  `MaSP` int(10) NOT NULL,
+  `MaSize` varchar(3) NOT NULL,
+  `SoLuong` int(11) NOT NULL,
+  `DonGia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `chitietphieunhap`
+--
+
+INSERT INTO `chitietphieunhap` (`MaPhieuNhap`, `MaSP`, `MaSize`, `SoLuong`, `DonGia`) VALUES
+(6, 4, 'L', 4, 200000),
+(7, 4, 'L', 4, 200000),
+(8, 4, 'L', 4, 200000),
+(9, 4, 'M', 12, 200000),
+(10, 4, 'L', 12, 120000),
+(11, 4, 'L', 5, 200000),
+(12, 4, 'L', 12, 20000),
+(13, 4, 'L', 1, 120000),
+(14, 4, 'L', 12, 200000),
+(15, 4, 'XL', 10, 200000);
 
 -- --------------------------------------------------------
 
@@ -201,7 +241,13 @@ INSERT INTO `hoadon` (`MaHoaDon`, `MaKhachHang`, `MaGiamGia`, `NgayTao`, `TongTi
 (75, 5, '', '2021-12-16', 1210000, 0, 'HCM'),
 (76, 5, '', '2021-12-16', 1600000, 0, 'HCM'),
 (77, 5, '', '2021-12-07', 1470000, 0, 'HCM'),
-(78, 5, '', '2021-12-16', 1580000, 0, 'HCM');
+(78, 5, '', '2021-12-16', 1580000, 1, 'HCM'),
+(79, 5, '', '2021-12-21', 540000, 1, 'HCM'),
+(80, 5, '', '2021-12-21', 3150000, 0, 'HCM'),
+(81, 5, '', '2021-12-23', 540000, 0, 'HCM'),
+(82, 5, '', '2021-12-23', 940000, 1, 'HCM'),
+(83, 5, '', '2021-12-23', 1260000, 0, 'HCM'),
+(84, 5, '', '2021-12-25', 360000, 0, 'HCM');
 
 -- --------------------------------------------------------
 
@@ -255,10 +301,31 @@ INSERT INTO `khuyenmai` (`MaKhuyenMai`, `SoLuongSuDung`, `NgayBatDau`, `NgayKetT
 ('5QZJ4CR', 10, '2021-12-16', '2021-12-19', 5),
 ('7TZXC6J', 25, '2021-12-08', '2021-12-18', 3),
 ('8AOWO76', 10, '2021-12-14', '2021-12-26', 10),
+('CJRR4RA', 10, '2021-12-21', '2021-12-26', 3),
 ('DQ4FMUE', 10, '2021-12-07', '2021-12-11', 12),
 ('IAEP3ZR', 50, '2021-12-08', '2021-12-26', 10),
 ('OVIITIQ', 10, '2021-12-06', '2021-12-08', 5),
 ('PYA5BPK', 50, '2021-12-07', '2021-12-12', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `nhacungcap`
+--
+
+CREATE TABLE `nhacungcap` (
+  `MaNhaCungCap` int(11) NOT NULL,
+  `TenNhaCungCap` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `nhacungcap`
+--
+
+INSERT INTO `nhacungcap` (`MaNhaCungCap`, `TenNhaCungCap`) VALUES
+(1, 'Nike'),
+(2, 'LV'),
+(3, 'Adidas');
 
 -- --------------------------------------------------------
 
@@ -286,6 +353,36 @@ INSERT INTO `nhanvien` (`MaNhanVien`, `TenNhanVien`, `ChucVu`, `Email`, `Passwor
 (3, 'aa', 'Nhân Viên', 'aa123@gmail.com', 'qweqwe', '098232354', 'go vap tphcm'),
 (4, 'Tuan', 'admin', 'tun@tun.com', '123', '09586128566', 'ok'),
 (5, 'sdsdf', 'Admin', 'tun@tun.com', 'tun', 'sdfsdfs', 'dfsdf');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `phieunhap`
+--
+
+CREATE TABLE `phieunhap` (
+  `MaPhieuNhap` int(11) NOT NULL,
+  `MaNhaCungCap` int(11) NOT NULL,
+  `MaNhanVien` int(11) NOT NULL,
+  `TongTien` int(11) NOT NULL,
+  `NgayNhap` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `phieunhap`
+--
+
+INSERT INTO `phieunhap` (`MaPhieuNhap`, `MaNhaCungCap`, `MaNhanVien`, `TongTien`, `NgayNhap`) VALUES
+(6, 1, 4, 800000, '2021-12-25'),
+(7, 1, 4, 800000, '2021-12-25'),
+(8, 1, 4, 800000, '2021-12-25'),
+(9, 1, 4, 2400000, '2021-12-25'),
+(10, 1, 4, 1440000, '2021-12-25'),
+(11, 1, 4, 1000000, '2021-12-25'),
+(12, 1, 4, 240000, '2021-12-25'),
+(13, 1, 4, 120000, '2021-12-25'),
+(14, 1, 4, 2400000, '2021-12-25'),
+(15, 1, 4, 2000000, '2021-12-25');
 
 -- --------------------------------------------------------
 
@@ -367,6 +464,12 @@ ALTER TABLE `chitiethoadon`
   ADD KEY `FK_MaSP_HD` (`MaSP`);
 
 --
+-- Chỉ mục cho bảng `chitietphieunhap`
+--
+ALTER TABLE `chitietphieunhap`
+  ADD PRIMARY KEY (`MaPhieuNhap`,`MaSP`,`MaSize`);
+
+--
 -- Chỉ mục cho bảng `danhmuc`
 --
 ALTER TABLE `danhmuc`
@@ -392,10 +495,22 @@ ALTER TABLE `khuyenmai`
   ADD PRIMARY KEY (`MaKhuyenMai`);
 
 --
+-- Chỉ mục cho bảng `nhacungcap`
+--
+ALTER TABLE `nhacungcap`
+  ADD PRIMARY KEY (`MaNhaCungCap`);
+
+--
 -- Chỉ mục cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
   ADD PRIMARY KEY (`MaNhanVien`);
+
+--
+-- Chỉ mục cho bảng `phieunhap`
+--
+ALTER TABLE `phieunhap`
+  ADD PRIMARY KEY (`MaPhieuNhap`);
 
 --
 -- Chỉ mục cho bảng `sanpham`
@@ -411,13 +526,13 @@ ALTER TABLE `sanpham`
 -- AUTO_INCREMENT cho bảng `danhmuc`
 --
 ALTER TABLE `danhmuc`
-  MODIFY `MaDanhMuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `MaDanhMuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHoaDon` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `MaHoaDon` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT cho bảng `khachhang`
@@ -426,16 +541,28 @@ ALTER TABLE `khachhang`
   MODIFY `MaKhachHang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
+-- AUTO_INCREMENT cho bảng `nhacungcap`
+--
+ALTER TABLE `nhacungcap`
+  MODIFY `MaNhaCungCap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
   MODIFY `MaNhanVien` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT cho bảng `phieunhap`
+--
+ALTER TABLE `phieunhap`
+  MODIFY `MaPhieuNhap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `MaSP` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `MaSP` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

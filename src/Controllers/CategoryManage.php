@@ -6,7 +6,7 @@ class CategoryManage extends AdminController {
         parent::__construct($params);
     }
 
-    //Màn hình quản lý danh mục
+    //Hiển thị màn hình quản lý danh mục
     function index() {
         if(empty($this->adminLogin)) {
             header("Location: ".BASE_URL."/Admin");
@@ -21,6 +21,7 @@ class CategoryManage extends AdminController {
         }
     }
 
+    //Xác nhận thêm danh mục
     function submitNewCategory() {
         if(isset($_POST['submit'])) {
             $data['TenDanhMuc'] = $_POST['name'];
@@ -33,7 +34,7 @@ class CategoryManage extends AdminController {
         } else $this->addCategory();
     }
 
-    //Màn hình thêm danh mục
+    //Màn hình nhập mới danh mục
     function addCategory($previousData = [
         "TenDanhMuc" => "",
         "MoTa" => ""

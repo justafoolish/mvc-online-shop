@@ -8,6 +8,7 @@ class Collection extends CustomerController
         parent::__construct($params);
     }
 
+    //Hiển thị toàn bộ sản phẩm
     public function index()
     {
         $currentPage = empty($this->params[0]) ? '1' : $this->params[0]; //Số trang hiện tại
@@ -35,6 +36,7 @@ class Collection extends CustomerController
         ]);
     }
 
+    //Hiển thị danh sách sản phẩm theo danh mục
     public function show()
     {
         $currentPage = empty($this->params[1]) ? '1' : $this->params[1]; //Số trang hiện tại

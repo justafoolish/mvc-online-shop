@@ -2,8 +2,6 @@
 class BaseController
 {
     protected $params = [];
-    // protected $collections = [];
-    // protected $totalCartItem = 0;
 
     function __construct($params)
     {

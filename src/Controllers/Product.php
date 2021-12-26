@@ -6,6 +6,7 @@ class Product extends CustomerController
         parent::__construct($params);
     }
 
+    //Hiển thị màn hình chi tiết sản phẩm
     public function index($pid = "")
     {
         
@@ -25,6 +26,7 @@ class Product extends CustomerController
         }
     }
 
+    //Kiểm tra số lượng tồn kho sản phẩm
     public function getQuantity()
     {
         if (isset($_POST['size']) && $_POST['pid']) {

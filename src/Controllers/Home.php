@@ -6,6 +6,7 @@ class Home extends CustomerController
         parent::__construct($params);
     }
 
+    //Hiển thị màn hình trang chủ
     function index()
     {
         $productModel = parent::model("ProductModel");

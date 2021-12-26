@@ -11,11 +11,13 @@ class InventoryModel extends BaseModel
         parent::__construct();
     }
 
+    //Lấy danh sách nhà cung cấp
     function getAllSups($condition = [])
     {
         return $this->getAllRecords(self::TABLE_NCC, ["*"]);
     }
 
+    //Lấy danh sách phiếu nhập hàng tồn kho
     public function getAllReceipt()
     {
         $table1 = self::TABLE;
@@ -29,16 +31,19 @@ class InventoryModel extends BaseModel
         return $this->getAllRecords($table,["MaPhieuNhap","NgayNhap","TenNhanVien","TenNhaCungCap","TongTien"]);
     }
 
+    //Lấy mã phiếu nhập vừa tạo
     public function getLastID()
     {
         return $this->getLastInsertID();
     }
 
+    //Tạo phiếu nhập hàng
     public function insertInventoryReceipt($data = [])
     {
         return $this->insert(self::TABLE, $data);
     }
 
+    //Thêm chi tiết phiếu nhập hàng
     public function insertReceiptDetail($data = []) {
         return $this->insert(self::TABLE_CTPN,$data);
     }

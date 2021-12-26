@@ -7,6 +7,7 @@ class OrderManage extends AdminController
         parent::__construct($params);
     }
 
+    //Hiển thị màn hình quản lý hoá đơn
     public function index()
     {
         if (empty($this->adminLogin)) {
@@ -22,6 +23,7 @@ class OrderManage extends AdminController
         }
     }
 
+    //Hiển thị màn hình chi tiết hoá đơn
     function orderDetail($orderID = "")
     {
         if (empty($orderID)) {
@@ -43,6 +45,7 @@ class OrderManage extends AdminController
         }
     }
 
+    //Xác nhận thanh toán hoá đơn
     function confirmOrder()
     {
         if (empty($this->adminLogin)) {
@@ -69,6 +72,7 @@ class OrderManage extends AdminController
         }
     }
 
+    //Hiển thị màn hình thống kê báo cáo
     function report()
     {
         if (empty($this->adminLogin)) {
@@ -87,15 +91,13 @@ class OrderManage extends AdminController
         }
     }
 
+    //Xử lý doanh thu
     function getProfit($date = "") {
         if(empty($date)) return 0;
-        // echo __METHOD__ ;
-        // echo date("Y-m")."-02";
+
         $orderModel = parent::model("OrderModel");
         $profit = $orderModel->totalProfit(["NgayTao" => date("Y-m")."-$date"], true);
-    //
-            // $this->print($profit);
-
+    
         if(isset($_POST['ajax'])) {
             echo json_encode($profit);
         }

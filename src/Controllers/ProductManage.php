@@ -7,6 +7,7 @@ class ProductManage extends AdminController
         parent::__construct($params);
     }
 
+    //Hiển thị màn hình quản lý sản phẩm
     function index()
     {
         if (empty($this->adminLogin)) {
@@ -22,6 +23,7 @@ class ProductManage extends AdminController
         }
     }
 
+    //Hiển thị màn hình thêm mới một sản phẩm
     function formInsert()
     {
         if (empty($this->adminLogin)) {
@@ -36,6 +38,7 @@ class ProductManage extends AdminController
         }
     }
 
+    //Hiển thị màn hình danh sách phiếu nhập hàng tồn kho
     function inventory()
     {
         $inventoryModel = parent::model("InventoryModel");
@@ -47,6 +50,7 @@ class ProductManage extends AdminController
         ]);
     }
 
+    //Hiển thị màn hình tạo mới phiếu nhập hàng tồn kho
     function updateInventory()
     {
         $productModel = parent::model("ProductModel");
@@ -65,7 +69,7 @@ class ProductManage extends AdminController
         ]);
     }
 
-
+    //Xác nhận tạo phiếu nhập hàng tồn kho
     function createInventoryReceipt()
     {
         # code...
@@ -107,11 +111,10 @@ class ProductManage extends AdminController
             }
             if($checkInsert) echo 1;
             else echo 0;
-            // $this->print($receipt);
-            // $this->print($products);
         } else echo -1;
     }
-    //Thừa
+
+    //Cập nhật số lượng tồn kho
     function updateVariantQuantity($product,$inventory)
     {
         $productModel = parent::model("ProductModel");
@@ -123,6 +126,7 @@ class ProductManage extends AdminController
         $productModel->updateQuantity($data, $quantity);
     }
 
+    //Xác nhận thêm sản phẩm
     function createProduct()
     {
 

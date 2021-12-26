@@ -6,6 +6,7 @@ class Checkout extends CustomerController
         parent::__construct($params);
     }
 
+    //Hiển thị trang thanh toán
     function index()
     {
         if (empty($this->customerLogin)) {
@@ -25,7 +26,9 @@ class Checkout extends CustomerController
         }
     }
 
-    function submitOrder() {
+    //Xác nhận thanh toán
+    function submitOrder()
+    {
         /*----------    
             Todo: 
             1. Tính tổng tiền hóa đơn
@@ -38,10 +41,9 @@ class Checkout extends CustomerController
             
             Done
         ----------*/
-        if(isset($_POST['submitBtn'])) {
+        if (isset($_POST['submitBtn'])) {
             $discountModel = parent::model("DiscountModel");
             $orderModel = parent::model("OrderModel");
-            // $orderDetailModel = parent::model("OrderDetailModel");
 
             $checkInsert = true;
             $customer = $this->customerLogin;
@@ -57,69 +59,83 @@ class Checkout extends CustomerController
 
             //Tạo thông tin hóa đơn
             $data['TongTien'] = 0;
-            foreach($carts as $product) {
-                $data['TongTien'] += (intval($product['DonGia']) * (1 - intval($product['ChietKhau'])/100)) * intval($product['SoLuong']);
+            foreach ($carts as $product) {
+                $data['TongTien'] += (intval($product['DonGia']) * (1 - intval($product['ChietKhau']) / 100)) * intval($product['SoLuong']);
             }
 
             //Tính tổng tiền, chiết khấu
             $discount = $discountModel->getDiscount(['MaKhuyenMai' => $data['MaGiamGia']]);
-            
+
             //Thiếu bước kiểm tra ngày hiện tại có thoả mãn ngày bắt đầu kết thúc 
-            if(!empty($discount)) {
-                $data['TongTien'] = (1 - intval($discount['ChietKhau'])/100) * $data['TongTien'];
+            if (!empty($discount)) {
+                $data['TongTien'] = (1 - intval($discount['ChietKhau']) / 100) * $data['TongTien'];
             }
 
             //Thêm hoá đơn mới
-            if($orderModel->insertOrder($data)) {
+            if ($orderModel->insertOrder($data)) {
                 $orderDetail['MaHoaDon'] = $orderModel->getLastID();
             } else {
                 $checkInsert = false;
             }
-            
+
             /*----------
                 Todo:
                 1. Lấy ra mã hóa đơn vừa thêm
                 2. Lặp từng sản phẩm thêm vào chi tiết hóa đơn
 
             ----------*/
-            if($checkInsert) {
-                foreach($carts as $product) {
+            if ($checkInsert) {
+                foreach ($carts as $product) {
                     $orderDetail['MaSP'] = $product['MaSP'];
                     $orderDetail['MaSize'] = strtoupper($product['MaSize']);
                     $orderDetail['SoLuong'] = $product['SoLuong'];
                     $orderDetail['DonGia'] = $product['DonGia'];
                     $orderDetail['ChietKhau'] = empty($product['ChietKhau']) ? $product['ChietKhau'] : "0";
-                    if(!$orderModel->insertOrderDetail($orderDetail)) {
+                    if (!$orderModel->insertOrderDetail($orderDetail)) {
                         $checkInsert = false;
                     } else {
-                        $this->updateQuantity($product);
+                        // $this->updateQuantity($product);
+                        $productModel = parent::model("ProductModel");
+                        //Lấy sô lượng sản phẩm hiện tại
+                        $curQuantity = $productModel->getQuantity([
+                            "MaSP" => $product['MaSP'],
+                            "MaSize" => strtoupper($product['MaSize'])
+                        ]);
+                        $productModel->updateQuantity(
+                            ["MaSP" => $product['MaSP'], "MaSize" => strtoupper($product['MaSize'])],
+                            ["SoLuong" => intval($curQuantity) - intval($product['SoLuong'])]
+                        );
                     }
                 }
             }
 
-            if($checkInsert) {
+            if ($checkInsert) {
                 $this->removeCart();
-                header('Location: '.BASE_URL."/Home");
-            }
-            else {
-                echo "<script>"; 
-                echo "alert('Thanh toán thất bại'); "; 
+                header('Location: ' . BASE_URL . "/Home");
+            } else {
+                echo "<script>";
+                echo "alert('Thanh toán thất bại'); ";
                 echo "window.open('./','_self')</script>";
             }
-                
-        } else header("Location: ".BASE_URL."/Home/");
+        } else header("Location: " . BASE_URL . "/Home/");
     }
 
-    function updateQuantity($product) {
-        $productModel = parent::model("ProductModel");
-        //Lấy sô lượng sản phẩm hiện tại
-        $curQuantity = $productModel->getQuantity([
-            "MaSP" => $product['MaSP'],
-            "MaSize" => strtoupper($product['MaSize'])
-        ]);
-        $productModel->updateQuantity(
-            ["MaSP" => $product['MaSP'], "MaSize" => strtoupper($product['MaSize'])],
-            ["SoLuong" => intval($curQuantity) - intval($product['SoLuong'])]
-        );
+    //Kiểm tra mã giảm giá trên hoá đơn
+    public function verifyDiscount() {
+        if(isset($_POST['code'])) {
+            $discountModel = parent::model("DiscountModel");
+
+            $currentDate = date("Y-m-d");
+            $discount = $discountModel->getDiscount(["MaKhuyenMai" => $_POST['code']]);
+
+            if(empty($discount)) {
+                echo 0;
+            } elseif($discount['SoLuongSuDung'] > 0){
+                //Kiểm tra Ngày
+                if($discount['NgayBatDau'] < $currentDate && $currentDate < $discount['NgayKetThuc']) 
+                    echo $discount['ChietKhau'];
+                else echo 0;
+            } else echo 0;
+        } else echo -1;
     }
 }

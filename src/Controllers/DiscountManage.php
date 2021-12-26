@@ -6,6 +6,7 @@ class DiscountManage extends AdminController {
         parent::__construct($params);
     }
 
+    //Hiển thị màn hình quản lý khuyến mãi
     public function index() {
         //Todo: Check login first
         //Để tạm ! để confirm đã login
@@ -25,6 +26,7 @@ class DiscountManage extends AdminController {
         }
     }
 
+    //Hiển thị form tạo mới khuyến mãi
     public function formAdd() {
         echo __METHOD__;
         if(empty($this->adminLogin)) {
@@ -36,6 +38,7 @@ class DiscountManage extends AdminController {
         }
     }
 
+    //Xác nhận tạo mới mã khuyến mãi
     public function addDiscount() {
         $checkCreate = false;
         if(isset($_POST['submit'])) {
@@ -57,21 +60,4 @@ class DiscountManage extends AdminController {
         else header("Location: ".BASE_URL."/DiscountManage/FormAdd");
     }
 
-    public function verifyDiscount() {
-        if(isset($_POST['code'])) {
-            $discountModel = parent::model("DiscountModel");
-
-            $currentDate = date("Y-m-d");
-            $discount = $discountModel->getDiscount(["MaKhuyenMai" => $_POST['code']]);
-
-            if(empty($discount)) {
-                echo 0;
-            } elseif($discount['SoLuongSuDung'] > 0){
-                //Kiểm tra Ngày
-                if($discount['NgayBatDau'] < $currentDate && $currentDate < $discount['NgayKetThuc']) 
-                    echo $discount['ChietKhau'];
-                else echo 0;
-            } else echo 0;
-        } else echo -1;
-    }
 }

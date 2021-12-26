@@ -6,6 +6,7 @@ class Cart extends CustomerController
         parent::__construct($params);
     }
 
+    //Hiển thị trang giỏ hàng
     function index()
     {
         parent::view("Cart.index", [
@@ -16,12 +17,14 @@ class Cart extends CustomerController
         ]);
     }
 
+    //Hiển thị thanh panel cart
     public function getSideCart() {
         parent::view("Templates.sidecart",[
             "carts" => $this->cartItem
         ]);
     }
 
+    //Kiểm tra số lượng sản phẩm
     function checkQuantity() {
         if(isset($_POST['pid']) && isset($_POST['size'])) {
             $pid = $_POST['pid'];
@@ -47,6 +50,7 @@ class Cart extends CustomerController
         }
     }
 
+    //Thêm sản phẩm vào giỏ hàng
     function addToCart($productModel, $pid, $size, $maxQuantity, $updateQuantity = 1) {
         $product = $productModel->getProductDetail(["MaSP" => $pid]);
 
@@ -91,6 +95,7 @@ class Cart extends CustomerController
         
     }
 
+    //Đếm số lượng sản phẩm trong giỏ
     function countCartItem() {
         $total = 0;
         if(isset($_SESSION['cart'])) {
@@ -102,6 +107,7 @@ class Cart extends CustomerController
         return $total;
     }
 
+    //Xoá sản phẩm trong giỏ
     function deletecartitem() {
         $total = 0;
         if(isset($_POST['cartID'])) {
@@ -124,9 +130,11 @@ class Cart extends CustomerController
         echo $total;        
     }
 
+    //Cập số số lượng trong giỏ
     function updatequantity() {
         $total = 0;
         $cart = [];
+        $update = false;
         $totalProduct = 0;
         if(isset($_POST['pid']) && $_POST['size'] && $_POST['option']) {
             $pid = $_POST['pid'];
@@ -137,10 +145,20 @@ class Cart extends CustomerController
             switch($option) {
                 case 1:
                     //Kiểm tra còn đủ để + vào hay ko
-                    $cart[$pid.$size]['SoLuong'] += 1;
+                    $productModel = parent::model("ProductModel");
+                    $quantity = $productModel->getQuantity([
+                        "MaSP" => $pid,
+                        "MaSize" => strtoupper($size),
+                    ]);
+                    if($cart[$pid.$size]['SoLuong'] < $quantity)
+                    {
+                        $cart[$pid.$size]['SoLuong'] += 1;
+                        $update = true;
+                    }
                     break;
                 case 2:
                     $cart[$pid.$size]['SoLuong'] -= intval($cart[$pid.$size]['SoLuong']) ? 1 : 0;
+                    $update = true;
                     break;
             }
 
@@ -152,6 +170,7 @@ class Cart extends CustomerController
             }
         }
         echo json_encode([
+            "update" => $update,
             "cart" => $cart,
             "totalAmount" => $total,
             "totalProduct" => $totalProduct

@@ -32,14 +32,12 @@ class CustomerController extends BaseController
         }
     }
 
+    //Lấy danh sách sản phẩm trong giỏ
     protected function getCart() {
         return isset($_SESSION['cart']) && !empty($_SESSION['cart']) ? $_SESSION['cart'] : [];
     }
-
-    protected function setCart($data = []) {
-        $_SESSION['cart'] = $data;
-        $this->cartItem = $_SESSION['cart'];
-    }
+    
+    //Xoá giỏ hàng
     protected function removeCart() {
         unset($_SESSION['cart']);
     }

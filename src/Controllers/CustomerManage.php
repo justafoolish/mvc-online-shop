@@ -6,6 +6,7 @@ class CustomerManage extends AdminController
         parent::__construct($params);
     }
 
+    //Hiển thị màn hình quản lý khách hàng
     function index()
     {
         // //Todo: is Login ? Dashboard / Login
@@ -22,6 +23,7 @@ class CustomerManage extends AdminController
         }
     }
 
+    //Hiển thị màn hình chi tiết thông tin khách hàng
     function viewDetail($customerID = "")
     {
         if (empty($customerID)) {

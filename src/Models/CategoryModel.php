@@ -9,6 +9,7 @@ class CategoryModel extends BaseModel
     }
 
     //4 tham số getAllRecords: $table, $select = ['*'], $condition = [], $limit = [],$groupBys = [], $orderBys = []
+    //Lấy danh sách danh mục sản phẩm
     public function getAllCategory($limit = []) {
         $table1 = self::TABLE;
         $table2 = self::TABLE_SP;
@@ -18,15 +19,9 @@ class CategoryModel extends BaseModel
         return $this->getAllRecords($table,["MaDanhMuc", "TenDanhMuc","count(MaSP) as SoLuong"],[],$limit,["MaDanhMuc","TenDanhMuc"]);
     }
 
-    function getCategory($condition) {
-        return $this->getAllRecords(self::TABLE,["*"], $condition,[1]);
-    }
-
+    //Thêm mới danh mục sản phẩm
     public function insertCategory($data = []) {
         return $this->insert(self::TABLE,$data);
     }
 
-    public function updateCategory($condition = [], $data = []) {
-        return $this->update(self::TABLE,$condition,$data);
-    }
 }

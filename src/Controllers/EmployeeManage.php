@@ -6,6 +6,7 @@ class EmployeeManage extends AdminController
         parent::__construct($params);
     }
 
+    //Hiển thị danh sách nhân viên
     function index()
     {
         // //Todo: is Login ? Dashboard / Login
@@ -21,6 +22,7 @@ class EmployeeManage extends AdminController
         }
     }
 
+    //Hiển thị form tạo nhân viên mới
     function formAdd()
     {
         if (empty($this->adminLogin)) {
@@ -30,6 +32,7 @@ class EmployeeManage extends AdminController
         }
     }
 
+    //Xác nhận tạo mới nhân viên
     function submitNewEmp()
     {
         if(isset($_POST['submit'])) {

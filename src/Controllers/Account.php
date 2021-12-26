@@ -6,6 +6,7 @@ class Account extends CustomerController
         parent::__construct($params);
     }
 
+    //Hiển thị trang đăng nhập (Nếu đã đăng nhập hiển thị trang cá nhân)
     function index()
     {
         if(empty($this->customerLogin)) {
@@ -25,6 +26,7 @@ class Account extends CustomerController
         }
     }
 
+    //Hiển thị trang lịch sử mua hàng
     function viewOrder() {
         empty($this->customerLogin) && header("Location: ".BASE_URL."/Account");
         $orderModel = parent::model("OrderModel");
@@ -67,6 +69,7 @@ class Account extends CustomerController
         }
     }
 
+    //Hiển thị trang đăng ký
     function register()
     {
         if(!empty($this->customerLogin)) {
@@ -79,6 +82,7 @@ class Account extends CustomerController
         ]);
     }
 
+    //Xác nhận đăng ký
     function checkRegister() {
         if(isset($_POST['submit'])) {
             $data['TenKhachHang'] = isset($_POST['name']) ? $_POST['name'] : "";
@@ -96,6 +100,7 @@ class Account extends CustomerController
         else echo -1;
     }
 
+    //Xác nhận đăng nhập
     function checkLogin() {
         if(isset($_POST['submit'])) {
             $data['email'] = $_POST['email'];
@@ -111,6 +116,7 @@ class Account extends CustomerController
         }
     }
 
+    //Kiểm tra đăng nhập
     function verifyLogin($customer, $data) {
         if(empty($customer)) {
             return -1;

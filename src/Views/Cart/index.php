@@ -124,7 +124,7 @@
         </div>
     </div>
     <?php require_once "./src/Views/Templates/sidebar.php" ?>
-    <script src="<?= BASE_URL ?>/public/scripts/cartPage.js?v=1"></script>
+    <script src="<?= BASE_URL ?>/public/scripts/cartPage.js?v=2"></script>
 </body>
 
 </html>

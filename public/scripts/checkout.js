@@ -18,7 +18,7 @@ verify.on("click",(e) => {
     e.preventDefault()
     let value = voucher.value;
     
-    $.post(`${BASE_URL}/DiscountManage/VerifyDiscount`, {code: value}, (data)=>{
+    $.post(`${BASE_URL}/Checkout/VerifyDiscount`, {code: value}, (data)=>{
         if(parseInt(data)) {
             voucher.parentElement.classList=success
             discount.innerHTML = convertNumber(parseInt(totalValue.innerHTML)*parseInt(data)/100);

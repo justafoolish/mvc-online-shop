@@ -6,11 +6,12 @@
 // define('PASSWD', '');
 // define('DB_NAME', 'cnpm_db');
 
-/** Product **/
+/** For Product **/
 
-define("BASE_URL", "https://clone-hades.herokuapp.com/");
-
+define("BASE_URL", "https://clone-hades.herokuapp.com");
 define('HOST', 'remotemysql.com:3306');
 define('USERNAME', 'V05To2dybm');
 define('PASSWD', '5Oe8r68oR2');
 define('DB_NAME', 'V05To2dybm');
+
+//Reminder: update base url in index.js

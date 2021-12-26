@@ -1,5 +1,5 @@
 // const BASE_URL = "http://localhost/mvcphp"
-const BASE_URL = "https://clone-hades.herokuapp.com/"
+const BASE_URL = "https://clone-hades.herokuapp.com"
 
 const sidebarWrap = $("#sidebarwrap");
 const searchPanel = $("#searchPanel");

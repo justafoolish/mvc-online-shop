@@ -47,7 +47,7 @@ const removeMessage = (element) => {
 }
 submitLogin && submitLogin.addEventListener("click",(e) => {
   e.preventDefault();
-
+  submitLogin.disabled = true;
   $.post(`${BASE_URL}/Account/checklogin`,{
     submit: true,
     email: emailLogin.value,
@@ -59,9 +59,11 @@ submitLogin && submitLogin.addEventListener("click",(e) => {
         break;
       case 0:
         showMessage(passwdLogin,"Mật khẩu không đúng")
+        submitLogin.disabled = false;
         break;
       case -1:
         showMessage(emailLogin,"Email không tồn tại")
+        submitLogin.disabled = false;
     }
   })
 })
@@ -96,6 +98,7 @@ $.fn.serializeObject = function(){
 
 submitRegister && submitRegister.addEventListener("click", (e) => {
   e.preventDefault();
+  submitLogin.disabled = true;
   let checkForm = 1;
   
   //Validate each input element
@@ -120,12 +123,14 @@ submitRegister && submitRegister.addEventListener("click", (e) => {
         setTimeout(() => {
           pageMessage.classList.add("hidden")
         },550)
+        submitLogin.disabled = false;
         break;
       case -1:
         showPageMessage("Vui lòng nhập lại")
         setTimeout(() => {
           pageMessage.classList.add("hidden")
         },550)
+        submitLogin.disabled = false;
         break;
     }
     

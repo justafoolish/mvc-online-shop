@@ -74,7 +74,7 @@
         </div>
     </div>
     <?php require_once "./src/Views/Templates/sidebar.php" ?>
-    <script src="<?= BASE_URL ?>/public/scripts/form.js?v=2"></script>
+    <script src="<?= BASE_URL ?>/public/scripts/form.js?v=3"></script>
 </body>
 
 </html>

@@ -19,7 +19,7 @@ class Cart extends CustomerController
 
     //Hiển thị thanh panel cart
     public function getSideCart() {
-        parent::view("Templates.sidecart",[
+        parent::view("Templates.sideCart",[
             "carts" => $this->cartItem
         ]);
     }

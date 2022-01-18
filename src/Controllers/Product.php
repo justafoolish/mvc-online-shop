@@ -9,7 +9,21 @@ class Product extends CustomerController
     //Hiển thị màn hình chi tiết sản phẩm
     public function index($pid = "")
     {
-        
+        if (strtolower($this->params[0]) === "search") {
+            $keyword = "";
+            if (isset($_POST['keyword'])) {
+                $keyword = $_POST['keyword'];
+            }
+            $productModel = parent::model("ProductModel");
+            $products = $keyword != "" ? $productModel->search($keyword) : [];
+
+
+            parent::view("Templates.search", [
+                "result" => $keyword,
+                "products" => $products
+            ]);
+            return;
+        }
         if (empty($pid)) {
             header("Location: " . BASE_URL . "/Collection/");
         } else {

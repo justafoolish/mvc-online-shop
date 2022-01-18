@@ -18,7 +18,9 @@ class ProductManage extends AdminController
             $products = $productModel->getProductVariant();
             
             parent::view("Admin.Product.index", [
-                "products" => $products
+                "products" => $products,
+                "admin"=>$this->adminLogin
+
             ]);
         }
     }
@@ -33,7 +35,8 @@ class ProductManage extends AdminController
             $categories = $categoryModel->getAllCategory(); //Lấy thông tin tất cả danh mục cho view option
 
             parent::view("Admin.Product.add", [
-                "categories" => $categories,
+                "categories" => $categories,              	
+              	"admin"=>$this->adminLogin
             ]);
         }
     }
@@ -46,7 +49,9 @@ class ProductManage extends AdminController
         $receipt = $inventoryModel->getAllReceipt();
 
         parent::view("Admin.Inventory.index", [
-            "receipts" => $receipt
+            "receipts" => $receipt,              	
+          	"admin"=>$this->adminLogin
+
         ]);
     }
 
@@ -58,8 +63,6 @@ class ProductManage extends AdminController
 
         $products = $productModel->getProductVariant();
         $suppliers = $inventory->getAllSups();
-
-        // $this->print($suppliers);
 
         parent::view("Admin.Inventory.update", [
             "products" => $products,

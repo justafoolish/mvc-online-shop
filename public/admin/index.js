@@ -1,5 +1,5 @@
-// const BASE_UR = "http://localhost/mvcphp"
-const BASE_UR = "https://clone-hades.herokuapp.com/";
+const BASE_UR = "http://localhost/mvcphp"
+
 const loc = window.location.pathname;
 const dir = loc.substring(0, loc.lastIndexOf("/"));
 const path = dir.split("/");

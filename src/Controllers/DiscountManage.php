@@ -19,6 +19,7 @@ class DiscountManage extends AdminController {
 
             $products = $productModel->getAllProduct();
             $discounts = $discountModel->getAllDiscount();
+
             parent::view("Admin.Discount.index", [
                 "discounts" => $discounts,
                 "products" => $products
@@ -28,7 +29,6 @@ class DiscountManage extends AdminController {
 
     //Hiển thị form tạo mới khuyến mãi
     public function formAdd() {
-        echo __METHOD__;
         if(empty($this->adminLogin)) {
             header("Location: ".BASE_URL."/Admin");
         }
@@ -48,7 +48,7 @@ class DiscountManage extends AdminController {
             $data['NgayBatDau'] =   date("Y-m-d",strtotime($_POST['startDate']));
             $data['NgayKetThuc'] =   date("Y-m-d",strtotime($_POST['endDate']));
             $data['SoLuongSuDung'] = intval($_POST['quantity']);
-            
+            echo $data;
             //Validate dữ liệu
             if($data['NgayKetThuc'] > $data['NgayBatDau'] && $data['ChietKhau'] > 0 && $data['SoLuongSuDung'] > 0) {
                 //Nhập vào cơ sở dữ liệu

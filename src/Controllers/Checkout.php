@@ -122,7 +122,10 @@ class Checkout extends CustomerController
 
     //Kiểm tra mã giảm giá trên hoá đơn
     public function verifyDiscount() {
-        if(isset($_POST['code'])) {
+      //echo $this->params[0];
+      //echo $_POST['code'];
+      if(isset($_POST['code'])) {
+      	//if(isset($this->params[0])){
             $discountModel = parent::model("DiscountModel");
 
             $currentDate = date("Y-m-d");

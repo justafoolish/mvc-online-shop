@@ -44,7 +44,7 @@ onfocus="this.removeAttribute('readonly');"/>
         </div>
     </div>
     <?php require_once "./src/Views/Templates/sidebar.php" ?>
-    <script src="<?= BASE_URL ?>/public/scripts/form.js?v=4"></script>
+    <script src="<?= BASE_URL ?>/public/scripts/form.js?v=5"></script>
 </body>
 
 </html>

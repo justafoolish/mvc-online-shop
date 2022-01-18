@@ -1,5 +1,4 @@
-// const BASE_URL = "http://localhost/mvcphp"
-const BASE_URL = "https://clone-hades.herokuapp.com"
+const BASE_URL = "http://localhost/mvcphp"
 
 const sidebarWrap = $("#sidebarwrap");
 const searchPanel = $("#searchPanel");
@@ -40,9 +39,9 @@ const closeSideBar = () => {
 /*----------- Tìm kiếm  ---------------*/
 const searchInit = () => {
   sideBarTitle.innerHTML = "TÌM KIẾM";
-  // $.post(`${BASE_URL}/Product/Index/Search`, { keyword: "Quan ao" }, (data) => {
-  //   searchItem.html(data);
-  // });
+  $.post(`${BASE_URL}/Product/Index/Search`, { keyword: "Quan ao" }, (data) => {
+     searchItem.html(data);
+  });
 
   openSidebar(searchPanel);
 }
@@ -52,9 +51,9 @@ const submitSearch = (e) => {
   e && e.preventDefault();
   let kw = searchForm.firstElementChild.value
   sideBarTitle.innerHTML = "TÌM KIẾM";
-  // $.post(`${BASE_URL}/Product/Index/Search`, { keyword: kw }, (data) => {
-  //   searchItem.html(data);
-  // });
+  $.post(`${BASE_URL}/Product/Index/Search`, { keyword: kw }, (data) => {
+    searchItem.html(data);
+  });
 }
 
 /*------------ Hiển thị thông báo -----------*/

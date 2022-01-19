@@ -1,7 +1,7 @@
 <?php
 class DiscountModel extends BaseModel 
 {
-    const TABLE = "Khuyenmai";
+    const TABLE = "khuyenmai";
 
     public function __construct() {
         parent::__construct();
